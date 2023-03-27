@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/productDetail.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Product Detail</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header_title container">
+            <div class="header_a">
+                <h4>MAY THE 4TH FLASH SALE! $15 OFF BACKPACK FOGGER! USE CODE PETRAFORCE AT CHECKOUT! 6PM-9PM ONLY!</h4>
+            </div>
+            <div class="header_title-content">
+                <a href="#"><img src="/images/logo.png" alt="" /></a>
+                <div class="search-box">
+                    <input class="search-box_input" placeholder="Search..." type="" text>
+                    <button class="search-box_btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                </div>
+                <div class="header-like">
+                    <i class="fa-regular fa-heart"><span>Yêu thích</span></i>
+                </div>
+                <div class="header-user">
+                    <i class="fa-regular fa-user"><span>Đăng nhập</span></i>
+                </div>
+                <div class="header-cart">
+                    <i class="fa-sharp fa-solid fa-cart-shopping"><span>Giỏ hàng</span></i>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a href="#">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="#">Tin tức và bài viết</a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+    <!-- Content Product Details -->
+    <div class="content_tilte">
+        <a href="#">Trang chủ</a>
+        <span>></span>
+        <a href="#">Thuốc trừ sâu</a>
+        <span>></span>
+        <span id="product-title"></span>
+    </div>
+    <div class="content_product container">
+        <div class="content_container-top">
+            <div class="content-left">
+                <div class="content-img-detail product-images-detail">
+                    <img class="img1" src="/images/tts.png" onclick="changeImage('one')" id="one" />
+                    <img class="img2" src="/images/tts.png" onclick="changeImage('two')" id="two" />
+                    <img class="img3" src="/images/tts.png" onclick="changeImage('three')" id="three" />
+                    <img class="img4" src="/images/logo.png" onclick="changeImage('four')" id="four" />
+                </div>
+                <img src="/images/tts.png" alt="" id="main-img" class="product-image" />
+            </div>
+            <div class="content-mid"></div>
+            <div class="content-right">
+                <div class="content-name">
+                    <h2 id="shift" class="product-title">Thuốc trừ sâu Batas 25EC</h2>
+                    <div class="content-title content-name-company">Công ty Sản phẩm Công nghệ cao</div>
+                    <div class="content-title content-name-price">
+                        <h4>Giá:</h4>
+                        <div class="content-price product-price" id="">100000</div>
+                    </div>
+                    <hr class="card__separator">
+                    <div class="content-title content-name-size">
+                        <h4>Size:</h4>
+                        <div class="content-button-size product-size">
+                            <button type="button" class="btn-1">100ml</button>
+                            <button type="button" class="btn-2">250ml</button>
+                        </div>
+                    </div>
+                    <div class="content-title content-name-number">
+                        <h4>Số lượng</h4>
+                        <div class="buttons_added">
+                            <input class="minus is-form" type="button" value="-" />
+                            <input aria-label="quantity" class="input-qty product-quantity" max="1000" min="1" name="" type="number" value="1" />
+                            <input class="plus is-form" type="button" value="+" />
+                        </div>
+                    </div>
+                    <div class="content-name-cart">
+                        <button class="btn btn-add">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>Thêm vào giỏ hàng</span>
+                         </button>
+                        <button class="btn-sed">
+                            <a href="./bill.html">Mua ngay</a>
+                        </button>
+                    </div>
+                    <div class="content-name-addwish">
+                        <button class="btn-addwish">
+                            <i class="fa-regular fa-heart"></i>
+                            <span>Thêm vào yêu thích</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content__container-bottom">
+            <div class="container content__review">
+                <div class="content-info">
+                    <div class="content-namerv">
+                        <p>Chi tiết sản phẩm</p>
+                    </div>
+                    <div class="content-descript">
+                        <p>- BATAS 25EC là thuốc trừ sâu sinh học tiên tiến, thế hệ mới, hiệu lực trừ sâu nhanh và mạnh.                           
+                        <p>- Chuyên trừ nhện, sâu hại nhóm chích hút.</p>
+                        <p>- Không độc hại với môi trường, động vật bậc cao, sản phẩm lý tưởng trong nông nghiệp xanh: Thân thiện với môi trường </p>
+                        <p>- Nông sản sạch - An toàn - Phù hợp với các chương trình GAP và IPM.</p>   
+                        <p>- Trừ rầy nâu, bọ trĩ, nhện gié hại lúa; rệp, nhện đỏ, bọ trĩ, sâu tơ, bọ phấn trắng hại rau, dưa, đậu, ớt; sâu vẽ bùa (dòi đục lá), rầy, rệp sáp, nhện đỏ hại chè, cà phê, cây ăn quả.</p>
+                        <p>- Thuốc được đăng ký tại Việt Nam trừ Lúa: Bọ trĩ, sâu cuốn lá; Bắp cải: Sâu tơ, sâu xanh bướm trắng; Lạc: Sâu xanh da láng, sâu khoang; Đậu tương: Sâu đục quả; Dưa hấu: Bọ trĩ; Vải:Nhện lông nhung; Cam: Nhện đỏ, sâu vẽ bùa, rầy chổng cánh; Xoài: Rầy bông; Chè: Rầy xanh, nhện đỏ,bọ cánh tơ; Hồ tiêu: Rệp sáp.</p>
+                        <h4>Hướng dẫn sử dụng:</h4>    
+                        <p>Phun 0.2-0.3 lít thuốc/ha. Lượng nước phun 500-600 lít/ha khi sâu hại mới xuất hiện, tuổi nhỏ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="same-product container">
+        <h4>Sản phẩm tương tự</h4>
+    </div>
+
+    <div class="bound slide-container">
+        <div class="slide-sliders product__bottom">
+        </div>
+        <div class="content__bottom">
+            <div class="content-number" style="display: flex;">
+                <button class="btn-prev btn-active">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+                <div class="content-number-page">
+                    <!-- <button class="btn-number active">1</button> -->
+                </div>
+                <button class="btn-next">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/javascript/productDetail.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</body>
+
+</html>
