@@ -50,6 +50,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1000;
 }
 
 .brand{
@@ -335,6 +336,10 @@ header {
     text-decoration: none;
 }
 
+.collect-item:hover{
+    transform: translate3d(0px, -5px, 0px);
+}
+
 .product-catalog-img{
     width: 100px;
     height: 100px;
@@ -405,7 +410,7 @@ header {
 	cursor: pointer;
 	transition: 450ms all;
 	transform-origin: center left;
-    /* position: relative; */
+    position: relative;
 	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.26);
     padding: 10px;
 }
@@ -415,34 +420,18 @@ header {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    padding: 10px;
+    padding: 15px;
 }
 
-/* .product-item .panel1 {
-	position: absolute;
-	width: 45px;
-	background-color: transparent;
-	display: flex;
-	align-items: center;
-	flex-flow: column;
-	opacity: 1;
-}
-
-.product-item:hover .panel1{
-	right: 0;
-	opacity: 1;
-	transition: 0.4s;
-} */
-
-.product-item .panel1 a{
-    /* position: relative; */
-    left: unset;
-    right: 20px;
-	font-size: 20px;
-	color: var(--primary-color);
-	margin: 15px 0;
-    text-transform: uppercase;
-    text-decoration: none;
+.product-item button{
+    position: absolute;
+    border: none;
+    font-size: 28px;
+    color: var(--primary-color);
+    right: 5px;
+    top: 2px;
+    background: none;
+    cursor: pointer;
 }
 
 .product-item .info a{
@@ -585,9 +574,7 @@ footer .main-footer .content.about p{
     border-radius: 4px;
     color: var(--primary-color);
 }
-/* .social-icon li a:hover{
-    background: red;
-} */
+
 .social-icon li a .fa{
     color: #fff;
     font-size: 20px;
@@ -598,15 +585,7 @@ footer .main-footer .content.about p{
     font-weight: 500;
     margin-bottom: 15px;
 }
-/* .links h2::before{
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: red;
-} */
+
 .links{
    width: 25%;
 }
@@ -628,15 +607,7 @@ footer .main-footer .content.about p{
     font-weight: 500;
     margin-bottom: 15px;
 }
-/* .contact h2::before{
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: red;
-} */
+
 .contact{
     width: calc(35% - 60px);
     margin-right: 0 !important;
