@@ -331,6 +331,10 @@ header {
     user-select: none; /*làm cho text không thể được select.*/
 }
 
+.collect-item{
+    text-decoration: none;
+}
+
 .product-catalog-img{
     width: 100px;
     height: 100px;
@@ -361,7 +365,7 @@ header {
     text-align: center;
 }
 
-.product-catalog-text a{
+.product-catalog-text p{
     color: #333333;
     font-size: 15px;
     font-weight: 600;
@@ -370,9 +374,10 @@ header {
     text-transform: uppercase;
     text-decoration: none;
     height: 15px;
+    transition: 0.2s linear ;
 }
 
-.product-catalog-text a:hover{
+.collect-item .product-catalog-text p:hover{
     color: #EE6B19;
 }
 
