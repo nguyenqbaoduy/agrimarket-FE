@@ -334,6 +334,7 @@ header {
 
 .collect-item{
     text-decoration: none;
+    transition: 0.5s linear;
 }
 
 .collect-item:hover{
