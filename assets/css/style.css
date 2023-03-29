@@ -4,6 +4,7 @@
     --gray-color: #EEEEEE;
     --black-color: #000000;
     --white-color: #fff;
+    --favorites-color: #CCCCCC;
     --toolbar-heigth: 30px;
     --main-header-height: 120px;
     --main-menu-height: 60px;
@@ -64,6 +65,16 @@ header {
 .menu-item{
     flex: 3;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .main-menu-header {
+    padding-top: 90px;
+  }
 
 /*MenuContainer*/
 .main-header{
@@ -427,8 +438,8 @@ header {
 .product-item button{
     position: absolute;
     border: none;
-    font-size: 28px;
-    color: var(--primary-color);
+    font-size: 25px;
+    color: #CCCCCC;
     right: 5px;
     top: 2px;
     background: none;
@@ -453,8 +464,12 @@ header {
 }
 
 .stars i{
-   color: #FFD700;
+   color: orange;
 }
+
+/* .checked {
+    color: orange;
+  } */
 
 .product-vulome p{
     margin-top: 35px;
