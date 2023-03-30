@@ -334,7 +334,6 @@ header {
 }
 
 .product-catalog{
-    max-width: 180px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -404,7 +403,9 @@ header {
 }
 
 .list-product{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 2rem;
     justify-content: space-between;
     align-items: center;
     padding-top: 12px;
@@ -413,7 +414,6 @@ header {
 .product-item
 {
 	background-color: var(--gray-color);
-	width: 220px;
 	height: auto;
 	border-radius: 10px;
 	overflow: hidden;
