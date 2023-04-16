@@ -16,6 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
   <body>
     <!--Main-->
@@ -55,7 +56,7 @@
                 </div>
                 <div class="sub-menu-wrap" id="subMenu">
                   <div class="sub-menu">
-                    <a href="#" class="sub-menu-link">
+                    <a href="info.html" class="sub-menu-link">
                       <p>Tài khoản của tôi</p>
                     </a>
                     <a href="#" class="sub-menu-link">
@@ -119,7 +120,7 @@
       <!--Product Catalog-->
       <section id="slider-product">
         <div class="product-catalog">
-          <a href="" class="collect-item">
+          <a href="./cartegory/seeds.html" class="collect-item">
             <div class="product-catalog-img">
               <img src="./assets/image/catalog/hatgiong.png" alt="1" />
             </div>
@@ -186,10 +187,12 @@
       </section>
 
       <!--Body-->
-      <div id="content" class="container">
-        <div class="list-product">
+      <div class="container" id="list">
+        <div class="list-product" style="display: none;">
           <div class="product-item">
-            <img class="product-item-img" src="./assets/image/buy/p1.png">
+            <div class="image">
+              <img class="product-item-img" src="/assets/image/buy/hoa-hong-hat-giong-min.png">
+            </div>
 				    <button onclick="Toggle()" id="btn-favorite" class="fas fa-heart"></button>
 				    <div class="info">
 					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
@@ -209,7 +212,9 @@
           </div>
 
           <div class="product-item">
-            <img class="product-item-img" src="./assets/image/buy/p1.png">
+            <div class="image">
+              <img class="product-item-img" src="/assets/image/buy/p1.png">
+            </div>
 				    <button onclick="Toggle2()" id="btn-favorite2" class="fas fa-heart"></button>
 				    <div class="info">
 					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
@@ -225,7 +230,9 @@
           </div>
 
           <div class="product-item">
-            <img class="product-item-img" src="./assets/image/buy/p1.png">
+            <div class="image">
+              <img class="product-item-img" src="/assets/image/buy/p1.png">
+            </div>
 				    <button onclick="Toggle()" id="btn-favorite" class="fas fa-heart"></button>
 				    <div class="info">
 					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
@@ -241,7 +248,9 @@
           </div>
 
           <div class="product-item">
-            <img class="product-item-img" src="./assets/image/buy/p1.png">
+            <div class="image">
+              <img class="product-item-img" src="/assets/image/buy/p1.png">
+            </div>
             <button onclick="Toggle()" id="btn-favorite" class="fas fa-heart"></button>
 				    <div class="info">
 					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
@@ -257,7 +266,9 @@
           </div>
 
           <div class="product-item">
-            <img class="product-item-img" src="./assets/image/buy/p1.png">
+            <div class="image">
+              <img class="product-item-img" src="/assets/image/buy/p1.png">
+            </div>
 				    <button onclick="Toggle()" id="btn-favorite" class="fas fa-heart"></button>
 				    <div class="info">
 					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
@@ -273,7 +284,9 @@
           </div>
 
           <div class="product-item">
-            <img class="product-item-img" src="./assets/image/buy/p1.png">
+            <div class="image">
+              <img class="product-item-img" src="/assets/image/buy/p1.png">
+            </div>
 				    <button onclick="Toggle()" id="btn-favorite" class="fas fa-heart"></button>
 				    <div class="info">
 					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
@@ -291,31 +304,14 @@
 
         <!-- Pagination -->
         <ul class="pagination">
-            <li class="pagination-item">
-                <a href="#" class="pagination-item-link pagination-item-link--disable">
-                    <i class="fas fa-chevron-left"></i>
-                </a>
-            </li>
-            <li class="pagination-item pagination-item--active">
-                <a href="#" class="pagination-item-link">1</a>
-            </li>
-            <li class="pagination-item">
-                <a href="#" class="pagination-item-link">2</a>
-            </li>
-            <li class="pagination-item">
-                <a href="#" class="pagination-item-link">3</a>
-            </li>
-            <li class="pagination-item">
-                <a class="pagination-item-link pagination-item-link--disable">. . .</a>
-            </li>
-            <li class="pagination-item">
-                <a href="#" class="pagination-item-link">8</a>
-            </li>
-            <li class="pagination-item">
-                <a href="#" class="pagination-item-link">
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            </li>
+          <!-- <li class="page-item previous-page disable"><a class="page-link" href="#">Prev</a></li>
+          <li class="page-item current-page active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+          <li class="page-item current-page"><a class="page-link" href="#">5</a></li>
+          <li class="page-item current-page"><a class="page-link" href="#">6</a></li>
+          <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+          <li class="page-item current-page"><a class="page-link" href="#">10</a></li>
+          <li class="page-item next-page"><a class="page-link" href="#">Next</a></li> -->
         </ul>
       </div>
 
@@ -354,7 +350,7 @@
             <!--Bắt Đâu Nội Dung Liên Hệ-->
             <div class="content contact">
                 <h2>Thông Tin Liên Hệ</h2>
-                <ul class="info">
+                <ul class="info-footer">
                     <li>
                         <span><i class="fas fa-map-marker-alt"></i></span>
                         <span>Đường Số 1<br />

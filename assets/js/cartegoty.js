@@ -67,8 +67,8 @@ function getPageList(totalPage, page, maxLength){
 }
 
 $(function(){
-    let numberOfItems = $(".list-product .product-item").length;
-    let limitPerPage = 20; //How many product list items visible per a page
+    let numberOfItems = $(".category-right-content .product-item").length;
+    let limitPerPage = 8; //How many product list items visible per a page
     let totalPages = Math.ceil(numberOfItems / limitPerPage);
     let paginationSize = 7; //How many page elements visible in the pagination
     let currentPage;
@@ -78,7 +78,7 @@ $(function(){
 
       currentPage = whichPage;
 
-      $(".list-product .product-item").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
+      $(".category-right-content .product-item").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
 
       $(".pagination li").slice(1, -1).remove();
 
@@ -98,7 +98,7 @@ $(function(){
       $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Next"))
     );
 
-    $(".list-product").show();
+    $(".category-right-content").show();
     showPage(1);
 
     $(document).on("click", ".pagination li.current-page:not(.active)", function(){
