@@ -7,6 +7,17 @@ $(document).on('click', '.content-button-size button', function() {
 $(document).on('click', '.content-size button', function() {
     $(this).addClass('btn-active').siblings().removeClass('btn-active');
 });
+
+var btnExpiryOne = document.querySelector('.content-button-expiry .btn-1');
+var btnExpiryTwo = document.querySelector('.content-button-expiry .btn-2');
+
+$(document).on('click', '.content-button-expiry button', function() {
+    $(this).addClass('btn-active').siblings().removeClass('btn-active');
+});
+$(document).on('click', '.content-button-expiry button', function() {
+    $(this).addClass('btn-active').siblings().removeClass('btn-active');
+});
+
 $('input.input-qty').each(function() {
     var $this = $(this),
         qty = $this.parent().find('.is-form'),
@@ -47,6 +58,6 @@ btnAdd.addEventListener('click', () => {
       quantity: productQuantity.value,
     };
     localStorage.setItem('cart', JSON.stringify(product));
-    alert('Thêm vào giỏ hàng thành công');
+    alert('Thêm vào giỏ hàng không có được thành công');
     // window.location.href = '../../user/cart.html';
   });

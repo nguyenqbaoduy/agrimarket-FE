@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <link rel="stylesheet" href="/css/allProduct.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Add Product</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#"><img src="/images/logo.png" alt="" /></a>
+            <div class="box-content">
+                <a href="#">Trang chủ</a>
+                <span>></span>
+                <a href="/seller/allProduct.html">Quản Lý Sản Phẩm</a>
+                <span>></span>
+                <a href="/seller/allProduct.html">Tất cả sản phẩm</a>
+            </div>
+            <div class="content-nav">
+                <nav>
+                    <a href="#" class="nav-link">
+                        <i class="fa-sharp fa-solid fa-bell icon"></i>
+                        <span class="badge">5</span>
+                    </a>
+                    <span class="divider"></span>
+                    <div class="profile">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="">
+                        <ul class="profile-link">
+                            <li><a href="#"><i class="fa-solid fa-circle-user icon"></i>Hồ sơ cá nhân shop</a></li>
+                            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+
+	<div class="containerds">
+		<div class="content-left">
+            <section id="sidebar">
+                <ul class="side-menu">
+                    <li>
+                        <a href="/seller/dashBoard.html"><i class="fa-solid fa-chart-line"></i>DashBoard</a>
+                    </li>
+                    <li class="divider"> Main</li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-chart-line"></i>Vận Chuyển</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-chart-line"></i>Quản Lý Đơn Hàng</a>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><i class="fa-solid fa-volleyball"></i></i>Quản Lý Sản Phẩm<i class="fa-solid fa-chevron-right icon-right"></i></a>
+                        <ul class="side-dropdown">
+                            <li>
+                                <a href="/seller/allProduct.html"><i class="fa-solid fa-chart-line" ></i>Tất Cả Sản Phẩm</a>
+                                <a href="/seller/addProduct.html" ><i class="fa-solid fa-chart-line"></i>Thêm Sản Phẩm</a>
+                            </li>
+                        </ul>
+                    </li>
+    
+                </ul>
+            </section>
+        </div>
+        <div class="divied"></div>
+        <div class="content-right">
+            <div>
+                <!-- Tab items -->
+                <div class="tabs">
+                  <div class="tab-item active">Tất cả</div>
+                  <div class="tab-item">Đang hoạt động</div>
+                  <div class="tab-item">Hết hàng 0</div>
+                  <div class="tab-item">Chờ duyệt 0</div>
+                  <div class="tab-item">Đã ẩn 0</div>
+                  <div class="line"></div>
+                </div>
+              
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <!-- <hr class="card__separator"> -->
+                    <div class="tab-pane active">
+                        <div class="header-tab">
+                            <h2>0 Sản phẩm</h2>
+                            <div class="grouphd">
+                                <button class="btn btn-add">
+                                    <a href="/seller/addProduct.html">Thêm 1 sản phẩm mới</a>
+                                </button>
+                                <div class="search-box">
+                                    <input class="search-box_input" placeholder="Search..." type="" text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-tab">
+                            <table width = "100%">
+                                <thead>
+                                    <tr>
+                                        <td><input type="checkbox" name="btn" id="chAll"/></td>
+                                        <td>Tên sản phẩm</td>
+                                        <td>Phân loại hàng</td>
+                                        <td>Giá</td>
+                                        <td>Kho hàng</td>
+                                        <td>Doanh số</td>
+                                        <td>Thao tác</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="pro-check">
+                                            <div class="product-check">
+                                                <input type="checkbox" name="btn">
+                                            </div>
+                                        </td>
+                                        <td class="product" id="">
+                                            <img src="/images/tts.png" alt="">
+                                            <div class="product-de">
+                                                <h5>Thuốc trừ sâu Batas 25EC</h5>
+                                            </div>
+                                        </td>
+                                        <td class="product-cate" id="">
+                                            <h5>Thuốc</h5>
+                                        </td>
+                                        <td class="product-pri" id="">
+                                            <h5>1.000đ</h5>
+                                        </td>
+                                        <td class="product-warehouse" id="">
+                                            <h5>1</h5>
+                                        </td>
+                                        <td class="product-sales" id="">
+                                            <h5>0</h5>
+                                        </td>
+                                        <td class="product-operation" id="">
+                                            <a href="#">Cập nhật</a>
+                                            <a href="#">Xóa</a>
+                                            <a href="#">Ẩn</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="containernp">
+                            <div class="pagination">
+                                <button class="btn1" onclick="backBtn()"><img src="/images/448-arrow.png">Prev</button>
+                                <ul>
+                                    <li class="link active" value="1" onclick="activeLink()">1</li>
+                                    <li class="link" value="2" onclick="activeLink()">2</li>
+                                    <li class="link" value="3" onclick="activeLink()">3</li>
+                                    <li class="link" value="4" onclick="activeLink()">4</li>
+                                    <li class="link" value="5" onclick="activeLink()">5</li>
+                                    <li class="link" value="6" onclick="activeLink()">6</li>
+                                </ul>
+                                <button class="btn2" onclick="nextBtn()">Next<img src="/images/448-arrow.png"></button>
+                            </div>
+                        </div>
+                    </div>
+                <div class="tab-pane">
+                    <div class="header-tab">
+                        <h2>0 Sản phẩm</h2>
+                        <div class="grouphd1">
+                            <div class="search-box">
+                                <input class="search-box_input" placeholder="Search..." type="" text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-tab">
+                        <table width = "100%">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" name="btn" id="chAll"/></td>
+                                    <td>Tên sản phẩm</td>
+                                    <td>Phân loại hàng</td>
+                                    <td>Giá</td>
+                                    <td>Kho hàng</td>
+                                    <td>Doanh số</td>
+                                    <td>Thao tác</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="pro-check">
+                                        <div class="product-check">
+                                            <input type="checkbox" name="btn">
+                                        </div>
+                                    </td>
+                                    <td class="product" id="">
+                                        <img src="/images/tts.png" alt="">
+                                        <div class="product-de">
+                                            <h5>Thuốc trừ sâu Batas 25EC</h5>
+                                        </div>
+                                    </td>
+                                    <td class="product-cate" id="">
+                                        <h5>Thuốc</h5>
+                                    </td>
+                                    <td class="product-pri" id="">
+                                        <h5>1.000đ</h5>
+                                    </td>
+                                    <td class="product-warehouse" id="">
+                                        <h5>1</h5>
+                                    </td>
+                                    <td class="product-sales" id="">
+                                        <h5>0</h5>
+                                    </td>
+                                    <td class="product-operation" id="">
+                                        <a href="#">Cập nhật</a>
+                                        <a href="#">Xóa</a>
+                                        <a href="#">Ẩn</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="containernp">
+                        <div class="pagination">
+                            <button class="btn1" onclick="backBtn()"><img src="/images/448-arrow.png">Prev</button>
+                            <ul>
+                                <li class="link active" value="1" onclick="activeLink()">1</li>
+                                <li class="link" value="2" onclick="activeLink()">2</li>
+                                <li class="link" value="3" onclick="activeLink()">3</li>
+                                <li class="link" value="4" onclick="activeLink()">4</li>
+                                <li class="link" value="5" onclick="activeLink()">5</li>
+                                <li class="link" value="6" onclick="activeLink()">6</li>
+                            </ul>
+                            <button class="btn2" onclick="nextBtn()">Next<img src="/images/448-arrow.png"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane">
+                    <div class="header-tab">
+                        <h2>0 Sản phẩm</h2>
+                        <div class="grouphd1">
+                            <div class="search-box">
+                                <input class="search-box_input" placeholder="Search..." type="" text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-tab">
+                        <table width = "100%">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" name="btn" id="chAll"/></td>
+                                    <td>Tên sản phẩm</td>
+                                    <td>Phân loại hàng</td>
+                                    <td>Giá</td>
+                                    <td>Kho hàng</td>
+                                    <td>Doanh số</td>
+                                    <td>Thao tác</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="pro-check">
+                                    </td>
+                                    <td class="product" id="">
+                                    </td>
+                                    <td class="product-cate" id="">
+                                    </td>
+                                    <td class="product-pri" id="">
+                                    </td>
+                                    <td class="product-warehouse" id="">
+                                    </td>
+                                    <td class="product-sales" id="">
+                                    </td>
+                                    <td class="product-operation" id="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="containernp">
+                        <div class="pagination">
+                            <button class="btn1" onclick="backBtn()"><img src="/images/448-arrow.png">Prev</button>
+                            <ul>
+                                <li class="link active" value="1" onclick="activeLink()">1</li>
+                                <li class="link" value="2" onclick="activeLink()">2</li>
+                                <li class="link" value="3" onclick="activeLink()">3</li>
+                                <li class="link" value="4" onclick="activeLink()">4</li>
+                                <li class="link" value="5" onclick="activeLink()">5</li>
+                                <li class="link" value="6" onclick="activeLink()">6</li>
+                            </ul>
+                            <button class="btn2" onclick="nextBtn()">Next<img src="/images/448-arrow.png"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane">
+                    <div class="header-tab">
+                        <h2>0 Sản phẩm</h2>
+                        <div class="grouphd1">
+                            <div class="search-box">
+                                <input class="search-box_input" placeholder="Search..." type="" text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-tab">
+                        <table width = "100%">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" name="btn" id="chAll"/></td>
+                                    <td>Tên sản phẩm</td>
+                                    <td>Phân loại hàng</td>
+                                    <td>Giá</td>
+                                    <td>Kho hàng</td>
+                                    <td>Doanh số</td>
+                                    <td>Thao tác</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="pro-check">
+                                    </td>
+                                    <td class="product" id="">
+                                    </td>
+                                    <td class="product-cate" id="">
+                                    </td>
+                                    <td class="product-pri" id="">
+                                    </td>
+                                    <td class="product-warehouse" id="">
+                                    </td>
+                                    <td class="product-sales" id="">
+                                    </td>
+                                    <td class="product-operation" id="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="containernp">
+                        <div class="pagination">
+                            <button class="btn1" onclick="backBtn()"><img src="/images/448-arrow.png">Prev</button>
+                            <ul>
+                                <li class="link active" value="1" onclick="activeLink()">1</li>
+                                <li class="link" value="2" onclick="activeLink()">2</li>
+                                <li class="link" value="3" onclick="activeLink()">3</li>
+                                <li class="link" value="4" onclick="activeLink()">4</li>
+                                <li class="link" value="5" onclick="activeLink()">5</li>
+                                <li class="link" value="6" onclick="activeLink()">6</li>
+                            </ul>
+                            <button class="btn2" onclick="nextBtn()">Next<img src="/images/448-arrow.png"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane">
+                    <div class="header-tab">
+                        <h2>0 Sản phẩm</h2>
+                        <div class="grouphd1">
+                            <div class="search-box">
+                                <input class="search-box_input" placeholder="Search..." type="" text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-tab">
+                        <table width = "100%">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" name="btn" id="chAll"/></td>
+                                    <td>Tên sản phẩm</td>
+                                    <td>Phân loại hàng</td>
+                                    <td>Giá</td>
+                                    <td>Kho hàng</td>
+                                    <td>Doanh số</td>
+                                    <td>Thao tác</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="pro-check">
+                                    </td>
+                                    <td class="product" id="">
+                                    </td>
+                                    <td class="product-cate" id="">
+                                    </td>
+                                    <td class="product-pri" id="">
+                                    </td>
+                                    <td class="product-warehouse" id="">
+                                    </td>
+                                    <td class="product-sales" id="">
+                                    </td>
+                                    <td class="product-operation" id="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="containernp">
+                        <div class="pagination">
+                            <button class="btn1" onclick="backBtn()"><img src="/images/448-arrow.png">Prev</button>
+                            <ul>
+                                <li class="link active" value="1" onclick="activeLink()">1</li>
+                                <li class="link" value="2" onclick="activeLink()">2</li>
+                                <li class="link" value="3" onclick="activeLink()">3</li>
+                                <li class="link" value="4" onclick="activeLink()">4</li>
+                                <li class="link" value="5" onclick="activeLink()">5</li>
+                                <li class="link" value="6" onclick="activeLink()">6</li>
+                            </ul>
+                            <button class="btn2" onclick="nextBtn()">Next<img src="/images/448-arrow.png"></button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+	</div>
+    <script src="/javascript/allProduct.js"></script>
+</body>
+
+</html>

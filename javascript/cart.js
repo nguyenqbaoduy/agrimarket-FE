@@ -29,16 +29,3 @@ $('#btn-delete').click(function () {
     alert($(this).val());
   });
 });
-
-
-const cartData = JSON.parse(localStorage.getItem('cart'));
-const productTitle = document.querySelector('.product-title');
-const productPrice = document.querySelector('.product-price');
-const productImage = document.querySelector('.product-image');
-const productSize = document.querySelector('.product-size');
-
-// set value
-productTitle.innerHTML = cartData.name;
-productSize.innerHTML = cartData.size;
-productPrice.innerHTML = cartData.price;
-productImage.src = cartData.image;

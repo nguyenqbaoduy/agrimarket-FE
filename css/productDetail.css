@@ -304,7 +304,7 @@ body {
 .content-name h2 {
     margin-top: 5px;
     width: 650px;
-    font-size: 30px;
+    font-size: 24px;
     color: #266937C2;
     margin-left: 25px;
 }
@@ -328,6 +328,26 @@ body {
     transform: translate(-44px, 5px);
 }
 
+.content-name-star {
+    display: flex;
+    margin-left: 25px ;
+}
+
+.content-name-star i {
+    color: orange;
+    margin-top: 3px;
+}
+
+.content-name-review {
+    margin-left: 10px;
+    padding-left: 5px;
+    border-left: 1px solid #000000;
+    text-transform: none;
+    margin-left: 10px;
+    padding-left: 5px;
+    color: #b1b1b1;
+}
+
 .content-name-price {
     display: flex;
     margin-top: 20px;
@@ -336,14 +356,15 @@ body {
 }
 
 .content-name-price h4 {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: normal;
 }
 
 .product-price{
     margin-left: 40px;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bolder;
+    color: #ff2727;
 }
 
 .content-title {
@@ -368,14 +389,52 @@ body {
 }
 
 .content-name-size h4 {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: normal;
 }
 
 .content-button-size button {
     margin-top: 25px;
     background: #ffffff;
-    width: 100px;
+    width: 90px;
+    height: 45px;
+    border-radius: 10px;
+    border: 2px solid #b8b8b8;
+    font-size: 16px;
+    color: #b8b8b8;
+}
+
+.content-button-size button:hover {
+    margin-top: 25px;
+    background: #ffffff;
+    width: 90px;
+    height: 45px;
+    border-radius: 10px;
+    border: 2px solid #266937;
+    font-size: 16px;
+    color: #266937;
+}
+
+.content-button-size button.btn-active {
+    border: 2px solid #266937;
+    color: #266937;
+}
+
+.content-name-expiry {
+    margin-top: 20px;
+    margin-bottom: 35px;
+    margin-left: 25px;
+}
+
+.content-name-expiry h4 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.content-button-expiry button {
+    margin-top: 25px;
+    background: #ffffff;
+    width: 95px;
     height: 50px;
     border-radius: 10px;
     border: 2px solid #b8b8b8;
@@ -383,7 +442,18 @@ body {
     color: #b8b8b8;
 }
 
-.content-button-size button.btn-active {
+.content-button-expiry button:hover {
+    margin-top: 25px;
+    background: #ffffff;
+    width: 95px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid #266937;
+    font-size: 16px;
+    color: #266937;
+}
+
+.content-button-expiry button.btn-active {
     border: 2px solid #266937;
     color: #266937;
 }
@@ -396,7 +466,7 @@ body {
 }
 
 .content-name-number h4 {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: normal;
 }
 
@@ -475,6 +545,7 @@ body {
 .active-button button:focus {
     background-color: red;
   }
+
 .content-name-cart button {
     display: flex;
     width: 150px;
@@ -488,18 +559,30 @@ body {
     background: #00AC2C;
     border-radius: 10px;
     justify-content: center;
-    height: 60px;
+    height: 55px;
+    transition: 0.3s linear;
+}
+
+.content-name-cart .btn:hover {
+    width: 92%;
+    margin-top: 30px;
+    margin-left: 25px;
+    background: #00AC2C;
+    border-radius: 10px;
+    justify-content: center;
+    height: 55px;
+    transform: translateY(2px)
 }
 
 .content-name-cart i {
     font-size: 25px;
-    padding-top: 18px;
+    padding-top: 14px;
     color: #ffffff;
 }
 
-.btn span {
+.btn a {
     margin-left: 10px;
-    padding-top: 12px;
+    padding-top: 9px;
     font-size: 25px;
     color: #ffffff;
 }
@@ -511,12 +594,24 @@ body {
     background: #266937;
     border-radius: 10px;
     justify-content: center;
-    height: 60px;
+    height: 55px;
+    transition: 0.3s linear;
+}
+
+.content-name-cart .btn-sed:hover {
+    width: 92%;
+    margin-left: 25px;
+    margin-top: 30px;
+    background: #266937;
+    border-radius: 10px;
+    justify-content: center;
+    height: 55px;
+    transform: translateY(2px)
 }
 
 .btn-sed a {
     margin-left: 10px;
-    padding-top: 12px;
+    padding-top: 9px;
     font-size: 25px;
     color: #ffffff;
 }
@@ -534,6 +629,7 @@ body {
     background: #D9D9D9;
     border-radius: 10px;
     height: 45px;
+    transition: 0.3s linear;
 }
 
 .content-name-addwish .btn-addwish:hover {
@@ -544,6 +640,7 @@ body {
     border-radius: 10px;
     height: 45px;
     border: 3px solid #ff00005c;
+    transform: translateY(2px)
 }
 
 .content-name-addwish i {
@@ -551,10 +648,6 @@ body {
     margin-top: 5px;
     margin-left: 30px;
     color: #000000;
-}
-
-.content-name-addwish i:hover {
-    color: #ff00005c;
 }
 
 .btn-addwish span {
