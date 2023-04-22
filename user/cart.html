@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/cart.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <title>Cart Page</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header_title container">
+            <div class="header_a">
+                <h4>MAY THE 4TH FLASH SALE! $15 OFF BACKPACK FOGGER! USE CODE PETRAFORCE AT CHECKOUT! 6PM-9PM ONLY!</h4>
+            </div>
+            <div class="header_title-content">
+                <a href="#"><img src="/images/logo.png" alt="" /></a>
+                <div class="search-box">
+                    <input class="search-box_input" placeholder="Search..." type="" text>
+                    <button class="search-box_btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                </div>
+                <div class="header-like">
+                    <a href="#"><i class="fa-regular fa-heart"><span>Yêu thích</span></i></a>
+                </div>
+                <div class="header-user">
+                    <a href="#"><i class="fa-regular fa-user"><span>Đăng nhập</span></i></a>
+                </div>
+                <div class="header-cart">
+                    <a href="/user/cart.html"><i class="fa-sharp fa-solid fa-cart-shopping"><span>Giỏ hàng</span></i></a>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a href="#">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="#">Tin tức và bài viết</a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+
+    <div class="container cart-container-top">
+        <div class="cart-check">
+          <input type="checkbox" name="btn" id="checkAll" />
+        </div>
+        <div class="cart-product">
+          Sản phẩm
+        </div>
+        <div class="cart-price">
+          Đơn giá
+        </div>
+        <div class="cart-number">
+          Số lượng
+        </div>
+        <div class="cart-money">
+          Số tiền
+        </div>
+      </div>
+      <div class="container cart-top">
+        <div class="content-cart-container">
+          <div class="cart-container-mid">
+            <div class="cart-check">
+              <input type="checkbox" name="btn">
+            </div>
+            <div class="cart-product cart-mid-img">
+              <a href="productDetail.html"><img src="/images/tts.png" alt="" class="product-image"></a>
+              <div class="cart-title">
+                <a href="/user/productDetail.html"><h4 class="product-title">Thuốc trừ sâu Batas 25EC</h4></a>
+                <div class="cart-size product-size">
+                  Size:
+                </div>
+              </div>
+    
+            </div>
+            <div class="art-price cart-mid-price product-price">
+              ₫ 90.000
+            </div>
+            <div class="cart-number cart-mid-number">
+              <div class="buttons_added">
+                <input class="minus is-form" type="button" value="-" />
+                <input aria-label="quantity" class="input-qty" max="1000" min="1" name="" type="number" value="1" />
+                <input class="plus is-form" type="button" value="+" />
+              </div>
+            </div>
+            <div class="cart-mid-money product-total-price">
+              ₫ 90.000
+            </div>
+            <div class="cart-delete-container">
+              <button id="btn-delete">Xóa hàng</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container cart-buy">
+        <div class="cart-buy-container">
+          <a href="bill.html"><button class="" btn third>Mua hàng</button></a>
+        </div>
+      </div>
+      <!-- bound -->
+      <div class="container middle-content">
+        <h4>Sản phẩm tương tự</h4>
+      </div>
+      <!-- cart items -->
+      <div class="bound slide-container">
+        <div class="slide-sliders product__bottom">
+          <!-- render product -->
+               
+        </div>
+        <div class="content__bottom">
+          <div class="content-number" style="display: flex;">
+            <button class="btn-prev btn-active">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </button>
+            <div class="content-number-page">
+              <!-- <button class="btn-number active">1</button> -->
+            </div>
+            <button class="btn-next">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+      <script src="/javascript/cart.js"></script>
+</body>
+</html>
