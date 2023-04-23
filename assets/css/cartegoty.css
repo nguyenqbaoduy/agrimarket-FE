@@ -97,11 +97,11 @@ header {
 .search-wrapper{
     width: 45%;
     border: 1px solid #ccc;
-    border-radius: 30px;
     height: 50px;
     display: flex;
     align-items: center;
-    overflow-x: hidden;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
 }
 
 .search-wrapper button{
@@ -122,6 +122,66 @@ header {
     outline: none;
 }
 
+.search-input-wrap {
+    flex: 1;
+    height: 100%;
+    position: relative;
+}
+
+.search-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    color: var(--text-color);
+    padding: 0 16px;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+.search-input:focus+.search-history {
+    display: block;
+}
+
+.search-history {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background-color: var(--white-color);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px #ccc;
+    display: none;
+    z-index: 8;
+}
+
+.search-history-list {
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.search-history-item {
+    height: 36px;
+    padding: 10px;
+}
+
+.search-history-item:hover {
+    background-color: var(--gray-color);
+}
+
+.search-history-item a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: black;
+    display: block;
+}
+
+/*menu items*/
 .menu-item{
     display: flex;
     justify-content: space-around;
@@ -142,12 +202,17 @@ header {
 }
 
 /*account*/
+.account{
+    position: relative;
+}
+
 .sub-menu-wrap{
     position: absolute;
-    top: 55%;
-    right: 18%;
+    top: 130%;
+    right: 5%;
+    margin-top: 12px;
     width: 230px;
-    max-height: 0px;
+    max-height: 0px; /* Mặt định */
     overflow: hidden;
     transition: max-height 0.5s;
 }
