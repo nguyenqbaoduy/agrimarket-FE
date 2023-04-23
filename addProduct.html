@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <link rel="stylesheet" href="./assets/css/addProduct.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Add Product</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#"><img src="./assets/image/logo/logo.png" alt="" /></a>
+            <div class="box-content">
+                <a href="#">Trang chủ</a>
+                <span>></span>
+                <a href="./allProduct.html">Quản lý sản phẩm</a>
+                <span>></span>
+                <a href="./addProduct.html">Thêm mới sản phẩm</a>
+            </div>
+            <div class="content-nav">
+                <nav>
+                    <a href="#" class="nav-link">
+                        <i class="fa-sharp fa-solid fa-bell icon"></i>
+                        <span class="badge">5</span>
+                    </a>
+                    <span class="divider"></span>
+                    <div class="profile">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="">
+                        <ul class="profile-link">
+                            <li><a href="#"><i class="fa-solid fa-circle-user icon"></i>Hồ sơ cá nhân shop</a></li>
+                            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+
+	<div class="containerds">
+		<div class="content-left">
+            <section id="sidebar">
+                <ul class="side-menu">
+                    <li>
+                        <a href="./dashBoard.html"><i class="fa-solid fa-chart-line"></i>DashBoard</a>
+                    </li>
+                    <li class="divider"> Main</li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-chart-line"></i>Vận Chuyển</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-chart-line"></i>Quản Lý Đơn Hàng</a>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><i class="fa-solid fa-volleyball"></i></i>Quản Lý Sản Phẩm<i class="fa-solid fa-chevron-right icon-right"></i></a>
+                        <ul class="side-dropdown">
+                            <li>
+                                <a href="./allProduct.html"><i class="fa-solid fa-chart-line" ></i>Tất Cả Sản Phẩm</a>
+                                <a href="./addProduct.html" ><i class="fa-solid fa-chart-line"></i>Thêm Sản Phẩm</a>
+                            </li>
+                        </ul>
+                    </li>
+    
+                </ul>
+            </section>
+        </div>
+        <div class="divied"></div>
+        <div class="content-right">
+            <div class="info-title">Thông tin cơ bản</div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Hình ảnh sản phẩm</h4>
+                </div>
+                <div class="info-right">
+                    <figure class="image-user">
+                      <img alt="" id="choosen-image">
+                      <div class="img-content">
+                        <div class="icon">
+                           <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="text">
+                           No file chosen, yet!
+                        </div>
+                     </div>
+                    </figure>
+                    <figcaption id="file-name">
+                        
+                    </figcaption>
+                    <input type="file" id="upload-button" accept="image/*" name="image">
+                    <label for="upload-button">
+                      <i class="fas fa-upload"></i> &nbsp;
+                      Chọn ảnh
+                    </label>
+                  </div>
+            </div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Tên sản phẩm</h4>
+                </div>
+                <div class="edit-main">
+                    <input class="name-box_input" placeholder="Nhập vào..." type="" text>
+                </div>
+            </div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Mô tả sản phẩm</h4>
+                </div>
+                <div class="edit-detail">
+                    <textarea type="textarea" resize="none" rows="2" minrows="9" maxrows="26" autosize="true" maxlength="Infinity" restrictiontype="input" max="Infinity" min="-Infinity" class="detail_box-input"></textarea>
+                </div>
+            </div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Đơn vị sản xuất</h4>
+                </div>
+                <div class="edit-dvsx">
+                    <input class="dvsx-box_input" placeholder="" type="" text>
+                </div>
+            </div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Giá</h4>
+                </div>
+                <div class="edit-price">
+                    <input class="price-box_input" placeholder="VND" type="" text>
+                </div>
+            </div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Size</h4>
+                </div>
+                <div class="edit-size">
+                    <input class="name-box_input" placeholder="Nhập vào..." type="" text>
+                </div>
+            </div>
+            <div class="edit-row">
+                <div class="tiltle-product">
+                    <h4><span>*</span>Hạn sử dụng đến</h4>
+                </div>
+                <div class="edit-expiry">
+                    <input class ="form-control" type="date">
+                </div>
+            </div>
+            <div class="containerbtn">
+                <div class="btn-group">
+                    <button class="btn btn-cancel">
+                        <a href="#">Hủy</a>
+                     </button>
+                    <button class="btn btn-save">
+                        <a href="#">Lưu</a>
+                     </button>
+                </div>
+            </div>
+        </div>     
+	</div>
+    <script src="./assets/js/addProduct.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>    
+</body>
+
+</html>
