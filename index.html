@@ -39,7 +39,31 @@
               </a>
             </div>
             <div class="search-wrapper">
-              <input type="search" placeholder="Search" />
+              <div class="search-input-wrap">
+                <input type="search" class="search-input" placeholder="Search"/>
+                <div class="search-history">
+                  <ul class="search-history-list">
+                      <li class="search-history-item">
+                          <a href="#">Combo 30 điểm đại học khối A</a>
+                      </li>
+                      <li class="search-history-item">
+                          <a href="#">Combo 30 điểm đại học khối D</a>
+                      </li>
+                      <li class="search-history-item">
+                          <a href="#">Mỹ phẩm cho người yêu</a>
+                      </li>
+                      <li class="search-history-item">
+                          <a href="#">Bí kíp tán crush auto đổ</a>
+                      </li>
+                      <li class="search-history-item">
+                          <a href="#">Iphone 13 Pro Max giá rẻ</a>
+                      </li>
+                      <li class="search-history-item">
+                          <a href="#">Người yêu đẹp trai như LTP</a>
+                      </li>
+                  </ul>
+                </div>
+              </div>
               <button class="fa-solid fa-magnifying-glass"></button>
             </div>
             <div class="menu-item">
@@ -68,16 +92,153 @@
                   </div>
                 </div>
               </div>
-              <div class="cart">
-                <div class="cart-btn">
-                  <span class="fas fa-cart-plus"></span>
-                  <span>Giỏ hàng</span>
+              <!--cart-->
+              <div class="header__cart header__cart--has-cart">
+                <i class="header__cart-icon fas fa-cart-plus"></i><span class="cart-title">Giỏ hàng</span>
+                <div class="header__cart-count">4</div>
+                
+                <!--Chưa có sp-->
+                <div class="header__cart-list no-cart">
+                    <img src="/assets/image/cart/cart.png" class="header__no-cart-img">
+                    <p class="header__no-cart-text">Chưa có sản phẩm</p>
                 </div>
-                <div class="sub-menu-wrap-cart">
-                  <div class="sub-menu-cart">
-                    <img src="./assets/image/cart/cart.png" alt="">
-                    <p>Chưa có đơn hàng</p>
-                  </div>
+                
+                <!--Có sp-->
+                <div class="header__cart-list has-cart">
+                    <h4 class="header__cart-heading">Sản phẩm đã chọn</h4>
+                    <ul class="header__cart-list-item">
+                        <li class="header__cart-item">
+                            <img src="/assets/image/buy/hoa-hong-hat-giong-min.png" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                    <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                    <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 2</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="/assets/image/buy/p1.png" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 1</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="./assets/img/buy/3.PNG" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>  
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 1</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="./assets/img/buy/4.PNG" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>  
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 3</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="./assets/img/buy/5.PNG" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 2</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="./assets/img/buy/6.PNG" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 1</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="./assets/img/buy/7.PNG" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>  
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 1</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__cart-item">
+                            <img src="./assets/img/buy/8.PNG" class="header__cart-item-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-heading">
+                                  <h3 class="header__cart-item-name">Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                  <p class="header__cart-item-price">110.000 ₫</p>
+                                </div>  
+                                <div class="header__cart-item-body">
+                                    <p class="header__cart-item-number">x 3</p>
+                                    <div class="header__cart-item-close">
+                                        Xoá
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="header__cart-footer">
+                        <a href="#" class="btn-list header__cart-see-cart">Xem giỏ hàng</a>
+                    </div>
                 </div>
               </div>
             </div>
@@ -131,7 +292,7 @@
         </div>
 
         <div class="product-catalog">
-          <a href="" class="collect-item">
+          <a href="./cartegory/seeds.html" class="collect-item">
             <div class="product-catalog-img">
               <img src="./assets/image/catalog/lamvuon.png" alt="2" />
             </div>
@@ -142,7 +303,7 @@
         </div>
 
         <div class="product-catalog">
-          <a href="" class="collect-item">
+          <a href="./cartegory/seeds.html" class="collect-item">
             <div class="product-catalog-img">
               <img src="./assets/image/catalog/channuoi.png" alt="3" />
             </div>
@@ -153,7 +314,7 @@
         </div>
 
         <div class="product-catalog">
-          <a href="" class="collect-item">
+          <a href="./cartegory/seeds.html" class="collect-item">
             <div class="product-catalog-img">
               <img src="./assets/image/catalog/dinhduong.png" alt="4" />
             </div>
@@ -164,7 +325,7 @@
         </div>
 
         <div class="product-catalog">
-          <a href="" class="collect-item">
+          <a href="./cartegory/seeds.html" class="collect-item">
             <div class="product-catalog-img">
               <img src="./assets/image/catalog/thuoc.png" alt="5" />
             </div>
@@ -175,7 +336,7 @@
         </div>
 
         <div class="product-catalog">
-          <a href="" class="collect-item">
+          <a href="./cartegory/seeds.html" class="collect-item">
             <div class="product-catalog-img">
               <img src="./assets/image/catalog/congcu.png" alt="6" />
             </div>
@@ -195,7 +356,7 @@
             </div>
 				    <button onclick="Toggle()" id="btn-favorite" class="fas fa-heart"></button>
 				    <div class="info">
-					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC</h3></a>
+					    <a><h3 class="product-title">Thuốc trừ sâu Batas 25EC cá loại thuoccs co thanh phan tu  thuc vat</h3></a>
               <p class="product-copany-name">Công ty TNHH công nghệ cao</p>
 					    <div class="stars">
 						    <i class="fas fa-star"></i>
