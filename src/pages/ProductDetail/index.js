@@ -1,11 +1,27 @@
-import { useParams } from 'react-router-dom';
-function ProductDetail() {
+import { Link, useParams } from 'react-router-dom';
+import './productDetail.css'
+import React, { useEffect, useState } from "react"
+import { getDetailProduct } from '../../services/getAPI.js'
+
+const ProductDetail = () => {
+    const [product, setProduct] = useState([])
     const params = useParams();
-    console.log(params.ProductID)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getDetailProduct(params.ProductID);
+                setProduct(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, []);
     return (
         <div className="container">
             <div className="content_title">
-                <a href="#">Trang chủ</a>
+                <a href="/">Trang chủ</a>
                 <span>{'>'}</span>
                 <a href="#">Thuốc trừ sâu</a>
                 <span></span>
@@ -25,7 +41,7 @@ function ProductDetail() {
                     <div className="content-mid"></div>
                     <div className="content-right">
                         <div className="content-name">
-                            <h2 id="shift" className="product-title">Thuốc trừ sâu Batas 25EC</h2>
+                            <h2 id="shift" className="product-title">{product.ProductName}</h2>
                             <div className="content-name-star">
                                 <i className="fa-solid fa-star"></i>
                                 <i className="fa-solid fa-star"></i>

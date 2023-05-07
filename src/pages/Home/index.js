@@ -1,4 +1,4 @@
-import '../Home/home.css'
+import './home.css'
 import React, { useEffect, useState } from "react"
 import { getAllProduct } from '../../services/getAPI.js'
 import { Link } from 'react-router-dom';

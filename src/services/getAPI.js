@@ -10,9 +10,9 @@ export async function getAllProduct() {
 //     var data =  await response.json();
 //     return data.result;
 // }
-// async function getDetailProduct(productId){
-//     const url = `/product/detail/${productId}`;
-//     const response = await fetch(api_url + url);
-//     var data =  await response.json();
-//     return data.result;
-// }
+export async function getDetailProduct(productId){
+    const url = `/product/detail/${productId}`;
+    const response = await fetch(api_url + url);
+    var data =  await response.json();
+    return data.product;
+}
