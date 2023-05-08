@@ -6,11 +6,7 @@ function DefaultLayout({children}) {
         <div>
             <Header/>
             <Slidebar/>
-            <div className="container">
-                <div className="content">
-                    {children}
-                </div>
-            </div>
+            {children}
         </div>
      );
 }
