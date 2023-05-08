@@ -1,16 +1,20 @@
 import './home.css'
 import React, { useEffect, useState } from "react"
-import { getAllProduct } from '../../services/getAPI.js'
+import { getAllProduct, getAllCategory } from '../../services/getAPI.js'
 import { Link } from 'react-router-dom';
 const Home = () => {
     const [products, setProducts] = useState([])
+    const [categorys, setCategorys] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getAllProduct();
-                setProducts(data);
-                console.log(data)
+                const product = await getAllProduct();
+                setProducts(product);
+                console.log(product)
+                const category = await getAllCategory();
+                setCategorys(category);
+                console.log(category);
             } catch (error) {
                 console.log(error);
             }
@@ -46,18 +50,18 @@ const Home = () => {
 
             {/* Product Catalog */}
             <section id="slider-product">
-                <div className="product-catalog">
-                    <a href="./cartegory/seeds.html" className="collect-item">
-                        <div className="product-catalog-img">
-                            <img src="./assets/image/catalog/hatgiong.png" alt="1" />
-                        </div>
-                        <div className="product-catalog-text">
-                            <p>Hạt giống</p>
-                        </div>
-                    </a>
-                </div>
-
-                {/* Add the rest of the product-catalog items here */}
+                {categorys.map((cartegory, index) => (
+                    <div className="product-catalog">
+                        <a href="./cartegory/seeds.html" className="collect-item">
+                            <div className="product-catalog-img">
+                                <img src="" alt="1" />
+                            </div>
+                            <div className="product-catalog-text">
+                                <p>{cartegory.CategoryName}</p>
+                            </div>
+                        </a>
+                    </div>
+                ))}
             </section>
 
             {/* Body */}
@@ -68,7 +72,7 @@ const Home = () => {
                     {products.map((product, index) => (
                         <div className="product-item" key={index}>
                             <div className="image">
-                                <img className="product-item-img" src={product.ProductSlug} alt="" />
+                                <img className="product-item-img" src={"/images/product/" + product.ProductImageDefault} alt="" />
                             </div>
                             <button
                                 // onClick={Toggle} 

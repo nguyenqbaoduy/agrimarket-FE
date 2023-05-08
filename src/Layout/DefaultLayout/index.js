@@ -5,8 +5,8 @@ function DefaultLayout({children}) {
     return ( 
         <div>
             <Header/>
+            <Slidebar/>
             <div className="container">
-                <Slidebar/>
                 <div className="content">
                     {children}
                 </div>

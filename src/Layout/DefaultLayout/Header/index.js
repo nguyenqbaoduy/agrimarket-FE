@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../../public/images/logo.png';
 
 function Header() {
     return (
@@ -13,7 +12,7 @@ function Header() {
             <div className="main-header both-sides" id="myHeader">
                 <div className="brand">
                     <a href="/">
-                        <img src={logo} alt="logo" />
+                        <img src='/images/logo.png' alt="logo" />
                     </a>
                 </div>
                 <div className="search-wrapper">

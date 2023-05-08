@@ -4,6 +4,11 @@ export async function getAllProduct() {
     var data =  await response.json();
     return data.result;
 };
+export async function getAllCategory() {
+    const response = await fetch(api_url + '/category/all?');
+    var data =  await response.json();
+    return data.result;
+};
 // async function searchByNameProduct(productName){
 //     const url = `/product/search?ProductName=${productName}`;
 //     const response = await fetch(api_url + url);
