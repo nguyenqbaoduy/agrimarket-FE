@@ -40,6 +40,24 @@ let btnlet = document.getElementById("btn-favorite");
     }
   }
 
+//--Search--
+const searchBar = document.querySelector('.search-input-wrap input');
+searchBar.addEventListener('input', function (e) {
+  let txtSearch = e.target.value.trim().toLowerCase();
+  const productsSearch = products.filter((item) =>
+    item.name.toLowerCase().includes(txtSearch)
+  );
+  renderProduct(productsSearch);
+  let listProductDOM = document.querySelectorAll('.product-item-name');
+  listProductDOM.forEach((item) => {
+    if (item.innerText.toLowerCase().inclues(txtSearch)) {
+      item.classList.remove('hide');
+    } else {
+      item.classList.add('hide');
+    }
+  });
+});
+
 
 //--Pagination--
 function getPageList(totalPage, page, maxLength){

@@ -40,7 +40,7 @@
             </div>
             <div class="search-wrapper">
               <div class="search-input-wrap">
-                <input type="search" class="search-input" placeholder="Search"/>
+                <input type="text" class="search-input" placeholder="Search" name="searchBar" id="searchBar"/>
                 <div class="search-history">
                   <ul class="search-history-list">
                       <li class="search-history-item">
@@ -76,7 +76,7 @@
               <div class="account" onclick="toggleMenu()">
                 <div class="account-btn">
                   <span class="far fa-user"></span>
-                  <span>Đăng nhập</span>
+                  <span class="view-fullname">Đăng nhập</span>
                 </div>
                 <div class="sub-menu-wrap" id="subMenu">
                   <div class="sub-menu">
@@ -86,7 +86,7 @@
                     <a href="#" class="sub-menu-link">
                       <p>Đơn mua</p>
                     </a>
-                    <a href="#" class="sub-menu-link">
+                    <a href="/login.html" class="sub-menu-link">
                       <p>Đăng xuất</p>
                     </a>
                   </div>
@@ -543,5 +543,6 @@
 
     <!--Script-->
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/api.js"></script>
   </body>
 </html>
