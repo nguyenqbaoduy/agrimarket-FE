@@ -73,8 +73,10 @@ const Home = () => {
                                 <img className="product-item-img" src={"/images/product/" + product.ProductImageDefault} alt="" />
                             </div>
                             <button
-                                onClick={Toggle}
-                                id="btn-favorite" className="fas fa-heart"></button>
+                                id={product.ProductID} 
+                                className="fas fa-heart"
+                                onClick={() => Toggle(product.ProductID)}
+                                ></button>
                             <div className="info">
                                 <Link to={`/Product/${product.ProductID}`}>
                                     <h3 className="product-title">{product.ProductName}</h3>
@@ -122,9 +124,9 @@ function toggleMenu() {
 }
 
 //toggleFavoriteProduct
-let btnlet = document.getElementById("btn-favorite");
-function Toggle() {
-    if (btnlet.style.color  == "var(--favorites-color)") {
+const Toggle = (btnFavorite) =>{
+    let btnlet = document.getElementById(btnFavorite);
+    if (btnlet.style.color  == "var(--favorites-color)" || btnlet.style.color == null) {
         btnlet.style.color  = "var(--primary-color)";
     }
     else {
