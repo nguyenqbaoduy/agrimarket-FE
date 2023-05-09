@@ -6,7 +6,6 @@ function Header() {
         <div>
             <div className="toolbar-scroll">
                 <h5>
-                    MAY THE 4TH FLASH SALE! $15 OFF BACKPACK FOGGER! USE CODE PETRAFORCE AT CHECKOUT! 6PM-9PM ONLY!
                 </h5>
             </div>
             <div className="main-header both-sides" id="myHeader">
@@ -33,7 +32,7 @@ function Header() {
                     <div className="like">
                         <div className="like-btn">
                             <span className="far fa-heart"></span>
-                            <span>Yêu thích</span>
+                            <span> Yêu thích</span>
                         </div>
                     </div>
                     <div className="account" 
@@ -41,7 +40,7 @@ function Header() {
                     >
                         <div className="account-btn">
                             <FontAwesomeIcon icon={faUser} />
-                            <span>Đăng nhập</span>
+                            <span> Đăng nhập</span>
                         </div>
                         <div className="sub-menu-wrap" id="subMenu">
                             <div className="sub-menu">

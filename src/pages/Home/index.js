@@ -28,22 +28,19 @@ const Home = () => {
             <div className="banner-container">
                 <div className="banner">
                     <div className="product">
-                        <img src="./assets/image/banner/b2.png" alt="" />
+                        <img src="/images/7_d27d1.png" alt="" />
                     </div>
                     <div className="content">
                         <h2>
                             <span style={{ color: 'var(--primary-color)', fontSize: '45px' }}>
-                                Green grass
+                            Nâng tầm chất lượng nông sản Việt 
                             </span>
-                            on your side of the fence. Always.
+                            &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
                         </h2>
-                        <span>Nec odio luctus volutpat sit.</span>
+                        <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit vel,
-                            vestibulum pellentesque habitant. Condimentum ullamcorper et
-                            sollicitudin pellentesque.
+                        Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân, nâng cao chất lượng cuộc sống.
                         </p>
-                        <a href="" className="btn">Visit the shop</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +51,7 @@ const Home = () => {
                     <div className="product-catalog">
                         <a href="./cartegory/seeds.html" className="collect-item">
                             <div className="product-catalog-img">
-                                <img src="" alt="1" />
+                                <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
                             </div>
                             <div className="product-catalog-text">
                                 <p>{cartegory.CategoryName}</p>
