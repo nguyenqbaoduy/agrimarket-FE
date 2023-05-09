@@ -117,11 +117,6 @@ const Home = () => {
 //     }
 // }
 
-//toggleMenuAccount
-let subMenu = document.getElementById("subMenu");
-function toggleMenu() {
-    subMenu.classList.toggle("open-menu");
-}
 
 //toggleFavoriteProduct
 const Toggle = (btnFavorite) =>{

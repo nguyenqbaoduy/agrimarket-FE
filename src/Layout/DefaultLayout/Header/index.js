@@ -35,8 +35,8 @@ function Header() {
                             <span> Yêu thích</span>
                         </div>
                     </div>
-                    <div className="account" 
-                    // onClick={toggleMenu}
+                    <div className="account"
+                    onClick={toggleMenu}
                     >
                         <div className="account-btn">
                             <FontAwesomeIcon icon={faUser} />
@@ -47,9 +47,15 @@ function Header() {
                                 <a href="info.html" className="sub-menu-link">
                                     <p>Tài khoản của tôi</p>
                                 </a>
-                                {/* Add more submenu links */}
+                                <a href="#" className="sub-menu-link">
+                                    <p>Đơn mua</p>
+                                </a>
+                                <a href="/login.html" className="sub-menu-link">
+                                    <p>Đăng xuất</p>
+                                </a>
                             </div>
                         </div>
+
                     </div>
                     <div className="header__cart header__cart--has-cart">
                         <FontAwesomeIcon icon={faCartPlus} className="header__cart-icon" />
@@ -62,5 +68,9 @@ function Header() {
         </div>
     );
 }
-
+//toggleMenuAccount
+let subMenu = document.getElementById("subMenu");
+function toggleMenu() {
+    subMenu.classList.toggle("open-menu");
+}
 export default Header;
