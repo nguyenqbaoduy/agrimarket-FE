@@ -6,7 +6,6 @@ function Header() {
         <div>
             <div className="toolbar-scroll">
                 <h5>
-                    MAY THE 4TH FLASH SALE! $15 OFF BACKPACK FOGGER! USE CODE PETRAFORCE AT CHECKOUT! 6PM-9PM ONLY!
                 </h5>
             </div>
             <div className="main-header both-sides" id="myHeader">
@@ -33,24 +32,30 @@ function Header() {
                     <div className="like">
                         <div className="like-btn">
                             <span className="far fa-heart"></span>
-                            <span>Yêu thích</span>
+                            <span> Yêu thích</span>
                         </div>
                     </div>
-                    <div className="account" 
-                    // onClick={toggleMenu}
+                    <div className="account"
+                    onClick={toggleMenu}
                     >
                         <div className="account-btn">
                             <FontAwesomeIcon icon={faUser} />
-                            <span>Đăng nhập</span>
+                            <span> Đăng nhập</span>
                         </div>
                         <div className="sub-menu-wrap" id="subMenu">
                             <div className="sub-menu">
                                 <a href="info.html" className="sub-menu-link">
                                     <p>Tài khoản của tôi</p>
                                 </a>
-                                {/* Add more submenu links */}
+                                <a href="#" className="sub-menu-link">
+                                    <p>Đơn mua</p>
+                                </a>
+                                <a href="/login.html" className="sub-menu-link">
+                                    <p>Đăng xuất</p>
+                                </a>
                             </div>
                         </div>
+
                     </div>
                     <div className="header__cart header__cart--has-cart">
                         <FontAwesomeIcon icon={faCartPlus} className="header__cart-icon" />
@@ -63,5 +68,9 @@ function Header() {
         </div>
     );
 }
-
+//toggleMenuAccount
+let subMenu = document.getElementById("subMenu");
+function toggleMenu() {
+    subMenu.classList.toggle("open-menu");
+}
 export default Header;
