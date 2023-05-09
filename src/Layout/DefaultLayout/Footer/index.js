@@ -10,7 +10,7 @@ function Footer() {
                             <img src="/images/logo.png" alt="logo" />
                         </a>
                     </div>
-                    <ul classNameName="social-icon">
+                    <ul className="social-icon">
                         <li><a href=""><i className="fab fa-facebook"></i></a></li>
                         <li><a href=""><i className="fab fa-twitter-square"></i></a></li>
                         <li><a href=""><i className="fab fa-instagram"></i></a></li>
