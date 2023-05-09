@@ -1,0 +1,64 @@
+.content-left{
+    display: flex;
+    background: #ffffff;
+}
+
+#sidebar{
+	position: flex;
+	width: 300px;
+	background: var(--light);
+	height: 100%;
+}
+#sidebar .fa-solid{
+	width: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#sidebar .fa-solid .icon-right{
+    transition: all .3s ease;
+}
+#sidebar .side-menu{
+	margin: 36px 0;
+	padding: 0 20px;
+}
+#sidebar .side-menu a{
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: var(--dark);
+	padding: 12px 16px 12px 0px;
+	transition: all .3s ease;
+	border-radius: 10px;
+	margin: 4px 0;
+	grid-gap: 6px;
+    width: 260px;
+}
+#sidebar .side-menu a:hover{
+    color:#266937 ;
+}
+#sidebar .side-menu  > li > a.active .icon-right{
+    transform: rotateZ(90deg);
+}
+#sidebar .side-menu  > li > a.active,
+#sidebar .side-menu >li > a.active:hover{
+	color: #266937;
+    font-weight: bolder;
+    transform: translateY(2px);
+
+} 
+#sidebar .side-dropdown{
+	padding-left: 56px;
+	max-height: 0;
+	overflow-y: hidden;
+	transition:  all .15s ease;
+}
+#sidebar .side-dropdown a:hover{
+	color: #5e6861c2;
+}
+#sidebar .side-dropdown.show {
+	max-height: 1000px;
+}
+#sidebar .side-dropdown a:hover {
+	color: #266937;
+}
