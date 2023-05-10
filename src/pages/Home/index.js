@@ -1,8 +1,9 @@
-import './home.css'
 import React, { useEffect, useState } from "react"
 import { getAllProduct, getAllCategory } from '../../services/getAPI.js'
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
+import Helmet from 'react-helmet';
+
 const Home = () => {
     const [products, setProducts] = useState([])
     const [categorys, setCategorys] = useState([])
@@ -23,9 +24,14 @@ const Home = () => {
         fetchData();
         window.scrollTo(0, 0);
     }, []);
-
+    const css = require('./home.css').toString();
     return (
         <div>
+            <Helmet>
+                <style>
+                    {css}
+                </style>
+            </Helmet>
             <div className="banner-container">
                 <div className="banner">
                     <div className="product">
@@ -73,10 +79,10 @@ const Home = () => {
                                 <img className="product-item-img" src={"/images/product/" + product.ProductImageDefault} alt="" />
                             </div>
                             <button
-                                id={product.ProductID} 
+                                id={product.ProductID}
                                 className="fas fa-heart"
                                 onClick={() => Toggle(product.ProductID)}
-                                ></button>
+                            ></button>
                             <div className="info">
                                 <Link to={`/Product/${product.ProductID}`}>
                                     <h3 className="product-title">{product.ProductName}</h3>
@@ -119,13 +125,13 @@ const Home = () => {
 
 
 //toggleFavoriteProduct
-const Toggle = (btnFavorite) =>{
+const Toggle = (btnFavorite) => {
     let btnlet = document.getElementById(btnFavorite);
-    if (btnlet.style.color  == "var(--favorites-color)" || btnlet.style.color == null) {
-        btnlet.style.color  = "var(--primary-color)";
+    if (btnlet.style.color == "var(--favorites-color)" || btnlet.style.color == null) {
+        btnlet.style.color = "var(--primary-color)";
     }
     else {
-        btnlet.style.color  = "var(--favorites-color)"
+        btnlet.style.color = "var(--favorites-color)"
     }
 }
 

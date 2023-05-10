@@ -1,7 +1,14 @@
-import './login.css'
+import Helmet from 'react-helmet';
 const Login = () => {
+    const css = require('./login.css').toString();
+
     return (
         <>
+            <Helmet>
+                <style>
+                    {css}
+                </style>
+            </Helmet>
             <head>
                 <title>Đăng nhập</title>
             </head>
