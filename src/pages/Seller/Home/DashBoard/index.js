@@ -18,7 +18,7 @@ allProgress.forEach(item=> {
   
   return (
     <div className={cx("content-right")}>
-      <main>
+      <div className={cx("content-dashboard")}>
         <h1 className={cx("title")}>Dashboard</h1>
         <ul className={cx("breadcrumbs")} >
           <li className={cx('name-page')}>
@@ -102,7 +102,7 @@ allProgress.forEach(item=> {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

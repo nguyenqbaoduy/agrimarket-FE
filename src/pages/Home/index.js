@@ -1,107 +1,121 @@
-import './home.css'
-import React, { useEffect, useState } from "react"
-import { getAllProduct, getAllCategory } from '../../services/getAPI.js'
-import { Link } from 'react-router-dom';
-import $ from 'jquery';
+import classNames from "classnames/bind";
+import styles from "./home.module.scss";
+import React, { useEffect, useState } from "react";
+import { getAllProduct, getAllCategory } from "../../services/getAPI.js";
+import { Link } from "react-router-dom";
+import $ from "jquery";
+
+const cx = classNames.bind(styles);
 const Home = () => {
-    const [products, setProducts] = useState([])
-    const [categorys, setCategorys] = useState([])
+  const [products, setProducts] = useState([]);
+  const [categorys, setCategorys] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const product = await getAllProduct();
-                setProducts(product);
-                console.log(product)
-                const category = await getAllCategory();
-                setCategorys(category);
-                console.log(category);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchData();
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const product = await getAllProduct();
+        setProducts(product);
+        console.log(product);
+        const category = await getAllCategory();
+        setCategorys(category);
+        console.log(category);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
 
-    return (
-        <div>
-            <div className="banner-container">
-                <div className="banner">
-                    <div className="product">
-                        <img src="/images/7_d27d1.png" alt="" />
-                    </div>
-                    <div className="content">
-                        <h2>
-                            <span style={{ color: 'var(--primary-color)', fontSize: '45px' }}>
-                                Nâng tầm chất lượng nông sản Việt
-                            </span>
-                            &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
-                        </h2>
-                        <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
-                        <p>
-                            Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân, nâng cao chất lượng cuộc sống.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Product Catalog */}
-            <section id="slider-product">
-                {categorys.map((cartegory, index) => (
-                    <div className="product-catalog">
-                        <a href="./cartegory/seeds.html" className="collect-item">
-                            <div className="product-catalog-img">
-                                <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
-                            </div>
-                            <div className="product-catalog-text">
-                                <p>{cartegory.CategoryName}</p>
-                            </div>
-                        </a>
-                    </div>
-                ))}
-            </section>
-
-            {/* Body */}
-            <div className="container" id="list">
-                <div className="list-product"
-                // style={{ display: 'none' }}
-                >
-                    {products.map((product, index) => (
-                        <div className="product-item" key={index}>
-                            <div className="image">
-                                <img className="product-item-img" src={"/images/product/" + product.ProductImageDefault} alt="" />
-                            </div>
-                            <button
-                                id={product.ProductID} 
-                                className="fas fa-heart"
-                                onClick={() => Toggle(product.ProductID)}
-                                ></button>
-                            <div className="info">
-                                <Link to={`/Product/${product.ProductID}`}>
-                                    <h3 className="product-title">{product.ProductName}</h3>
-                                </Link>
-                                <p className="product-copany-name">{product.UserID}</p>
-                                <div className="stars">
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i> (5/5)
-                                </div>
-                                <strong className="price"><span className="mrp">{product.ProductPrice}</span></strong>
-                            </div>
-                            <div className="product-volume">
-                                <p>480 ml</p>
-                            </div>
-                        </div>
-                    ))}
-                    {/* Add the rest of the product-item elements here */}
-                </div>
-            </div>
+  return (
+    <div>
+      <div className={cx("banner-container")}>
+        <div className={cx("banner")}>
+          <div className={cx("product")}>
+            <img src="/images/7_d27d1.png" alt="" />
+          </div>
+          <div className={cx("content")}>
+            <h2>
+              <span style={{ color: "var(--primary-color)", fontSize: "45px" }}>
+                Nâng tầm chất lượng nông sản Việt
+              </span>
+              &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
+            </h2>
+            <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
+            <p>
+              Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân,
+              nâng cao chất lượng cuộc sống.
+            </p>
+          </div>
         </div>
-    );
-}
+      </div>
+
+      {/* Product Catalog */}
+      <section id="slider-product">
+        {categorys.map((cartegory, index) => (
+          <div className={cx("product-catalog")}>
+            <a href="./cartegory/seeds.html" className={cx("collect-item")}>
+              <div className={cx("product-catalog-img")}>
+                <img
+                  src={"/images/cartegory/" + cartegory.CategoryIcon}
+                  alt="1"
+                />
+              </div>
+              <div className={cx("product-catalog-text")}>
+                <p>{cartegory.CategoryName}</p>
+              </div>
+            </a>
+          </div>
+        ))}
+      </section>
+
+      {/* Body */}
+      <div className={cx("container")} id="list">
+        <div
+          className={cx("list-product")}
+          // style={{ display: 'none' }}
+        >
+          {products.map((product, index) => (
+            <div className={cx("product-item")} key={index}>
+              <div className={cx("image")}>
+                <img
+                  className={cx("product-item-img")}
+                  src={"/images/product/" + product.ProductImageDefault}
+                  alt=""
+                />
+              </div>
+              <button
+                id={product.ProductID}
+                className={cx("fas fa-heart")}
+                onClick={() => Toggle(product.ProductID)}
+              ></button>
+              <div className={cx("info")}>
+                <Link to={`/Product/${product.ProductID}`}>
+                  <h3 className={cx("product-title")}>{product.ProductName}</h3>
+                </Link>
+                <p className={cx("product-copany-name")}>{product.UserID}</p>
+                <div className={cx("stars")}>
+                  <i className={cx("fas fa-star")}></i>
+                  <i className={cx("fas fa-star")}></i>
+                  <i className={cx("fas fa-star")}></i>
+                  <i className={cx("fas fa-star")}></i>
+                  <i className={cx("fas fa-star")}></i> (5/5)
+                </div>
+                <strong className={cx("price")}>
+                  <span className={cx("mrp")}>{product.ProductPrice}</span>
+                </strong>
+              </div>
+              <div className={cx("product-volume")}>
+                <p>480 ml</p>
+              </div>
+            </div>
+          ))}
+          {/* Add the rest of the product-item elements here */}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 //myheaders
 // window.onscroll = function () { myFunction() };
@@ -117,89 +131,131 @@ const Home = () => {
 //     }
 // }
 
-
 //toggleFavoriteProduct
-const Toggle = (btnFavorite) =>{
-    let btnlet = document.getElementById(btnFavorite);
-    if (btnlet.style.color  == "var(--favorites-color)" || btnlet.style.color == null) {
-        btnlet.style.color  = "var(--primary-color)";
-    }
-    else {
-        btnlet.style.color  = "var(--favorites-color)"
-    }
-}
+const Toggle = (btnFavorite) => {
+  let btnlet = document.getElementById(btnFavorite);
+  if (
+    btnlet.style.color == "var(--favorites-color)" ||
+    btnlet.style.color == null
+  ) {
+    btnlet.style.color = "var(--primary-color)";
+  } else {
+    btnlet.style.color = "var(--favorites-color)";
+  }
+};
 
 //--Pagination--
 function getPageList(totalPage, page, maxLength) {
-    function range(start, end) {
-        return Array.from(Array(end - start + 1), (_, i) => i + start);
-    }
+  function range(start, end) {
+    return Array.from(Array(end - start + 1), (_, i) => i + start);
+  }
 
-    let sideWidth = maxLength < 9 ? 1 : 2;
-    let leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-    let rightWidth = (maxLength - sideWidth * 2 + 3) >> 1;
+  let sideWidth = maxLength < 9 ? 1 : 2;
+  let leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+  let rightWidth = (maxLength - sideWidth * 2 + 3) >> 1;
 
-    if (totalPage <= maxLength) {
-        return range(1, totalPage);
-    }
+  if (totalPage <= maxLength) {
+    return range(1, totalPage);
+  }
 
-    if (page <= maxLength - sideWidth - 1 - rightWidth) {
-        return range(1, maxLength - sideWidth - 1).concat(range(totalPage - sideWidth - rightWidth + 1, totalPage));
-    }
+  if (page <= maxLength - sideWidth - 1 - rightWidth) {
+    return range(1, maxLength - sideWidth - 1).concat(
+      range(totalPage - sideWidth - rightWidth + 1, totalPage)
+    );
+  }
 
-    if (page >= totalPage - sideWidth - 1 - rightWidth) {
-        return range(1, sideWidth).concat(0, range(totalPage - sideWidth - 1 - rightWidth - leftWidth, totalPage));
-    }
+  if (page >= totalPage - sideWidth - 1 - rightWidth) {
+    return range(1, sideWidth).concat(
+      0,
+      range(totalPage - sideWidth - 1 - rightWidth - leftWidth, totalPage)
+    );
+  }
 
-    return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPage - sideWidth + 1 - totalPage));
+  return range(1, sideWidth).concat(
+    0,
+    range(page - leftWidth, page + rightWidth),
+    0,
+    range(totalPage - sideWidth + 1 - totalPage)
+  );
 }
 
 $(function () {
-    let numberOfItems = $(".list-product .product-item").length;
-    let limitPerPage = 20; //How many product list items visible per a page
-    let totalPages = Math.ceil(numberOfItems / limitPerPage);
-    let paginationSize = 7; //How many page elements visible in the pagination
-    let currentPage;
+  let numberOfItems = $(".list-product .product-item").length;
+  let limitPerPage = 20; //How many product list items visible per a page
+  let totalPages = Math.ceil(numberOfItems / limitPerPage);
+  let paginationSize = 7; //How many page elements visible in the pagination
+  let currentPage;
 
-    function showPage(whichPage) {
-        if (whichPage < 1 || whichPage > totalPages) return false;
+  function showPage(whichPage) {
+    if (whichPage < 1 || whichPage > totalPages) return false;
 
-        currentPage = whichPage;
+    currentPage = whichPage;
 
-        $(".list-product .product-item").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
+    $(".list-product .product-item")
+      .hide()
+      .slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage)
+      .show();
 
-        $(".pagination li").slice(1, -1).remove();
+    $(".pagination li").slice(1, -1).remove();
 
-        getPageList(totalPages, currentPage, paginationSize).forEach(item => {
-            $("<li>").addClass("page-item").addClass(item ? "current-page" : "dots")
-                .toggleClass("active", item === currentPage).append($("<a>").addClass("page-link")
-                    .attr({ href: "javascript:void(0)" }).text(item || "...")).insertBefore(".next-page");
-        });
+    getPageList(totalPages, currentPage, paginationSize).forEach((item) => {
+      $("<li>")
+        .addClass("page-item")
+        .addClass(item ? "current-page" : "dots")
+        .toggleClass("active", item === currentPage)
+        .append(
+          $("<a>")
+            .addClass("page-link")
+            .attr({ href: "javascript:void(0)" })
+            .text(item || "...")
+        )
+        .insertBefore(".next-page");
+    });
 
-        $(".previous-page").toggleClass("disable", currentPage === 1);
-        $(".next-page").toggleClass("disable", currentPage === totalPages);
-        return true;
+    $(".previous-page").toggleClass("disable", currentPage === 1);
+    $(".next-page").toggleClass("disable", currentPage === totalPages);
+    return true;
+  }
+
+  $(".pagination").append(
+    $("<li>")
+      .addClass("page-item")
+      .addClass("previous-page")
+      .append(
+        $("<a>")
+          .addClass("page-link")
+          .attr({ href: "javascript:void(0)" })
+          .text("Prev")
+      ),
+    $("<li>")
+      .addClass("page-item")
+      .addClass("next-page")
+      .append(
+        $("<a>")
+          .addClass("page-link")
+          .attr({ href: "javascript:void(0)" })
+          .text("Next")
+      )
+  );
+
+  $(".list-product").show();
+  showPage(1);
+
+  $(document).on(
+    "click",
+    ".pagination li.current-page:not(.active)",
+    function () {
+      return showPage(+$(this).text());
     }
+  );
 
-    $(".pagination").append(
-        $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-link").attr({ href: "javascript:void(0)" }).text("Prev")),
-        $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({ href: "javascript:void(0)" }).text("Next"))
-    );
+  $(".next-page").on("click", function () {
+    return showPage(currentPage + 1);
+  });
 
-    $(".list-product").show();
-    showPage(1);
-
-    $(document).on("click", ".pagination li.current-page:not(.active)", function () {
-        return showPage(+$(this).text());
-    });
-
-    $(".next-page").on("click", function () {
-        return showPage(currentPage + 1);
-    });
-
-    $(".previous-page").on("click", function () {
-        return showPage(currentPage - 1);
-    });
+  $(".previous-page").on("click", function () {
+    return showPage(currentPage - 1);
+  });
 });
 
 export default Home;

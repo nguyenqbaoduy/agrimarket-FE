@@ -5,7 +5,7 @@
 	display: flex;
 	background: #ffffff;
 
-	main {
+	.content-dashboard {
 		width: 100%;
 		padding: 24px 20px 20px 20px;
 
@@ -20,12 +20,12 @@
 			grid-gap: 6px;
 
 
-			name-page,
-			name-page Link {
+			.name-page,
+			.name-page Link {
 				font-size: 14px;
 			}
 
-			name-page Link {
+			.name-page Link {
 				color: var(--blue);
 			}
 
