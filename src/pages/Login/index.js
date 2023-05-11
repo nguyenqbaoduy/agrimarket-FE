@@ -1,16 +1,12 @@
 import styles from './Login.module.css';
-
 const Login = () => {
-    function sendLogin(){
-        const usernameInput = document.getElementById('login-username');
-        const passwordInput = document.getElementById('login-password');
-        console.log(usernameInput.value,passwordInput.value);
-    }
-    function sendSignup(){
-
-    }
     return (
         <>
+            <Helmet>
+                <style>
+                    {css}
+                </style>
+            </Helmet>
             <head>
                 <title>Đăng nhập</title>
             </head>
