@@ -1,25 +1,27 @@
+import styles from './Footer.module.css';
+
 function Footer() {
     return (
-        <footer className="footer">
+        <footer className={styles.footer}>
             {/* Main-footer */}
-            <div className="main-footer">
+            <div className={styles['main-footer']}>
                 {/* <Bắt Đầu Nội Dung Giới Thiệu */}
-                <div className="content about">
-                    <div className="brand-footer">
+                <div className={`${styles.content} ${styles.about}`}>
+                    <div className={styles['brand-footer']}>
                         <a href="">
                             <img src="/images/logo.png" alt="logo" />
                         </a>
                     </div>
-                    <ul className="social-icon">
+                    <ul className={styles['social-icon']}>
                         <li><a href=""><i className="fab fa-facebook"></i></a></li>
                         <li><a href=""><i className="fab fa-twitter-square"></i></a></li>
                         <li><a href=""><i className="fab fa-instagram"></i></a></li>
                         <li><a href=""><i className="fab fa-youtube"></i></a></li>
                     </ul>
                 </div>
-                {/* <Kết Thúc Nội Dung Giới Thiệu
-                <Bắt Đầu Nội Dung Đường Dẫn */}
-                <div className="content links">
+                {/* <Kết Thúc Nội Dung Giới Thiệu */}
+                {/* <Bắt Đầu Nội Dung Đường Dẫn */}
+                <div className={`${styles.content} ${styles.links}`}>
                     <h2>Đường Dẫn</h2>
                     <ul>
                         <li><a href="#">Trang Chủ</a></li>
@@ -31,9 +33,9 @@ function Footer() {
                 </div>
                 {/* Kết Thúc Nội Dung Đường Dẫn */}
                 {/* Bắt Đâu Nội Dung Liên Hệ */}
-                <div className="content contact">
+                <div className={`${styles.content} ${styles.contact}`}>
                     <h2>Thông Tin Liên Hệ</h2>
-                    <ul className="info-footer">
+                    <ul className={styles['info-footer']}>
                         <li>
                             <span><i className="fas fa-map-marker-alt"></i></span>
                             <span>Đường Số 1<br />
@@ -51,16 +53,17 @@ function Footer() {
                             <p><a href="#">diachiemail@gmail.com</a></p>
                         </li>
                         <li>
-                            <form className="form">
-                                <input type="email" className="form__field" placeholder="Đăng Ký Subscribe Email" />
-                                <button type="button" className="btn btn--primary  uppercase">Gửi</button>
+                            <form className={styles.form}>
+                                <input type="email" className={styles['form__field']} placeholder="Đăng Ký Subscribe Email" />
+                                <button type="button" className={`${styles.btn} ${styles['btn--primary']} uppercase`}>Gửi</button>
                             </form>
                         </li>
                     </ul>
                 </div>
                 {/* Kết Thúc Nội Dung Liên Hệ */}
             </div>
-        </footer>
-    )
-};
+        </footer >
+    );
+}
+
 export default Footer;

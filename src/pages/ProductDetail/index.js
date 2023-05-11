@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-import './productDetail.css'
 import React, { useEffect, useState } from "react"
 import { getDetailProduct } from '../../services/getAPI.js'
 

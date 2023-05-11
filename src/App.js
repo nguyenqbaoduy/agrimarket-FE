@@ -6,7 +6,6 @@ import { Fragment } from 'react';
 function App() {
   return (
     <Router>
-      <div className="App">
         <Routes>
           {publicPath.map((route, index) => {
             const Layout = route.layout ===null ? Fragment : DefaultLayout;
@@ -18,7 +17,6 @@ function App() {
             } />;
           })}
         </Routes>
-      </div>
     </Router>
 
   );

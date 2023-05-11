@@ -1,18 +1,19 @@
-import './home.css'
 import React, { useEffect, useState } from "react"
 import { getAllProduct, getAllCategory } from '../../services/getAPI.js'
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
+import styles from './Home.module.css';
+
 const Home = () => {
-    const [products, setProducts] = useState([])
-    const [categorys, setCategorys] = useState([])
+    const [products, setProducts] = useState([]);
+    const [categorys, setCategorys] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const product = await getAllProduct();
                 setProducts(product);
-                console.log(product)
+                console.log(product);
                 const category = await getAllCategory();
                 setCategorys(category);
                 console.log(category);
@@ -25,81 +26,78 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
-            <div className="banner-container">
-                <div className="banner">
-                    <div className="product">
-                        <img src="/images/7_d27d1.png" alt="" />
-                    </div>
-                    <div className="content">
-                        <h2>
-                            <span style={{ color: 'var(--primary-color)', fontSize: '45px' }}>
-                                Nâng tầm chất lượng nông sản Việt
-                            </span>
-                            &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
-                        </h2>
-                        <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
-                        <p>
-                            Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân, nâng cao chất lượng cuộc sống.
-                        </p>
+            <div className="BODY">
+                <div className={styles['banner-container']}>
+                    <div className={styles.banner}>
+                        <div className={styles.product}>
+                            <img src="/images/7_d27d1.png" alt="" />
+                        </div>
+                        <div className={styles.content}>
+                            <h2>
+                                <span style={{ color: 'var(--primary-color)', fontSize: '45px' }}>
+                                    Nâng tầm chất lượng nông sản Việt
+                                </span>
+                                &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
+                            </h2>
+                            <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
+                            <p>
+                                Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân, nâng cao chất lượng cuộc sống.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Product Catalog */}
-            <section id="slider-product">
-                {categorys.map((cartegory, index) => (
-                    <div className="product-catalog">
-                        <a href="./cartegory/seeds.html" className="collect-item">
-                            <div className="product-catalog-img">
-                                <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
-                            </div>
-                            <div className="product-catalog-text">
-                                <p>{cartegory.CategoryName}</p>
-                            </div>
-                        </a>
-                    </div>
-                ))}
-            </section>
-
-            {/* Body */}
-            <div className="container" id="list">
-                <div className="list-product"
-                // style={{ display: 'none' }}
-                >
-                    {products.map((product, index) => (
-                        <div className="product-item" key={index}>
-                            <div className="image">
-                                <img className="product-item-img" src={"/images/product/" + product.ProductImageDefault} alt="" />
-                            </div>
-                            <button
-                                id={product.ProductID} 
-                                className="fas fa-heart"
-                                onClick={() => Toggle(product.ProductID)}
-                                ></button>
-                            <div className="info">
-                                <Link to={`/Product/${product.ProductID}`}>
-                                    <h3 className="product-title">{product.ProductName}</h3>
-                                </Link>
-                                <p className="product-copany-name">{product.UserID}</p>
-                                <div className="stars">
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i>
-                                    <i className="fas fa-star"></i> (5/5)
+                {/* Product Catalog */}
+                <section id={styles['slider-product']}>
+                    {categorys.map((cartegory, index) => (
+                        <div className={styles['product-catalog']} key={index}>
+                            <a href="./cartegory/seeds.html" className={styles['collect-item']}>
+                                <div className={styles['product-catalog-img']}>
+                                    <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
                                 </div>
-                                <strong className="price"><span className="mrp">{product.ProductPrice}</span></strong>
-                            </div>
-                            <div className="product-volume">
-                                <p>480 ml</p>
-                            </div>
+                                <div className={styles['product-catalog-text']}>
+                                    <p>{cartegory.CategoryName}</p>
+                                </div>
+                            </a>
                         </div>
                     ))}
-                    {/* Add the rest of the product-item elements here */}
+                </section>
+
+                {/* Body */}
+                <div className={styles.container} id="list">
+                    <div className={styles['list-product']}>
+                        {products.map((product, index) => (
+                            <div className={styles['product-item']} key={index}>
+                                <div className={styles.image}>
+                                    <img className={styles['product-item-img']} src={"/images/product/" + product.ProductImageDefault} alt="" />
+                                </div>
+                                <button
+                                    id={product.ProductID}
+                                    className="fas fa-heart"
+                                    onClick={() => Toggle(product.ProductID)}                            ></button>
+                                <div className={styles.info}>
+                                    <Link to={`/Product/${product.ProductID}`}>
+                                        <h3 className={styles['product-title']}>{product.ProductName}</h3>
+                                    </Link>
+                                    <p className={styles['product-company-name']}>{product.UserID}</p>
+                                    <div className={styles.stars}>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i> (5/5)
+                                    </div>
+                                    <strong className={styles.price}><span className="mrp">{product.ProductPrice}</span></strong>
+                                </div>
+                                <div className={styles['product-volume']}>
+                                    <p>480 ml</p>
+                                </div>
+                            </div>
+                        ))}
+                        {/* Add the rest of the product-item elements here */}
+                    </div>
                 </div>
             </div>
-        </div>
     );
 }
 
@@ -119,13 +117,13 @@ const Home = () => {
 
 
 //toggleFavoriteProduct
-const Toggle = (btnFavorite) =>{
+const Toggle = (btnFavorite) => {
     let btnlet = document.getElementById(btnFavorite);
-    if (btnlet.style.color  == "var(--favorites-color)" || btnlet.style.color == null) {
-        btnlet.style.color  = "var(--primary-color)";
+    if (btnlet.style.color == "var(--favorites-color)" || btnlet.style.color == null) {
+        btnlet.style.color = "var(--primary-color)";
     }
     else {
-        btnlet.style.color  = "var(--favorites-color)"
+        btnlet.style.color = "var(--favorites-color)"
     }
 }
 

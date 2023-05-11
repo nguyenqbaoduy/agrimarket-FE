@@ -7,7 +7,7 @@ const publicPath = [
     {path:'/',component:Home},
     {path:'/Login',component:Login, layout:null},
     {path:'/User/:userID',component:User, layout:null},
-    {path:'/Product/:ProductID',component:ProductDetail},
+    // {path:'/Product/:ProductID',component:ProductDetail},
 
 ]
 const privatePath = [
