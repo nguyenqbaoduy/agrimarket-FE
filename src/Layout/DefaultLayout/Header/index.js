@@ -1,66 +1,81 @@
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
+
+import classNames from "classnames/bind";
+
+import styles from "./Header.module.scss";
+
+const cx = classNames.bind(styles);
 
 function Header() {
+    //toggleMenuAccount
+    const [isMenuOpen, setMenuOpen] = useState(true);
+
+    function toggleMenu() {
+      setMenuOpen(!isMenuOpen);
+    }
     return (
         <div>
-            <div className="toolbar-scroll">
+            <div className={cx('toolbar-scroll')}>
                 <h5>
                 </h5>
             </div>
-            <div className="main-header both-sides" id="myHeader">
-                <div className="brand">
+            <div className={cx('main-header', 'both-sides')} id="myHeader">
+                <div className={cx('brand')}>
                     <a href="/">
                         <img src='/images/logo.png' alt="logo" />
                     </a>
                 </div>
-                <div className="search-wrapper">
-                    <div className="search-input-wrap">
-                        <input type="search" className="search-input" placeholder="Search" />
-                        <div className="search-history">
-                            <ul className="search-history-list">
-                                <li className="search-history-item">
+                <div className={cx('search-wrapper')}>
+                    <div className={cx('search-input-wrap')}>
+                        <input type="search" className={cx('search-input')} placeholder="Search" />
+                        <div className={cx('search-history')}>
+                            <ul className={cx('search-history-list')}>
+                                <li className={cx('search-history-item')}>
                                     <a href="/">Combo 30 điểm đại học khối A</a>
                                 </li>
                                 {/* Add more search history items */}
                             </ul>
                         </div>
                     </div>
-                    <button className="fa-solid fa-magnifying-glass"></button>
+                    <button className={cx('fa-solid', 'fa-magnifying-glass')}></button>
                 </div>
-                <div className="menu-item">
-                    <div className="like">
-                        <div className="like-btn">
-                            <span className="far fa-heart"></span>
+                <div className={cx('menu-item')}>
+                    <div className={cx('like')}>
+                        <div className={cx('like-btn')}>
+                            <span className={cx('far', 'fa-heart')}></span>
                             <span> Yêu thích</span>
                         </div>
                     </div>
-                    <div className="account"
-                    onClick={toggleMenu}
+                    <div className={cx('account')}
+                        onClick={toggleMenu}
                     >
-                        <div className="account-btn">
+                        <div className={cx('account-btn')}>
                             <FontAwesomeIcon icon={faUser} />
                             <span> Đăng nhập</span>
                         </div>
-                        <div className="sub-menu-wrap" id="subMenu">
-                            <div className="sub-menu">
-                                <a href="info.html" className="sub-menu-link">
+                        <div className={
+                    isMenuOpen ? cx('sub-menu-wrap') : cx('sub-menu-wrap','open-menu')
+                    } id="subMenu">
+                            <div className={cx('sub-menu')}>
+                                <Link className={cx('sub-menu-link')} to={`/Info`}>
                                     <p>Tài khoản của tôi</p>
-                                </a>
-                                <a href="#" className="sub-menu-link">
+                                </Link>
+                                <a href="#" className={cx('sub-menu-link')}>
                                     <p>Đơn mua</p>
                                 </a>
-                                <a href="/login.html" className="sub-menu-link">
+                                <a href="/login.html" className={cx('sub-menu-link')}>
                                     <p>Đăng xuất</p>
                                 </a>
                             </div>
                         </div>
-
                     </div>
-                    <div className="header__cart header__cart--has-cart">
-                        <FontAwesomeIcon icon={faCartPlus} className="header__cart-icon" />
-                        <span className="cart-title">Giỏ hàng</span>
-                        <div className="header__cart-count">4</div>
+                    <div className={cx('header__cart', 'header__cart--has-cart')}>
+                        <FontAwesomeIcon icon={faCartPlus} className={cx('header__cart-icon')} />
+                        <span className={cx('cart-title')}>Giỏ hàng</span>
+                        <div className={cx('header__cart-count')}>4</div>
                         {/* Add cart items */}
                     </div>
                 </div>
@@ -68,9 +83,5 @@ function Header() {
         </div>
     );
 }
-//toggleMenuAccount
-let subMenu = document.getElementById("subMenu");
-function toggleMenu() {
-    subMenu.classList.toggle("open-menu");
-}
+
 export default Header;

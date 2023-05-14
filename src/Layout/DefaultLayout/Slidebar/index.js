@@ -1,7 +1,14 @@
 import React from 'react';
+
+import classNames from "classnames/bind";
+
+import styles from "./Slidebar.module.scss";
+
+const cx = classNames.bind(styles);
+
 function Slidebar() {
     return (
-        <div className="main-menu-header">
+        <div className={cx('main-menu-header')}>
             <div id="menu">
                 <ul>
                     <li><a href="/">Trang chủ</a></li>

@@ -1,4 +1,18 @@
 const api_url = "http://localhost:3000";
+export async function login(username, password) {
+    const headers = new Headers();
+    headers.append('UserName', username);
+    headers.append('Password', password);
+  
+    const requestOptions = {
+      method: 'GET',
+      headers: headers,
+    };
+  
+    const response = await fetch(api_url + '/login', requestOptions);
+    var data =  await response.json();
+    return data.accessToken;
+  };
 export async function getAllProduct() {
     const response = await fetch(api_url + '/product/all?');
     var data =  await response.json();

@@ -1,25 +1,31 @@
+import classNames from "classnames/bind";
+
+import styles from "./Footer.module.scss";
+
+const cx = classNames.bind(styles);
+
 function Footer() {
     return (
-        <footer className="footer">
+        <footer className={cx('footer')}>
             {/* Main-footer */}
-            <div className="main-footer">
+            <div className={cx('main-footer')}>
                 {/* <Bắt Đầu Nội Dung Giới Thiệu */}
-                <div className="content about">
-                    <div className="brand-footer">
+                <div className={cx('content', 'about')}>
+                    <div className={cx('brand-footer')}>
                         <a href="">
                             <img src="/images/logo.png" alt="logo" />
                         </a>
                     </div>
-                    <ul className="social-icon">
-                        <li><a href=""><i className="fab fa-facebook"></i></a></li>
-                        <li><a href=""><i className="fab fa-twitter-square"></i></a></li>
-                        <li><a href=""><i className="fab fa-instagram"></i></a></li>
-                        <li><a href=""><i className="fab fa-youtube"></i></a></li>
+                    <ul className={cx('social-icon')}>
+                        <li><a href=""><i className='fab fa-facebook'></i></a></li>
+                        <li><a href=""><i className={cx('fab', 'fa-twitter-square')}></i></a></li>
+                        <li><a href=""><i className={cx('fab', 'fa-instagram')}></i></a></li>
+                        <li><a href=""><i className={cx('fab', 'fa-youtube')}></i></a></li>
                     </ul>
                 </div>
                 {/* <Kết Thúc Nội Dung Giới Thiệu
                 <Bắt Đầu Nội Dung Đường Dẫn */}
-                <div className="content links">
+                <div className={cx('content', 'links')}>
                     <h2>Đường Dẫn</h2>
                     <ul>
                         <li><a href="#">Trang Chủ</a></li>
@@ -31,29 +37,29 @@ function Footer() {
                 </div>
                 {/* Kết Thúc Nội Dung Đường Dẫn */}
                 {/* Bắt Đâu Nội Dung Liên Hệ */}
-                <div className="content contact">
+                <div className={cx('content', 'contact')}>
                     <h2>Thông Tin Liên Hệ</h2>
-                    <ul className="info-footer">
+                    <ul className={cx('info-footer')}>
                         <li>
-                            <span><i className="fas fa-map-marker-alt"></i></span>
+                            <span><i className={cx('fas', 'fa-map-marker-alt')}></i></span>
                             <span>Đường Số 1<br />
                                 Quận Liên Chiểu, Đà Nẵng<br />
                                 Việt Nam</span>
                         </li>
                         <li>
-                            <span><i className="fa fa-phone"></i></span>
+                            <span><i className={cx('fa', 'fa-phone')}></i></span>
                             <p><a href="#">+84 123 456 789</a>
                                 <br />
                                 <a href="#">+84 987 654 321</a></p>
                         </li>
                         <li>
-                            <span><i className="fa fa-envelope"></i></span>
+                            <span><i className={cx('fa', 'fa-envelope')}></i></span>
                             <p><a href="#">diachiemail@gmail.com</a></p>
                         </li>
                         <li>
-                            <form className="form">
-                                <input type="email" className="form__field" placeholder="Đăng Ký Subscribe Email" />
-                                <button type="button" className="btn btn--primary  uppercase">Gửi</button>
+                            <form className={cx('form')}>
+                                <input type="email" className={cx('form__field')} placeholder="Đăng Ký Subscribe Email" />
+                                <button type="button" className={cx('btn', 'btn--primary', 'uppercase')}>Gửi</button>
                             </form>
                         </li>
                     </ul>
