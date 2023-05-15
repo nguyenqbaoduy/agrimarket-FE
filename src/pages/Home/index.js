@@ -8,7 +8,6 @@ import classNames from "classnames/bind";
 import styles from "./Home.module.scss";
 
 const cx = classNames.bind(styles);
-
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categorys, setCategorys] = useState([]);
@@ -30,88 +29,109 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const toggleFavorite = (productId) => {
+    setProducts((prevProducts) => {
+      return prevProducts.map((product) => {
+        if (product.ProductID === productId) {
+          return {
+            ...product,
+            isFavorite: !product.isFavorite
+          };
+        }
+        return product;
+      });
+    });
+  };
+  // Khi F5 tự động scroll lên đầu
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
   return (
     <div>
-            <div className={cx('banner-container')}>
-                <div className={cx('banner')}>
-                    <div className={cx('product')}>
-                        <img src="/images/7_d27d1.png" alt="" />
-                    </div>
-                    <div className={cx('content')}>
-                        <h2>
-                            <span style={{ color: 'var(--primary-color)', fontSize: '45px' }}>
-                                Nâng tầm chất lượng nông sản Việt
-                            </span>
-                            &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
-                        </h2>
-                        <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
-                        <p>
-                            Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân, nâng cao chất lượng cuộc sống.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Product Catalog */}
-            <section id={cx('slider-product')}>
-                {categorys.map((cartegory, index) => (
-                    <div className={cx('product-catalog')}>
-                        <a href="./cartegory/seeds.html" className={cx('collect-item')}>
-                            <div className={cx('product-catalog-img')}>
-                                <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
-                            </div>
-                            <div className={cx('product-catalog-text')}>
-                                <p>{cartegory.CategoryName}</p>
-                            </div>
-                        </a>
-                    </div>
-                ))}
-            </section>
-
-            {/* Body */}
-            <div className={cx('container')} id={cx('list')}>
-                <div className={cx('list-product')}>
-                    {products.map((product, index) => (
-                        <div className={cx('product-item')} key={index}>
-                            <div className={cx('image')}>
-                                <img className={cx('product-item-img')} src={"/images/product/" + product.ProductImageDefault} alt="" />
-                            </div>
-                            <button
-                                id={product.ProductID}
-                                className={cx('fas fa-heart')}
-                                onClick={() => Toggle(product.ProductID)}
-                            ></button>
-                            <div className={cx('info')}>
-                                <Link to={`/Product/${product.ProductID}`}>
-                                    <h3 className={cx('product-title')}>{product.ProductName}</h3>
-                                </Link>
-                                <p className={cx('product-copany-name')}>{product.UserID}</p>
-                                <div className={cx('stars')}>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i    className={cx('fas fa-star')}
-                                    ></i>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i className={cx('fas fa-star')}></i>
-                                    <i className={cx('fas fa-star')}></i> (5/5)
-                                </div>
-                                <strong className={cx('price')}>
-                                    <span className={cx('mrp')}>{product.ProductPrice}</span>
-                                </strong>
-                            </div>
-                            <div className={cx('product-volume')}>
-                                <p>480 ml</p>
-                            </div>
-                        </div>
-                    ))}
-                    {/* Add the rest of the product-item elements here */}
-                </div>
-            </div>
+      <div className={cx('banner-container')}>
+        <div className={cx('banner')}>
+          <div className={cx('product')}>
+            <img src="/images/7_d27d1.png" alt="" />
+          </div>
+          <div className={cx('content')}>
+            <h2>
+              <span style={{ color: 'var(--primary-color)', fontSize: '45px' }}>
+                Nâng tầm chất lượng nông sản Việt
+              </span>
+              &nbsp; vì một tương lai đưa nông sản ra khắp thế giới
+            </h2>
+            <span>Đồng hành cùng nông dân Việt phát triển bền vững</span>
+            <p>
+              Cam kết đồng hành, đem lại chất lượng tốt nhất cho người nông dân, nâng cao chất lượng cuộc sống.
+            </p>
+          </div>
         </div>
-    );
+      </div>
+
+      {/* Product Catalog */}
+      <section id={cx('slider-product')}>
+        {categorys.map((cartegory, index) => (
+          <div className={cx('product-catalog')}>
+            <a href="./cartegory/seeds.html" className={cx('collect-item')}>
+              <div className={cx('product-catalog-img')}>
+                <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
+              </div>
+              <div className={cx('product-catalog-text')}>
+              <p>{cartegory.CategoryName}</p>
+              </div>
+            </a>
+          </div>
+        ))}
+      </section>
+
+      {/* Body */}
+      <div className={cx('container')} id={cx('list')}>
+        <div className={cx('list-product')}>
+          {products.map((product, index) => (
+            <div className={cx('product-item')} key={index}>
+              <div className={cx('image')}>
+                <img className={cx('product-item-img')} src={"/images/product/" + product.ProductImageDefault} alt="" />
+              </div>
+              <button
+                className={cx('fas fa-heart', { favorite: product.isFavorite })}
+                style={{
+                  color: product.isFavorite
+                    ? 'var(--primary-color)'
+                    : 'var(--favorites-color)'
+                }}
+                onClick={() => toggleFavorite(product.ProductID)}
+              ></button>
+              <div className={cx('info')}>
+                <Link to={`/Product/${product.ProductID}`}>
+                  <h3 className={cx('product-title')}>{product.ProductName}</h3>
+                </Link>
+                <p className={cx('product-copany-name')}>{product.UserID}</p>
+                <div className={cx('stars')}>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}
+                  ></i>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}></i>
+                  <i className={cx('fas fa-star')}></i> (5/5)
+                </div>
+                <strong className={cx('price')}>
+                  <span className={cx('mrp')}>{product.ProductPrice}</span>
+                </strong>
+              </div>
+              <div className={cx('product-volume')}>
+                <p>480 ml</p>
+              </div>
+            </div>
+          ))}
+          {/* Add the rest of the product-item elements here */}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 //myheaders
@@ -129,17 +149,17 @@ const Home = () => {
 // }
 
 //toggleFavoriteProduct
-const Toggle = (btnFavorite) => {
-  let btnlet = document.getElementById(btnFavorite);
-  if (
-    btnlet.style.color == "var(--favorites-color)" ||
-    btnlet.style.color == null
-  ) {
-    btnlet.style.color = "var(--primary-color)";
-  } else {
-    btnlet.style.color = "var(--favorites-color)";
-  }
-};
+// const Toggle = (btnFavorite) => {
+//   let btnlet = document.getElementById(btnFavorite);
+//   if (
+//     btnlet.style.color == "var(--favorites-color)" ||
+//     btnlet.style.color == null
+//   ) {
+//     btnlet.style.color = "var(--primary-color)";
+//   } else {
+//     btnlet.style.color = "var(--favorites-color)";
+//   }
+// };
 
 //--Pagination--
 function getPageList(totalPage, page, maxLength) {

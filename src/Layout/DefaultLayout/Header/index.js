@@ -14,14 +14,14 @@ function Header() {
     const [isMenuOpen, setMenuOpen] = useState(true);
 
     function toggleMenu() {
-      setMenuOpen(!isMenuOpen);
+        setMenuOpen(!isMenuOpen);
     }
     return (
-        <div>
-            <div className={cx('toolbar-scroll')}>
+        <div className={cx('header')}>
+            {/* <div className={cx('toolbar-scroll')}>
                 <h5>
                 </h5>
-            </div>
+            </div> */}
             <div className={cx('main-header', 'both-sides')} id="myHeader">
                 <div className={cx('brand')}>
                     <a href="/">
@@ -57,8 +57,8 @@ function Header() {
                             <span> Đăng nhập</span>
                         </div>
                         <div className={
-                    isMenuOpen ? cx('sub-menu-wrap') : cx('sub-menu-wrap','open-menu')
-                    } id="subMenu">
+                            isMenuOpen ? cx('sub-menu-wrap') : cx('sub-menu-wrap', 'open-menu')
+                        } id="subMenu">
                             <div className={cx('sub-menu')}>
                                 <Link className={cx('sub-menu-link')} to={`/Info`}>
                                     <p>Tài khoản của tôi</p>
@@ -73,10 +73,40 @@ function Header() {
                         </div>
                     </div>
                     <div className={cx('header__cart', 'header__cart--has-cart')}>
-                        <FontAwesomeIcon icon={faCartPlus} className={cx('header__cart-icon')} />
-                        <span className={cx('cart-title')}>Giỏ hàng</span>
+                        <i className={cx('header__cart-icon', 'fas', 'fa-cart-plus')}></i><span className={cx('cart-title')}>Giỏ hàng</span>
                         <div className={cx('header__cart-count')}>4</div>
-                        {/* Add cart items */}
+
+                        {/* Chưa có sp */}
+                        <div className={cx('header__cart-list', 'no-cart')}>
+                            <img src="/assets/image/cart/cart.png" className={cx('header__no-cart-img')} />
+                            <p className={cx('header__no-cart-text')}>Chưa có sản phẩm</p>
+                        </div>
+
+                        {/* Có sp */}
+                        <div className={cx('header__cart-list', 'has-cart')}>
+                            <h4 className={cx('header__cart-heading')}>Sản phẩm đã chọn</h4>
+                            <ul className={cx('header__cart-list-item')}>
+                                <li className={cx('header__cart-item')}>
+                                    <img src="/assets/image/buy/hoa-hong-hat-giong-min.png" className={cx('header__cart-item-img')} />
+                                    <div className={cx('header__cart-item-info')}>
+                                        <div className={cx('header__cart-item-heading')}>
+                                            <h3 className={cx('header__cart-item-name')}>Thuốc trừ sâu Batas 25EC 480ml</h3>
+                                            <p className={cx('header__cart-item-price')}>110.000 ₫</p>
+                                        </div>
+                                        <div className={cx('header__cart-item-body')}>
+                                            <p className={cx('header__cart-item-number')}>x 2</p>
+                                            <div className={cx('header__cart-item-close')}>
+                                                Xoá
+                                                <i className={cx('fas', 'fa-times')}></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div className={cx('header__cart-footer')}>
+                                <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
