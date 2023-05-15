@@ -11,6 +11,8 @@ const cx = classNames.bind(styles);
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categorys, setCategorys] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(5); // Số lượng product hiện thị trên mỗi trang
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +31,14 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  let len = Math.ceil(products.length / productsPerPage)
+  console.log(currentPage, len)
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   const toggleFavorite = (productId) => {
     setProducts((prevProducts) => {
       return prevProducts.map((product) => {
@@ -77,7 +87,7 @@ const Home = () => {
                 <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
               </div>
               <div className={cx('product-catalog-text')}>
-              <p>{cartegory.CategoryName}</p>
+                <p>{cartegory.CategoryName}</p>
               </div>
             </a>
           </div>
@@ -87,7 +97,7 @@ const Home = () => {
       {/* Body */}
       <div className={cx('container')} id={cx('list')}>
         <div className={cx('list-product')}>
-          {products.map((product, index) => (
+          {currentProducts.map((product, index) => (
             <div className={cx('product-item')} key={index}>
               <div className={cx('image')}>
                 <img className={cx('product-item-img')} src={"/images/product/" + product.ProductImageDefault} alt="" />
@@ -127,8 +137,39 @@ const Home = () => {
               </div>
             </div>
           ))}
-          {/* Add the rest of the product-item elements here */}
         </div>
+                  {/* Pagination */}
+                  <ul className={cx("pagination")}>
+            <li
+              className={cx("previous-page", { disable: currentPage == 1 })}
+              onClick={() => {
+                if (currentPage > 1) {
+                  paginate(currentPage - 1);
+                }
+              }}
+            >
+              Prev
+            </li>
+            {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => i + 1).map((number) => (
+              <li
+                key={number}
+                className={cx("pagination-item", { active: number === currentPage })}
+                onClick={() => paginate(number)}
+              >
+                {number}
+              </li>
+            ))}
+            <li
+              className={cx("next-page", { disable: currentPage === Math.ceil(products.length / productsPerPage) })}
+              onClick={() => {
+                if (currentPage < Math.ceil(products.length / productsPerPage)) {
+                  paginate(currentPage + 1);
+                }
+              }}
+            >
+              Next
+            </li>
+          </ul>
       </div>
     </div>
   );
@@ -162,117 +203,117 @@ const Home = () => {
 // };
 
 //--Pagination--
-function getPageList(totalPage, page, maxLength) {
-  function range(start, end) {
-    return Array.from(Array(end - start + 1), (_, i) => i + start);
-  }
+// function getPageList(totalPage, page, maxLength) {
+//   function range(start, end) {
+//     return Array.from(Array(end - start + 1), (_, i) => i + start);
+//   }
 
-  let sideWidth = maxLength < 9 ? 1 : 2;
-  let leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-  let rightWidth = (maxLength - sideWidth * 2 + 3) >> 1;
+//   let sideWidth = maxLength < 9 ? 1 : 2;
+//   let leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+//   let rightWidth = (maxLength - sideWidth * 2 + 3) >> 1;
 
-  if (totalPage <= maxLength) {
-    return range(1, totalPage);
-  }
+//   if (totalPage <= maxLength) {
+//     return range(1, totalPage);
+//   }
 
-  if (page <= maxLength - sideWidth - 1 - rightWidth) {
-    return range(1, maxLength - sideWidth - 1).concat(
-      range(totalPage - sideWidth - rightWidth + 1, totalPage)
-    );
-  }
+//   if (page <= maxLength - sideWidth - 1 - rightWidth) {
+//     return range(1, maxLength - sideWidth - 1).concat(
+//       range(totalPage - sideWidth - rightWidth + 1, totalPage)
+//     );
+//   }
 
-  if (page >= totalPage - sideWidth - 1 - rightWidth) {
-    return range(1, sideWidth).concat(
-      0,
-      range(totalPage - sideWidth - 1 - rightWidth - leftWidth, totalPage)
-    );
-  }
+//   if (page >= totalPage - sideWidth - 1 - rightWidth) {
+//     return range(1, sideWidth).concat(
+//       0,
+//       range(totalPage - sideWidth - 1 - rightWidth - leftWidth, totalPage)
+//     );
+//   }
 
-  return range(1, sideWidth).concat(
-    0,
-    range(page - leftWidth, page + rightWidth),
-    0,
-    range(totalPage - sideWidth + 1 - totalPage)
-  );
-}
+//   return range(1, sideWidth).concat(
+//     0,
+//     range(page - leftWidth, page + rightWidth),
+//     0,
+//     range(totalPage - sideWidth + 1 - totalPage)
+//   );
+// }
 
-$(function () {
-  let numberOfItems = $(".list-product .product-item").length;
-  let limitPerPage = 20; //How many product list items visible per a page
-  let totalPages = Math.ceil(numberOfItems / limitPerPage);
-  let paginationSize = 7; //How many page elements visible in the pagination
-  let currentPage;
+// $(function () {
+//   let numberOfItems = $(".list-product .product-item").length;
+//   let limitPerPage = 20; //How many product list items visible per a page
+//   let totalPages = Math.ceil(numberOfItems / limitPerPage);
+//   let paginationSize = 7; //How many page elements visible in the pagination
+//   let currentPage;
 
-  function showPage(whichPage) {
-    if (whichPage < 1 || whichPage > totalPages) return false;
+//   function showPage(whichPage) {
+//     if (whichPage < 1 || whichPage > totalPages) return false;
 
-    currentPage = whichPage;
+//     currentPage = whichPage;
 
-    $(".list-product .product-item")
-      .hide()
-      .slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage)
-      .show();
+//     $(".list-product .product-item")
+//       .hide()
+//       .slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage)
+//       .show();
 
-    $(".pagination li").slice(1, -1).remove();
+//     $(".pagination li").slice(1, -1).remove();
 
-    getPageList(totalPages, currentPage, paginationSize).forEach((item) => {
-      $("<li>")
-        .addClass("page-item")
-        .addClass(item ? "current-page" : "dots")
-        .toggleClass("active", item === currentPage)
-        .append(
-          $("<a>")
-            .addClass("page-link")
-            .attr({ href: "javascript:void(0)" })
-            .text(item || "...")
-        )
-        .insertBefore(".next-page");
-    });
+//     getPageList(totalPages, currentPage, paginationSize).forEach((item) => {
+//       $("<li>")
+//         .addClass("page-item")
+//         .addClass(item ? "current-page" : "dots")
+//         .toggleClass("active", item === currentPage)
+//         .append(
+//           $("<a>")
+//             .addClass("page-link")
+//             .attr({ href: "javascript:void(0)" })
+//             .text(item || "...")
+//         )
+//         .insertBefore(".next-page");
+//     });
 
-    $(".previous-page").toggleClass("disable", currentPage === 1);
-    $(".next-page").toggleClass("disable", currentPage === totalPages);
-    return true;
-  }
+//     $(".previous-page").toggleClass("disable", currentPage === 1);
+//     $(".next-page").toggleClass("disable", currentPage === totalPages);
+//     return true;
+//   }
 
-  $(".pagination").append(
-    $("<li>")
-      .addClass("page-item")
-      .addClass("previous-page")
-      .append(
-        $("<a>")
-          .addClass("page-link")
-          .attr({ href: "javascript:void(0)" })
-          .text("Prev")
-      ),
-    $("<li>")
-      .addClass("page-item")
-      .addClass("next-page")
-      .append(
-        $("<a>")
-          .addClass("page-link")
-          .attr({ href: "javascript:void(0)" })
-          .text("Next")
-      )
-  );
+//   $(".pagination").append(
+//     $("<li>")
+//       .addClass("page-item")
+//       .addClass("previous-page")
+//       .append(
+//         $("<a>")
+//           .addClass("page-link")
+//           .attr({ href: "javascript:void(0)" })
+//           .text("Prev")
+//       ),
+//     $("<li>")
+//       .addClass("page-item")
+//       .addClass("next-page")
+//       .append(
+//         $("<a>")
+//           .addClass("page-link")
+//           .attr({ href: "javascript:void(0)" })
+//           .text("Next")
+//       )
+//   );
 
-  $(".list-product").show();
-  showPage(1);
+//   $(".list-product").show();
+//   showPage(1);
 
-  $(document).on(
-    "click",
-    ".pagination li.current-page:not(.active)",
-    function () {
-      return showPage(+$(this).text());
-    }
-  );
+//   $(document).on(
+//     "click",
+//     ".pagination li.current-page:not(.active)",
+//     function () {
+//       return showPage(+$(this).text());
+//     }
+//   );
 
-  $(".next-page").on("click", function () {
-    return showPage(currentPage + 1);
-  });
+//   $(".next-page").on("click", function () {
+//     return showPage(currentPage + 1);
+//   });
 
-  $(".previous-page").on("click", function () {
-    return showPage(currentPage - 1);
-  });
-});
+//   $(".previous-page").on("click", function () {
+//     return showPage(currentPage - 1);
+//   });
+// });
 
 export default Home;
