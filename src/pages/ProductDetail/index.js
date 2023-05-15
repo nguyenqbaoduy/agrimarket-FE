@@ -3,30 +3,34 @@ import React, { useEffect, useState } from 'react'
 import { getDetailProduct } from '../../services/getAPI.js'
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import PageNotFound from "../PageNotFound";
 const cx = classNames.bind(styles);
 
 const ProductDetail = () => {
     const [product, setProduct] = useState([])
     const [images, setImages] = useState([])
     const [dataLoaded, setDataLoaded] = useState(false); //  xử lí bất đồng bộ, chưa load data xong
-
+    const [errorOccurred, setErrorOccurred] = useState(false);
     const params = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getDetailProduct(params.ProductID);
-                setProduct(data.product);
-                setImages(data.images);
+                const getProduct = await getDetailProduct(params.ProductID);
+                setProduct(getProduct.data.product);
+                setImages(getProduct.data.images);
                 setDataLoaded(true);
             } catch (error) {
                 console.log(error);
+                setErrorOccurred(true); // To render Page not found
             }
         };
         fetchData();
         window.scrollTo(0, 0);
     }, []);
-
+    if (errorOccurred) {
+        return <PageNotFound />
+    }
     return (
         <div className={cx('product_detail')}>
         <div className={cx('container')}>

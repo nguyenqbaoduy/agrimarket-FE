@@ -17,12 +17,10 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const product = await getAllProduct();
-        setProducts(product);
-        console.log(product);
+        const getProduct = await getAllProduct();
+        setProducts(getProduct.data);
         const category = await getAllCategory();
         setCategorys(category);
-        console.log(category);
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +33,6 @@ const Home = () => {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
   let len = Math.ceil(products.length / productsPerPage)
-  console.log(currentPage, len)
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -81,7 +78,7 @@ const Home = () => {
       {/* Product Catalog */}
       <section id={cx('slider-product')}>
         {categorys.map((cartegory, index) => (
-          <div className={cx('product-catalog')}>
+          <div className={cx('product-catalog')} key={index}>
             <a href="./cartegory/seeds.html" className={cx('collect-item')}>
               <div className={cx('product-catalog-img')}>
                 <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
