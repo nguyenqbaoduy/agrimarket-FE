@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const [cookies] = useCookies(["accessToken"]);
-    const token = cookies.accessToken;
+    const isLoggedIn = !!cookies.accessToken;
     //toggleMenuAccount
     const [isMenuOpen, setMenuOpen] = useState(true);
 

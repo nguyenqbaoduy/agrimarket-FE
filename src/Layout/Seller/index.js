@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./Home/SideBar";
 import DashBoard from "./Home/DashBoard";
@@ -8,18 +7,14 @@ import styles from "./Seller.module.scss";
 
 const cx = classNames.bind(styles);
 
-function Seller() {
-  const params = useParams();
+function Seller({children}) {
   return (
-    <div>
-      {/* <Header /> */}
+    <div className="seller">
+      <Header />
       <div className={cx("wrapper")} style={{ display: "flex" }}>
-        {/* <SideBar />
-        <DashBoard /> */}
-      </div>
-      <div className="b">
-        <h2>Seller + {params.SellerID}</h2>
-        Đây là Seller
+        <SideBar />
+        <DashBoard />
+        {children}
       </div>
     </div>
   );
