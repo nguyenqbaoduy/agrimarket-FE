@@ -10,7 +10,7 @@ export async function login(username, password) {
     };
     const response = await fetch(api_url + '/login', requestOptions);
     var data =  await response.json();
-    return data.accessToken;
+    return data;
   };
 export async function getAllProduct() {
     const response = await fetch(api_url + '/product/all?');

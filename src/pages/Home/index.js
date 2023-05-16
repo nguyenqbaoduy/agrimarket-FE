@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllProduct, getAllCategory } from "../../services/getAPI.js";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-
+import { useCookies } from 'react-cookie';
 import classNames from "classnames/bind";
 
 import styles from "./Home.module.scss";
@@ -13,7 +13,7 @@ const Home = () => {
   const [categorys, setCategorys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(5); // Số lượng product hiện thị trên mỗi trang
-
+  const [cookies] = useCookies([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,9 +21,11 @@ const Home = () => {
         setProducts(getProduct.data);
         const category = await getAllCategory();
         setCategorys(category);
+        
       } catch (error) {
         console.log(error);
       }
+      console.log(cookies.accessToken)
     };
     fetchData();
     window.scrollTo(0, 0);
@@ -32,7 +34,6 @@ const Home = () => {
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
-  let len = Math.ceil(products.length / productsPerPage)
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

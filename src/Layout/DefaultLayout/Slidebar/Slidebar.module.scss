@@ -508,7 +508,7 @@ header {
 /*Menu*/
 .main-menu-header{
     height: var(--main-menu-height);
-}
+
 
 #menu ul {
     background: var(--primary-color);
@@ -531,7 +531,7 @@ header {
     transition: 0.5s;
     opacity: 0.8;
 }
-
+}
 /*Banner*/
 .banner-container{
     display: flex;

@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 function SideBar() {
   return (
     <div className={cx("content-left")}>
-      <section id="sidebar">
+      <section id={cx("sidebar")}>
         <ul className={cx("side-menu")}>
           <li>
             <a href="#" className={cx("active")}>

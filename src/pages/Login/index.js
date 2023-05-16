@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../services/getAPI.js";
 import styles from './Login.module.scss'
 import classNames from "classnames/bind";
+import { useCookies } from "react-cookie";
+
 const cx = classNames.bind(styles);
 const Login = () => {
+    const [cookies, setCookie] = useCookies(['token']); 
+
     //++Funtion
     const navigate = useNavigate();
 
@@ -20,9 +24,8 @@ const Login = () => {
         const username = usernameInput.value;
         const password = passwordInput.value;
         const token = await login(username, password);
-        console.log('Tên đăng nhập:', username);
-        console.log('Mật khẩu:', password);
-        console.log(token);
+        setCookie('accessToken', token.accessToken, { path: "/" });
+        setCookie('refreshToken', token.refreshToken, { path: "/" });
         navigate("/");
     }
     const sendSignup = () => {
@@ -36,14 +39,14 @@ const Login = () => {
                     <h2 className={cx('signin')}>Đăng Nhập</h2>
                     <label>
                         <span className={cx('username-name')}>Tên đăng nhập</span>
-                        <input type="text" name="username" id="login-username" />
+                        <input type="text" name="username" id={cx("login-username")} />
                     </label>
                     <label>
                         <span className={cx('password-pw')}>Mật Khẩu</span>
-                        <input type="password" name="password" id="login-password" />
+                        <input type="password" name="password" id={cx("login-password")} />
                         <ion-icon className={cx('eye-pw')} name="eye-off-outline"></ion-icon>
                     </label>
-                    <button className={cx('submit')} type="button" id="btn-login" onClick={sendLogin}>
+                    <button className={cx('submit')} type="button" id={cx("btn-login")} onClick={sendLogin}>
                         Đăng nhập
                     </button>
                     <a href="./forgot.html" style={{ textDecoration: 'none' }}>
@@ -107,7 +110,7 @@ const Login = () => {
                             <input type="password" className={cx('confirm-password')} />
                         </label>
 
-                        <button type="button" className={cx('submit')} id="btn-register" onClick={sendSignup}>
+                        <button type="button" className={cx('submit')} id={cx("btn-register")} onClick={sendSignup}>
                             Đăng ký ngay
                         </button>
                     </div>

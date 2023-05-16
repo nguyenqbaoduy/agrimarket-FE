@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function Slidebar() {
     return (
         <div className={cx('main-menu-header')}>
-            <div id="menu">
+            <div id={cx('menu')}>
                 <ul>
                     <li><a href="/">Trang chủ</a></li>
                     <li><a href="/">Tin tức và bài viết</a></li>

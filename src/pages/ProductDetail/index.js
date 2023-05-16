@@ -39,7 +39,7 @@ const ProductDetail = () => {
                 <span>{'>'}</span>
                 <a href='#'>Thuốc trừ sâu</a>
                 <span></span>
-                <span id='product-title'></span>
+                <span id={cx('product-title')}></span>
             </div>
             <div className={cx('content_product', 'container')}>
                 <div className={cx('content_container-top')}>
@@ -49,7 +49,7 @@ const ProductDetail = () => {
                         images.map((image, index) => (
                             <img className={cx('img')+(index+1)} src={'/images/product/' + image.ImageUrl}
                             // onclick={'changeImage('one')'} 
-                            id={image.ImageID}
+                            id={cx(image.ImageID)}
                             />
                         ))
                         )}
@@ -58,14 +58,14 @@ const ProductDetail = () => {
                         <img src={
                             '/images/product/' + images[0].ImageUrl
                         } 
-                        alt='' id='main-img' className={cx('product-image')} />
+                        alt='' id={cx('main-img')} className={cx('product-image')} />
                         )}
 
                     </div>
                     <div className={cx('content-mid')}></div>
                     <div className={cx('content-right')}>
                         <div className={cx('content-name')}>
-                            <h2 id='shift' className={cx('product-title')}>{product.ProductName}</h2>
+                            <h2 id={cx('shift')} className={cx('product-title')}>{product.ProductName}</h2>
                             <div className={cx()}>
                                 <i className={cx('fa-solid','fa-star')}></i>
                                 <i className={cx('fa-solid','fa-star')}></i>

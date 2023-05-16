@@ -97,7 +97,7 @@ allProgress.forEach(item=> {
               </div>
             </div>
             <div className={cx("chart")} >
-              {/* <div id="chart"></div> */}
+              {/* <div id={cx("chart")}></div> */}
               <ChartPage />
             </div>
           </div>
