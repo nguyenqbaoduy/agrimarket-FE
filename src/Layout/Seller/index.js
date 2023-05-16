@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 function Seller({children}) {
   return (
-    <div className="seller">
+    <div className="main-seller">
       <Header />
       <div className={cx("wrapper")} style={{ display: "flex" }}>
         <SideBar />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./SideBar.module.scss";
 import classNames from "classnames/bind";
 
@@ -6,42 +7,42 @@ const cx = classNames.bind(styles);
 function SideBar() {
   return (
     <div className={cx("content-left")}>
-      <section id={cx("sidebar")}>
+      <div id={cx("sidebar")}>
         <ul className={cx("side-menu")}>
-          <li>
-            <a href="#" className={cx("active")}>
+          <li className={cx("side-menu-detail")}>
+            <Link href="#" className={cx("active")}>
               <i className="fa-solid fa-chart-line"></i>DashBoard
-            </a>
+            </Link>
           </li>
           <li className={cx("divider")}> Main</li>
-          <li>
-            <a href="#">
+          <li className={cx("side-menu-detail")}>
+            <Link href="#">
               <i className={cx("fa-solid fa-chart-line")}></i>Vận Chuyển
-            </a>
+            </Link>
           </li>
-          <li>
-            <a href="#">
+          <li className={cx("side-menu-detail")}>
+            <Link href="#">
               <i className={cx("fa-solid fa-chart-line")}></i>Quản Lý Đơn Hàng
-            </a>
+            </Link>
           </li>
-          <li>
-            <a href="#">
+          <li className={cx("side-menu-detail")}>
+            <Link href="#">
               <i className={cx("fa-solid fa-volleyball")}></i>Quản Lý Sản Phẩm
               <i className={cx("fa-solid fa-chevron-right icon-right")}></i>
-            </a>
+            </Link>
             <ul className={cx("side-dropdown")}>
               <li>
-                <a href="./allProduct.html">
+                <Link href="./allProduct.html">
                   <i className={cx("fa-solid fa-chart-line")}></i>Tất Cả Sản Phẩm
-                </a>
-                <a href="./addProduct.html">
+                </Link>
+                <Link href="./addProduct.html">
                   <i className={cx("fa-solid fa-chart-line")}></i>Thêm Sản Phẩm
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
         </ul>
-      </section>
+      </div>
     </div>
   );
 }

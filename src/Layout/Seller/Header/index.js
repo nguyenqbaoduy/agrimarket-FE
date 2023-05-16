@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const cx = classNames.bind(styles);
 export default function index() {
   return (
-    <header className={cx("header")}>
+    <header className={cx("main-header")}>
       <div className={cx("header-content")}>
         <Link to="#">
           <img src="./assets/image/logo/logo.png" alt="" />
