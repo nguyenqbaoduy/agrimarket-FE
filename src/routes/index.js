@@ -2,7 +2,7 @@ import Home from '../pages/Home'
 // import User from '../pages/User'
 import Login from '../pages/Login'
 import ProductDetail from '../pages/ProductDetail'
-import SellerDefault from '../pages/Seller/Default'
+import DashBoard from '../pages/Seller/DashBoard'
 //-----------Layout--------------------------------
 import Seller from '../Layout/Seller'
 import DefaultLayout from '../Layout/DefaultLayout';
@@ -12,7 +12,7 @@ const publicPath = [
     { path: '/Login', component: Login, layout: null },
     // {path:'/User/:userID',component:User, layout:null},
     { path: '/Product/:ProductID', component: ProductDetail, layout: DefaultLayout },
-    { path: '/Seller/:SellerID', component: SellerDefault, layout: Seller }
+    { path: '/Seller/:SellerID', component: DashBoard, layout: Seller }
 
 ]
 const privatePath = [

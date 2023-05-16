@@ -1,6 +1,5 @@
 import Header from "./Header";
 import SideBar from "./Home/SideBar";
-import DashBoard from "./Home/DashBoard";
 import classNames from "classnames/bind";
 
 import styles from "./Seller.module.scss";
@@ -13,7 +12,6 @@ function Seller({children}) {
       <Header />
       <div className={cx("wrapper")} style={{ display: "flex" }}>
         <SideBar />
-        <DashBoard />
         {children}
       </div>
     </div>
