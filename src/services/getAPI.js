@@ -18,23 +18,29 @@ export async function login(username, password) {
   var data = await response.json();
   return data;
 };
-export async function authentication(authorization) {
-  const headers = new Headers();
-  headers.append('authorization', authorization);
-  const requestOptions = {
+export async function authentication(accessToken, refreshToken) {
+  const headerA = new Headers();
+  headerA.append('authorization', accessToken);
+  const requestAuth = {
     method: 'GET',
-    headers: headers,
+    headers: headerA,
   };
-  const response = await fetch(api_url + '/authentication', requestOptions);
+  const response = await fetch(api_url + '/authentication', requestAuth);
   if (response.status === 200) {
     var data = await response.json();
     return {
-      fullname: data.FullName,
+      fullname: data.data.FullName,
       status: response.status,
-      role: data.Role
+      role: data.data.Role
     }
   } else {
-    const renewToken = await fetch(api_url + '/refresh_access_token', requestOptions);
+    const headerR = new Headers();
+    headerR.append('authorization', refreshToken);
+    const requestRefreshToken = {
+      method: 'GET',
+      headers: headerR,
+    };
+    const renewToken = await fetch(api_url + '/refresh_access_token', requestRefreshToken);
     if (renewToken.status === 200) {
       var newToken = await renewToken.json();
       setCookie('accessToken',newToken)
@@ -43,7 +49,6 @@ export async function authentication(authorization) {
     else{
       return {status: renewToken.status}
     }
-
   };
 }
 

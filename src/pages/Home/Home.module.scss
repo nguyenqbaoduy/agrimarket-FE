@@ -779,11 +779,19 @@ header {
     box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
 }
 
-.pagination li a {
+.pagination li{
     color: white;
     text-decoration: none;
     font-size: 1.2em;
     line-height: 45px;
+    text-align: center;
+}
+
+.pagination-item{
+    background: #ccc;
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .previous-page,
@@ -801,14 +809,6 @@ header {
 
 .next-page:hover {
     transform: translateX(5px);
-}
-
-.current-page,
-.dots {
-    background: #ccc;
-    width: 45px;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 .active {

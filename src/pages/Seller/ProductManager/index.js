@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 export default function index() {
   return (
     <div>
-      
+      Quản lí sản phẩm
     </div>
   )
 }
