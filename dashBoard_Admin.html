@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./assets/css/dBoard_Admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Dash Board</title>
+</head>
+
+<body>
+    <div class="wrapper">
+    <header class="header">
+        <div class="header-content">
+            <a href="#"><img src="./assets/image/logo/logo.png" alt="" /></a>
+            <div class="box-content">
+                <a href="#">Trang chủ</a>
+                <span>></span>
+                <a href="#">Dashboard</a>
+            </div>
+            <div class="content-nav">
+                <nav>
+                    <a href="#" class="nav-link">
+                        <i class="fa-sharp fa-solid fa-bell icon"></i>
+                        <span class="badge">5</span>
+                    </a>
+                    <span class="divider"></span>
+                    <div class="profile">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+                            alt="">
+                        <ul class="profile-link">
+                            <li><a href="#"><i class="fa-solid fa-circle-user icon"></i>Hồ sơ</a></li>
+                            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="containerds">
+        <div class="content-left">
+            <section id="sidebar">
+                <ul class="side-menu">
+                    <li>
+                        <a href="./dashBoard_Admin.html" class="active"><i class="fa-solid fa-gauge"></i>DashBoard</a>
+                    </li>
+                    <li class="divider"> Main</li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-box"></i>Products</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-file-invoice"></i>Orders</a>
+                    </li>
+                    <li>
+                        <a href="./manageAcc_Admin.html"><i class="fa-solid fa-user"></i>Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-newspaper"></i>News And Articles</a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <div class="content-right">
+            <main>
+                <h1 class="title">Dashboard</h1>
+                <ul class="breadcrumbs">
+                    <li><a href="#">Trang chủ</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                </ul>
+                <div class="info-data">
+                    <div class="card">
+                        <div class="head">
+                            <div>
+                                <h2 class="">5012</h2>
+                                <p class="">Sales</p>
+                            </div>
+                            <i class='bx bx-trending-up icon'></i>
+                        </div>
+                        <span class="progress" data-value="80%"></span>
+                        <span class="label">80%</span>
+                    </div>
+                    <div class="card">
+                        <div class="head">
+                            <div>
+                                <h2 class="">54.209.163 VND</h2>
+                                <p class="">Purchases</p>
+                            </div>
+                            <i class='bx bx-trending-down icon down'></i>
+                        </div>
+                        <span class="progress" data-value="60%"></span>
+                        <span class="label">60%</span>
+                    </div>
+                    <div class="card">
+                        <div class="head">
+                            <div>
+                                <h2>4500</h2>
+                                <p>Orders</p>
+                            </div>
+                            <i class='bx bx-trending-up icon'></i>
+                        </div>
+                        <span class="progress" data-value="40%"></span>
+                        <span class="label">30%</span>
+                    </div>
+                </div>
+                <div class="info-data1">
+                    
+                    <div class="col-div-12">
+                        <div class="box-8">
+                            <div class="content-box">
+                                <p>Top sales shop</p>
+                                <br />
+                                <table>
+                                    <tr>
+                                        <th>Shop</th>
+                                        <th>Sales</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    <tr>
+                                        <td>AgriTP</td>
+                                        <td>2424</td>
+                                        <td>22.542.532 VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NongNghiepSach</td>
+                                        <td>1823</td>
+                                        <td>20.123.538 VND</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+        </div>
+    </div>
+    </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="./assets/js/dBoard_Admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./assets/css/addAccount.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Add Account</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-content">
+                <a href="#"><img src="./assets/image/logo/logo.png" alt="" /></a>
+                <div class="box-content">
+                    <a href="./dashBoard_Admin.html">Trang chủ</a>
+                    <span>></span>
+                    <a href="./manageAcc_Admin.html">Addcounts</a>
+                    <span>></span>
+                    <a href="./addAccount.html">Add Addcount</a>
+                </div>
+                <div class="content-nav">
+                    <nav>
+                        <a href="#" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-bell icon"></i>
+                            <span class="badge">5</span>
+                        </a>
+                        <span class="divider"></span>
+                        <div class="profile">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+                                alt="">
+                            <ul class="profile-link">
+                                <li><a href="#"><i class="fa-solid fa-circle-user icon"></i>Hồ sơ</a></li>
+                                <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="containerds">
+            <div class="content-left">
+                <section id="sidebar">
+                    <ul class="side-menu">
+                        <li>
+                            <a href="./dashBoard_Admin.html" "><i class=" fa-solid fa-gauge"></i>DashBoard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-solid fa-box"></i>Products</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-solid fa-file-invoice"></i>Orders</a>
+                        </li>
+                        <li>
+                            <a href="./manageAcc_Admin.html" class="active"><i
+                                    class="fa-solid fa-user"></i>Accounts</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-solid fa-newspaper"></i>News And Articles</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div class="divied"></div>
+            <div class="content-right">
+                <main>
+                    <h1 class="title">Add Account</h1>
+                    <div class="edit-row">
+                        <div class="cr_email">
+                            <h4><span>*</span>Email</h4>
+                        </div>
+                        <div class="edit-main">
+                            <input class="email-box_input" placeholder="Nhập vào..." type="email">
+                        </div>
+                    </div>
+
+                    <div class="edit-row">
+                        <div class="cr_password">
+                            <h4><span>*</span>Password</h4>
+                        </div>
+                        <div class="edit-main">
+                            <input class="password-box_input" placeholder="Nhập vào..." type="">
+                        </div>
+                    </div>
+
+                    <div class="edit-row">
+                        <div class="cr_phonenb">
+                            <h4><span>*</span>Phone Number</h4>
+                        </div>
+                        <div class="edit-main">
+                            <input class="phonenb-box_input" placeholder="Nhập vào..." type="">
+                        </div>
+                    </div>
+
+                    <div class="edit-row">
+                        <div class="cr_address">
+                            <h4><span>*</span>Address</h4>
+                        </div>
+                        <div class="edit-main">
+                            <input class="address-box_input" placeholder="Nhập vào..." type="">
+                        </div>
+                    </div>
+
+                    <div class="edit-row">
+                        <div class="cr_role">
+                            <h4><span>*</span>Role</h4>
+                        </div>
+                        <div class="grouprd">
+                            <input type="radio" name="select" id="option-1" checked>
+                            <input type="radio" name="select" id="option-2">
+                            <label for="option-1" class="option option-1">
+                              <div class="dot"></div>
+                              <span>User</span>
+                            </label>
+                            <label for="option-2" class="option option-2">
+                              <div class="dot"></div>
+                              <span>Seller</span>
+                            </label>
+                          </div>
+                    </div>
+
+                    <div class="containerbtn">
+                        <div class="btn-group">
+                            <button class="btn btn-cancel">
+                                <a href="./manageAcc_Admin.html">Cancel</a>
+                            </button>
+                            <button class="btn btn-create" type="submit">
+                                <a href="#">Create</a>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </main>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="./assets/js/addAccount.js"></script>
+</body>
+
+</html>
