@@ -12,7 +12,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [categorys, setCategorys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(2); // Số lượng product hiện thị trên mỗi trang
+  const [productsPerPage] = useState(5); // Số lượng product hiện thị trên mỗi trang
   const [cookies] = useCookies(['accessToken']);
   useEffect(() => {
     const fetchData = async () => {

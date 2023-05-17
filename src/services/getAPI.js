@@ -80,3 +80,14 @@ export async function authentication(accessToken, refreshToken) {
       status: response.status
     };
   }
+  export async function getCartDrawerContainer(accessToken) {
+    const headers = new Headers();
+    headers.append('Authorization', accessToken);
+    const requestOptions = {
+      method: 'GET',
+      headers: headers,
+    };
+    const response = await fetch(api_url + '/cart_drawer_container', requestOptions);
+    var data = await response.json();
+    return data.result;
+  };

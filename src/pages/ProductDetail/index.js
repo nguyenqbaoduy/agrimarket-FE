@@ -12,7 +12,6 @@ const ProductDetail = () => {
     const [dataLoaded, setDataLoaded] = useState(false); //  xử lí bất đồng bộ, chưa load data xong
     const [errorOccurred, setErrorOccurred] = useState(false);
     const params = useParams();
-
     useEffect(() => {
         const fetchData = async () => {
             try {
