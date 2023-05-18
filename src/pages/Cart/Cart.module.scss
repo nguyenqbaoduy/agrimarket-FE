@@ -255,4 +255,7 @@
         grid-template-columns: repeat(4, 1fr);
     }
   }
+  .product-title{
+    word-wrap: break-word;
+  }
 }

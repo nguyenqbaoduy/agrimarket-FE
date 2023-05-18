@@ -77,6 +77,19 @@ export async function getDetailProduct(productId) {
     status: response.status
   };
 }
+
+export async function getCart(accessToken) {
+  const headers = new Headers();
+  headers.append('Authorization', accessToken);
+  const requestOptions = {
+    method: 'GET',
+    headers: headers,
+  };
+  const response = await fetch(api_url + '/cart', requestOptions);
+  var data = await response.json();
+  return data.result;
+};
+
 export async function getCartDrawerContainer(accessToken) {
   const headers = new Headers();
   headers.append('Authorization', accessToken);
@@ -91,6 +104,30 @@ export async function getCartDrawerContainer(accessToken) {
 export async function addItemToCart(accessToken, data) {
   const response = await fetch(api_url + '/cart/add', {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function changeQuantity(accessToken, data) {
+  console.log(data)
+  const response = await fetch(api_url + '/cart/changeQuantity', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function deteleCartItem(accessToken, data) {
+  console.log(data)
+  const response = await fetch(api_url + '/cart/remove', {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       'Authorization': accessToken

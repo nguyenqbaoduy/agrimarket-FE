@@ -59,6 +59,9 @@ function Header() {
         removeCookie('UserID', { path: "/" })
         setIsLoggedIn(false);
     }
+    const viewCart = () => {
+        navigate("/cart")
+    }
     return (
         <div className={cx('header')}>
             {/* <div className={cx('toolbar-scroll')}>
@@ -128,7 +131,7 @@ function Header() {
                             <div className={cx('header__cart-list', 'no-cart')}>
                                 <p className={cx('header__no-cart-text')}>Chưa có sản phẩm</p>
                                 <div className={cx('header__cart-footer')}>
-                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')} onClick={viewCart}>Xem giỏ hàng</a>
                                 </div>
                             </div>
                         ) : (
@@ -149,7 +152,7 @@ function Header() {
                                     ))}
                                 </ul>
                                 <div className={cx('header__cart-footer')}>
-                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')}onClick={viewCart}>Xem giỏ hàng</a>
                                 </div>
                             </div>
                         )}

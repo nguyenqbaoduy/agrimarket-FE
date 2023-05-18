@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllProduct, getAllCategory } from "../../services/getAPI.js";
+import { getCart, changeQuantity, deteleCartItem } from "../../services/getAPI.js";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
@@ -10,6 +10,63 @@ import styles from "./Cart.module.scss";
 const cx = classNames.bind(styles);
 
 const Cart = () => {
+    const [cookies, setCookie, removeCookie] = useCookies([]);
+    const [cart, setCart] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const getcart = await getCart(cookies.accessToken);
+            setCart(getcart)
+        };
+        fetchData();
+    }, []);
+
+    const handleIncreaseQuantity = async (index) => {
+        const updatedCart = [...cart];
+        updatedCart[index].Quantity += 1;
+        setCart(updatedCart);
+        const data = {
+            CartItemID: updatedCart[index].CartItemID,
+            ChangeAmount: updatedCart[index].Quantity,
+        }
+        const status = await changeQuantity(cookies.accessToken, data);
+        console.log(status)
+    };
+    const handleDecreaseQuantity = async (index) => {
+        const updatedCart = [...cart];
+        updatedCart[index].Quantity -= 1;
+        setCart(updatedCart);
+        const data = {
+            CartItemID: updatedCart[index].CartItemID,
+            ChangeAmount: updatedCart[index].Quantity,
+        }
+        const status = await changeQuantity(cookies.accessToken, data);
+        console.log(status)
+
+    };
+    const handleQuantityChange = async (event, index) => {
+        const value = event.target.value;
+        const updatedCart = [...cart];
+        updatedCart[index].Quantity = parseInt(value);
+        setCart(updatedCart);
+        const data = {
+            CartItemID: updatedCart[index].CartItemID,
+            ChangeAmount: updatedCart[index].Quantity,
+        }
+        const status = await changeQuantity(cookies.accessToken, data);
+        console.log(status)
+    };
+    const handleDeleteItem = async (index) => {
+        const updatedCart = [...cart];
+        const data = {
+            CartItemID: updatedCart[index].CartItemID,
+        }
+        const status = await deteleCartItem(cookies.accessToken, data);
+        console.log(status)
+        updatedCart.splice(index, 1);
+        setCart(updatedCart);
+
+      };
     return (
         <div className={cx("cart-page")}>
             <div className={cx('container', 'cart-container-top')}>
@@ -29,40 +86,51 @@ const Cart = () => {
                     Số tiền
                 </div>
             </div>
-            <div className={cx('container', 'cart-top')}>
-                <div className={cx('content-cart-container')}>
-                    <div className={cx('cart-container-mid')}>
-                        <div className={cx('cart-check')}>
-                            <input type="checkbox" name="btn" />
-                        </div>
-                        <div className={cx('cart-product', 'cart-mid-img')}>
-                            <a href="productDetail.html"><img src="./assets/image/buy/tts.png" alt="" className={cx('product-image')} /></a>
-                            <div className={cx('cart-title')}>
-                                <a href="/user/productDetail.html"><h4 className={cx('product-title')}>Thuốc trừ sâu Batas 25EC</h4></a>
-                                <div className={cx('cart-size', 'product-size')}>
-                                    Size:
+            {cart && cart.map((cart, index) => (
+                <div className={cx('container', 'cart-top')} key={index}>
+                    <div className={cx('content-cart-container')}>
+                        <div className={cx('cart-container-mid')}>
+                            <div className={cx('cart-check')}>
+                                <input type="checkbox" name="btn" />
+                            </div>
+                            <div className={cx('cart-product', 'cart-mid-img')}>
+                                <a href="productDetail.html"><img src={"/images/product/" + cart.ProductImageDefault} alt="" className={cx('product-image')} /></a>
+                                <div className={cx('cart-title')}>
+                                    <a href="/user/productDetail.html"><h4 className={cx('product-title')}>{cart.ProductName}</h4></a>
+                                    {/* <div className={cx('cart-size', 'product-size')}>
+                                        Size:
+                                    </div> */}
                                 </div>
                             </div>
-                        </div>
-                        <div className={cx('art-price', 'cart-mid-price', 'product-price')}>
-                            ₫ 90.000
-                        </div>
-                        <div className={cx('cart-number', 'cart-mid-number')}>
-                            <div className={cx('buttons_added')}>
-                                <input className={cx('minus', 'is-form')} type="button" value="-" />
-                                <input aria-label="quantity" className={cx('input-qty')} max="1000" min="1" name="" type="number" value="1" />
-                                <input className={cx('plus', 'is-form')} type="button" value="+" />
+                            <div className={cx('art-price', 'cart-mid-price', 'product-price')}>
+                                ₫ {cart.ProductPrice}
                             </div>
-                        </div>
-                        <div className={cx('cart-mid-money', 'product-total-price')}>
-                            ₫ 90.000
-                        </div>
-                        <div className={cx('cart-delete-container')}>
-                            <button id="btn-delete">Xóa hàng</button>
+                            <div className={cx('cart-number', 'cart-mid-number')}>
+                                <div className={cx('buttons_added')}>
+                                    <input className={cx('minus', 'is-form')} type='button' defaultValue='-' onClick={() => handleDecreaseQuantity(index)} />
+                                    <input
+                                        aria-label='quantity'
+                                        className={cx('input-qty', 'product-quantity')}
+                                        max='1000'
+                                        min='1'
+                                        name=''
+                                        type='number'
+                                        value={cart.Quantity}
+                                        onChange={(event) => handleQuantityChange(event, index)}
+                                    />
+                                    <input className={cx('plus', 'is-form')} type='button' defaultValue='+' onClick={() => handleIncreaseQuantity(index)} />
+                                </div>
+                            </div>
+                            <div className={cx('cart-mid-money', 'product-total-price')}>
+                                ₫ {cart.SumPrice}
+                            </div>
+                            <div className={cx('cart-delete-container')}>
+                                <button id="btn-delete" onClick={() => handleDeleteItem(index)}>Xóa hàng</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            ))};
             <div className={cx('container', 'cart-buy')}>
                 <div className={cx('cart-buy-container')}>
                     <a href="bill.html"><button className={cx('', 'btn', 'third')}>Mua hàng</button></a>

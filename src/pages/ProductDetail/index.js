@@ -19,6 +19,23 @@ const ProductDetail = () => {
     const params = useParams();
     const [quantity, setQuantity] = useState(1);
     const [cookies, setCookie, removeCookie] = useCookies([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const getProduct = await getDetailProduct(params.ProductID);
+                setProduct(getProduct.data.product);
+                setImages(getProduct.data.images);
+                setDataLoaded(true);
+            } catch (error) {
+                console.log(error);
+                setErrorOccurred(true); // To render Page not found
+            }
+            window.scrollTo(0, 0);
+        };
+        fetchData();
+    }, []);
+    
     const handleDecrease = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
@@ -36,22 +53,6 @@ const ProductDetail = () => {
             setQuantity(value);
         }
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const getProduct = await getDetailProduct(params.ProductID);
-                setProduct(getProduct.data.product);
-                setImages(getProduct.data.images);
-                setDataLoaded(true);
-            } catch (error) {
-                console.log(error);
-                setErrorOccurred(true); // To render Page not found
-            }
-            window.scrollTo(0, 0);
-        };
-        fetchData();
-    }, []);
 
     if (errorOccurred) {
         return <PageNotFound />
