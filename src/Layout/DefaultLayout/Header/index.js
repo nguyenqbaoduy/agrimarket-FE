@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { authentication, getCartDrawerContainer } from "../../../services/getAPI";
+import { authentication, getCartDrawerContainer, searchProduct } from "../../../services/getAPI";
 import { useNavigate } from "react-router-dom";
 import { HeaderContext } from '../../DefaultLayout';
 import classNames from "classnames/bind";
@@ -62,6 +62,27 @@ function Header() {
     const viewCart = () => {
         navigate("/cart")
     }
+    // search
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+
+    const handleSearchInput = async (event) => {
+        const { value } = event.target;
+        if (value === "") {
+            setSearchTerm(value);
+            setSearchResults(null)
+        }
+        else{
+            setSearchTerm(value);
+            // Gửi yêu cầu GET tới API với từ khóa tìm kiếm
+            console.log(searchTerm)
+            const data = await searchProduct(searchTerm)
+            // // Xử lý dữ liệu trả về từ API
+            setSearchResults(data);
+        }
+
+    };
+
     return (
         <div className={cx('header')}>
             {/* <div className={cx('toolbar-scroll')}>
@@ -75,14 +96,22 @@ function Header() {
                     </a>
                 </div>
                 <div className={cx('search-wrapper')}>
-                    <div className={cx('search-input-wrap')}>
-                        <input type="search" className={cx('search-input')} placeholder="Search" />
+                    <div className={cx("search-input-wrap")}>
+                        <input
+                            type="search"
+                            className={cx('search-input')}
+                            placeholder="Search"
+                            id="search"
+                            value={searchTerm}
+                            onChange={handleSearchInput}
+                        />
                         <div className={cx('search-history')}>
                             <ul className={cx('search-history-list')}>
-                                <li className={cx('search-history-item')}>
-                                    <a href="/">Combo 30 điểm đại học khối A</a>
-                                </li>
-                                {/* Add more search history items */}
+                                {searchResults && searchResults.slice(0, 5).map((result, index) => (
+                                    <li className={cx('search-history-item')} key={index}>
+                                        <Link className={cx('search-item')} to={"/product/detail/" + result.ProductID}>{result.ProductName}</Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>

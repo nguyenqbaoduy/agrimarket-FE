@@ -57,6 +57,12 @@ export async function getAllProduct() {
     status: response.status
   };
 };
+export async function searchProduct(search) {
+  const response = await fetch(api_url + '/product/search/?ProductName='+search)
+  var data = await response.json();
+  return data.result;
+
+};
 export async function getAllCategory() {
   const response = await fetch(api_url + '/category/all?');
   var data = await response.json();
@@ -145,6 +151,8 @@ export async function register(user) {
     body: JSON.stringify(user),
   });
   var data = await response.json();
-  return {data:data,
-  status : response.status};
+  return {
+    data: data,
+    status: response.status
+  };
 };
