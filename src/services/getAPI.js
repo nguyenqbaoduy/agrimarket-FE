@@ -15,6 +15,17 @@ export async function login(username, password) {
   var data = await response.json();
   return data;
 };
+export async function authorization(accessToken) {
+  const headers = new Headers();
+  headers.append('authorization', accessToken);
+  const requestOptions = {
+    method: 'GET',
+    headers: headers,
+  };
+  const response = await fetch(api_url + '/authorization', requestOptions);
+  var data = await response.json();
+  return data.Role;
+};
 export async function authentication(accessToken, refreshToken) {
   const headerA = new Headers();
   headerA.append('authorization', accessToken);

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { authentication, getCartDrawerContainer, searchProduct } from "../../../services/getAPI";
+import { authentication, getCartDrawerContainer, searchProduct,authorization } from "../../../services/getAPI";
 import { useNavigate } from "react-router-dom";
 import { HeaderContext } from '../../DefaultLayout';
 import classNames from "classnames/bind";

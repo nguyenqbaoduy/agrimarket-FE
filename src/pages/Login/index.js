@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { login, register } from "../../services/getAPI.js";
+import { login, register, authorization } from "../../services/getAPI.js";
 import styles from './Login.module.scss'
 import classNames from "classnames/bind";
 import { useCookies } from "react-cookie";
@@ -29,7 +29,13 @@ const Login = () => {
         setCookie('accessToken', token.accessToken, { path: "/" });
         setCookie('refreshToken', token.refreshToken, { path: "/" });
         setCookie('UserID', token.UserID, { path: "/" });
-        navigate("/");
+        const role = await authorization(token.accessToken);
+        if (role == 1)
+            navigate("/");
+        else if (role == 2)
+            navigate("/seller/" + token.UserID);
+        else
+            navigate("/admin");
     }
     const sendSignup = async () => {
         const user = {
