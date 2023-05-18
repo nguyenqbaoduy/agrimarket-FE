@@ -12,7 +12,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [categorys, setCategorys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(5); // Số lượng product hiện thị trên mỗi trang
+  const [productsPerPage] = useState(10); // Số lượng product hiện thị trên mỗi trang
   const [cookies] = useCookies(['accessToken']);
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,6 @@ const Home = () => {
       } catch (error) {
         console.log(error);
       }
-      console.log(cookies.accessToken)
     };
     fetchData();
     window.scrollTo(0, 0);

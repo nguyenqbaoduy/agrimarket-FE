@@ -26,8 +26,7 @@ const Login = () => {
         const token = await login(username, password);
         setCookie('accessToken', token.accessToken, { path: "/" });
         setCookie('refreshToken', token.refreshToken, { path: "/" });
-        console.log(cookies.accessToken,cookies.refreshToken)
-
+        setCookie('UserID', token.UserID, { path: "/" });
         navigate("/");
     }
     const sendSignup = () => {

@@ -19,23 +19,22 @@ function Header() {
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const [username, setUserName] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Thiết lập mặc định chưa đăng nhập
-    const [hasCart, setHasCart] = useState(true); // Thiết lập mặc định chưa có sản phẩm
+    const [hasCart, setHasCart] = useState(false); // Thiết lập mặc định chưa có sản phẩm
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        console.log("header:" + cookies.accessToken, cookies.refreshToken)
         const fetchData = async () => {
             try {
                 // Kiểm tra đã login chưa
                 const getUser = await authentication(cookies.accessToken, cookies.refreshToken);
                 if (getUser.status == '200') {
                     setUserName(getUser.fullname)
-                    console.log(getUser);
                     setIsLoggedIn(true)
                     // Kiểm tra có sản phẩm trong giỏ hàng không
-                    const getCartItem = await getCartDrawerContainer(cookies.accessToken);
-                    console.log(getCartItem);
-                    setCart(getCartItem);
+                        const getCartItem = await getCartDrawerContainer(cookies.accessToken);
+                        setCart(getCartItem);
+                        if (getCartItem != null)
+                            setHasCart(true);
                 }
             } catch (error) {
                 console.log(error);
@@ -47,7 +46,6 @@ function Header() {
     const [isMenuOpen, setMenuOpen] = useState(true);
 
     function toggleMenu() {
-        console.log(isLoggedIn)
         if (isLoggedIn == true) {
             setMenuOpen(!isMenuOpen);
         }
@@ -58,6 +56,7 @@ function Header() {
     function toogleLogOut() {
         removeCookie('accessToken', { path: "/" })
         removeCookie('refreshToken', { path: "/" })
+        removeCookie('UserID', { path: "/" })
         setIsLoggedIn(false);
     }
     return (
@@ -122,42 +121,42 @@ function Header() {
                         'header__cart--has-cart': hasCart,
                         'header__cart--no-cart': !hasCart
                     })}>
-
                         <i className={cx('header__cart-icon', 'fas', 'fa-cart-plus')}></i><span className={cx('cart-title')}>Giỏ hàng</span>
-                        <div className={cx('header__cart-count')}>4</div>
-
-                        {/* Chưa có sp */}
-                        <div className={cx('header__cart-list', 'no-cart')}>
-                            <p className={cx('header__no-cart-text')}>Chưa có sản phẩm</p>
-                            <div className={cx('header__cart-footer')}>
-                                <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                        <div className={cx('header__cart-count')}> {cart == null ? 0 : cart.length}</div>
+                        {cart === null ? (
+                            /* Chưa có sản phẩm */
+                            <div className={cx('header__cart-list', 'no-cart')}>
+                                <p className={cx('header__no-cart-text')}>Chưa có sản phẩm</p>
+                                <div className={cx('header__cart-footer')}>
+                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                                </div>
                             </div>
-                        </div>
-
-                        {/* Có sp */}
-                        <div className={cx('header__cart-list', 'has-cart')}>
-                            <h4 className={cx('header__cart-heading')}>Sản phẩm đã chọn</h4>
-                            <ul className={cx('header__cart-list-item')}>
-                                {cart.map((product) => (
-                                    <li key={product.id} className={cx('header__cart-item')}>
-                                        <img src={"/images/product/" + product.ProductImageDefault} className={cx('header__cart-item-img')} alt={product.ProductName} />
-                                        <div className={cx('header__cart-item-info')}>
-                                            <div className={cx('header__cart-item-heading')}>
-                                                <h3 className={cx('header__cart-item-name')}>{product.ProductName}</h3>
-                                                <p className={cx('header__cart-item-price')}>{product.ProductPrice}</p>
+                        ) : (
+                            /* Có sp */
+                            <div className={cx('header__cart-list', 'has-cart')}>
+                                <h4 className={cx('header__cart-heading')}>Sản phẩm đã chọn</h4>
+                                <ul className={cx('header__cart-list-item')}>
+                                    {cart.map((product) => (
+                                        <li key={product.ProductID} className={cx('header__cart-item')}>
+                                            <img src={"/images/product/" + product.ProductImageDefault} className={cx('header__cart-item-img')} alt={product.ProductName} />
+                                            <div className={cx('header__cart-item-info')}>
+                                                <div className={cx('header__cart-item-heading')}>
+                                                    <h3 className={cx('header__cart-item-name')}>{product.ProductName}</h3>
+                                                    <p className={cx('header__cart-item-price')}>{product.ProductPrice}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                            <div className={cx('header__cart-footer')}>
-                                <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className={cx('header__cart-footer')}>
+                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')}>Xem giỏ hàng</a>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
