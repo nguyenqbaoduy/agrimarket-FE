@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { getCart, changeQuantity, deteleCartItem } from "../../services/getAPI.js";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
 import classNames from "classnames/bind";
-
+import { HeaderContext } from '../../Layout/DefaultLayout'
 import styles from "./Cart.module.scss";
 
 const cx = classNames.bind(styles);
@@ -12,6 +12,7 @@ const cx = classNames.bind(styles);
 const Cart = () => {
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const [cart, setCart] = useState([])
+    const { triggerHeaderReload } = useContext(HeaderContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,6 +66,7 @@ const Cart = () => {
         console.log(status)
         updatedCart.splice(index, 1);
         setCart(updatedCart);
+        triggerHeaderReload();
 
       };
     return (

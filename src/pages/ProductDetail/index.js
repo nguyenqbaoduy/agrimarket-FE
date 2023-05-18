@@ -1,5 +1,5 @@
 import styles from './ProductDetail.module.scss'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { getDetailProduct, addItemToCart } from '../../services/getAPI.js'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
@@ -7,6 +7,7 @@ import PageNotFound from "../PageNotFound";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { HeaderContext } from '../../Layout/DefaultLayout'
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,7 @@ const ProductDetail = () => {
     const params = useParams();
     const [quantity, setQuantity] = useState(1);
     const [cookies, setCookie, removeCookie] = useCookies([]);
+    const { triggerHeaderReload } = useContext(HeaderContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,6 +70,7 @@ const ProductDetail = () => {
             const status = await addItemToCart(cookies.accessToken, data);
             if (status == "200"){
                 toast("Thêm thành công")
+                triggerHeaderReload();
             }
             else
                 toast("Thêm thất bại")

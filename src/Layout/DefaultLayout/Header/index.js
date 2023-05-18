@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { authentication, getCartDrawerContainer } from "../../../services/getAPI";
 import { useNavigate } from "react-router-dom";
-
+import { HeaderContext } from '../../DefaultLayout';
 import classNames from "classnames/bind";
 
 import styles from "./Header.module.scss";
@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const navigate = useNavigate();
-
+    const { reloadHeader } = useContext(HeaderContext);
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const [username, setUserName] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Thiết lập mặc định chưa đăng nhập
@@ -31,17 +31,17 @@ function Header() {
                     setUserName(getUser.fullname)
                     setIsLoggedIn(true)
                     // Kiểm tra có sản phẩm trong giỏ hàng không
-                        const getCartItem = await getCartDrawerContainer(cookies.accessToken);
-                        setCart(getCartItem);
-                        if (getCartItem != null)
-                            setHasCart(true);
+                    const getCartItem = await getCartDrawerContainer(cookies.accessToken);
+                    setCart(getCartItem);
+                    if (getCartItem != null)
+                        setHasCart(true);
                 }
             } catch (error) {
                 console.log(error);
             }
         };
         fetchData();
-    }, []);
+    }, [reloadHeader]);
     //toggleMenuAccount
     const [isMenuOpen, setMenuOpen] = useState(true);
 
@@ -152,7 +152,7 @@ function Header() {
                                     ))}
                                 </ul>
                                 <div className={cx('header__cart-footer')}>
-                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')}onClick={viewCart}>Xem giỏ hàng</a>
+                                    <a href="#" className={cx('btn-list', 'header__cart-see-cart')} onClick={viewCart}>Xem giỏ hàng</a>
                                 </div>
                             </div>
                         )}
