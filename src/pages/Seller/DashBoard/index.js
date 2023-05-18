@@ -3,6 +3,7 @@ import styles from "./DashBoard.module.scss";
 import classNames from "classnames/bind";
 import { render } from "@testing-library/react";
 import ChartPage from "./Chart";
+import React, { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -10,11 +11,12 @@ const cx = classNames.bind(styles);
 
 function DashBoard() {
   // PROGRESSBAR
-const allProgress = document.querySelectorAll('main .card .progress');
-
-allProgress.forEach(item=> {
-	item.style.setProperty('--value', item.dataset.value)
-})
+  useEffect(() => {
+    const allProgress = document.querySelectorAll('.content-dashboard .card .progress');
+    allProgress.forEach(item => {
+      item.style.setProperty('--value', item.dataset.value);
+    });
+  }, []);
   
   return (
     <div className={cx("content-right")}>
@@ -22,11 +24,11 @@ allProgress.forEach(item=> {
         <h1 className={cx("title")}>Dashboard</h1>
         <ul className={cx("breadcrumbs")} >
           <li className={cx('name-page')}>
-            <Link to="#">Trang chủ</Link>
+            <Link to="#" className={cx('name-page-item')}>Trang chủ</Link>
           </li>
           <li className={cx("divider")} >/</li>
           <li className={cx('name-page')}>
-            <Link to="#" className={cx("active")} >
+            <Link to="#" className={cx('name-page-item')} id={cx("active")} >
               Dashboard
             </Link>
           </li>
@@ -79,23 +81,6 @@ allProgress.forEach(item=> {
         </div>
         <div className={cx("data")} >
           <div className={cx("content-data")} >
-            <div className={cx("head")} >
-              <h3 className="head-titlle">Sales Report</h3>
-              <div className={cx("option")} >
-                <i className={cx("bx bx-dots-horizontal-rounded icon")} ></i>
-                <ul className={cx("option-link")} >
-                  <li>
-                    <Link to="#">Edit</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Save</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Remove</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
             <div className={cx("chart")} >
               {/* <div id={cx("chart")}></div> */}
               <ChartPage />

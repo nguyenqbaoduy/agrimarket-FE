@@ -25,7 +25,7 @@
 			padding: 0 20px;
 			list-style: none;
 
-			:link {
+			.link-dashboard {
 				display: flex;
 				align-items: center;
 				font-size: 14px;
@@ -42,7 +42,7 @@
 				}
 			}
 
-			>.side-menu-detail > :link.active {
+			>.side-menu-detail > .link-dashboard.active {
 				.icon-right {
 					transform: rotateZ(90deg);
 				}
@@ -61,7 +61,7 @@
 			overflow-y: hidden;
 			transition: all .15s ease;
 
-			Link:hover {
+			.link-dashboard:hover {
 				color: #5e6861c2;
 			}
 
