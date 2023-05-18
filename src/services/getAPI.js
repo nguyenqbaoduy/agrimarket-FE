@@ -136,3 +136,15 @@ export async function deteleCartItem(accessToken, data) {
   });
   return response.status;
 };
+export async function register(user) {
+  const response = await fetch(api_url + '/register', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+  var data = await response.json();
+  return {data:data,
+  status : response.status};
+};

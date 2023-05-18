@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/getAPI.js";
+import { login, register } from "../../services/getAPI.js";
 import styles from './Login.module.scss'
 import classNames from "classnames/bind";
 import { useCookies } from "react-cookie";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 const Login = () => {
-    const [cookies, setCookie] = useCookies(['token']); 
+    const [cookies, setCookie] = useCookies(['token']);
 
     //++Funtion
     const navigate = useNavigate();
@@ -17,7 +19,7 @@ const Login = () => {
     const handleToggleSignUp = () => {
         setShowSignUp(!showSignUp);
     }; //done
-    
+
     const sendLogin = async () => {
         const usernameInput = document.getElementById('login-username');
         const passwordInput = document.getElementById('login-password');
@@ -29,12 +31,42 @@ const Login = () => {
         setCookie('UserID', token.UserID, { path: "/" });
         navigate("/");
     }
-    const sendSignup = () => {
-        console.log('sendSignup');
+    const sendSignup = async () => {
+        const user = {
+            UserName: document.getElementById('username').value,
+            Password: document.getElementById('password').value,
+            FullName: document.getElementById('fullname').value,
+            Email: document.getElementById('email').value,
+            Phone: document.getElementById('phone').value,
+            Role: "1"
+        }
+        const req = await register(user);
+        if (req.status === 200) {
+            const token = req.data;
+            setCookie('accessToken', token.accessToken, { path: "/" });
+            setCookie('refreshToken', token.refreshToken, { path: "/" });
+            setCookie('UserID', token.UserID, { path: "/" });
+            navigate("/");
+        }
+        else {
+            toast(req.data.message)
+        }
     }
     //--Funtion
     return (
         <div className={cx('login')}>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover={false}
+                theme="dark"
+            />
             <div className={cx('cont', { 's-signup': showSignUp })}>
                 <div className={cx('form', 'sign-in')}>
                     <h2 className={cx('signin')}>Đăng Nhập</h2>
@@ -82,28 +114,28 @@ const Login = () => {
                     <div className={cx('form', 'sign-up')}>
                         <h2>Đăng Ký</h2>
                         <label>
-                            <span className={cx('sign-up-name')}>Tên ngườI dùng</span>
+                            <span className={cx('sign-up-name')}>Tên người dùng</span>
                             <span className={cx('toast', 'toast-name', 'hide')}>(*Tên người dùng phải &gt; 6 ký tự)</span>
-                            <input type="text" className={cx('fullname')} />
+                            <input type="text" className={cx('fullname')} id={cx('fullname')} />
                         </label>
                         <label>
                             <span className={cx('sign-up-phone')}>Số điện thoại</span>
                             <span className={cx('toast', 'toast-phone', 'hide')}>(*Số điện thoại không hợp lệ)</span>
-                            <input type="phone" className={cx('phone')} />
+                            <input type="phone" className={cx('phone')} id={cx('phone')} />
                         </label>
                         <label>
                             <span className={cx('sign-up-email')}>Email</span>
                             <span className={cx('toast', 'toast-email', 'hide')}>(*email phải có @)</span>
-                            <input type="email" className={cx('one', 'email')} />
+                            <input type="email" className={cx('one', 'email')} id={cx('email')} />
                         </label>
                         <label>
                             <span className={cx('sign-up-username')}>Tên đăng nhập</span>
-                            <input type="text" className={cx('username')} />
+                            <input type="text" className={cx('username')} id={cx('username')} />
                         </label>
                         <label>
                             <span className={cx('sign-up-password')}>Mật khẩu</span>
                             <span className={cx('toast', 'toast-password', 'hide')}>(*Mật khẩu phải &gt; 6 ký tự)</span>
-                            <input type="password" className={cx('password')} />
+                            <input type="password" className={cx('password')} id={cx('password')} />
                         </label>
                         <label>
                             <span className={cx('sign-up-cfPassword')}>Nhập Lại Mật khẩu</span>
