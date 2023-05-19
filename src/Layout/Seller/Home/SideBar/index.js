@@ -75,7 +75,7 @@ function SideBar() {
             </Link>
           </li>
           <li className={cx("side-menu-detail")}>
-            <Link to={'/Seller/ManageProduct'} className={cx("link-dashboard")} onClick={handleHide}>
+            <Link to={'/Seller/AllProduct'} className={cx("link-dashboard")} onClick={handleHide}>
               <i className={cx("fa-solid fa-volleyball")}></i>Quản Lý Sản Phẩm
               <i className={cx("fa-solid fa-chevron-right icon-right")}></i>
             </Link>
