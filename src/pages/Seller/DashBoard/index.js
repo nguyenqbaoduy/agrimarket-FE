@@ -24,11 +24,11 @@ function DashBoard() {
         <h1 className={cx("title")}>Dashboard</h1>
         <ul className={cx("breadcrumbs")} >
           <li className={cx('name-page')}>
-            <Link to="#" className={cx('name-page-item')}>Trang chủ</Link>
+            <Link to="/Seller" className={cx('name-page-item')}>Trang chủ</Link>
           </li>
           <li className={cx("divider")} >/</li>
           <li className={cx('name-page')}>
-            <Link to="#" className={cx('name-page-item')} id={cx("active")} >
+            <Link to="/Seller" className={cx('name-page-item')} id={cx("active")} >
               Dashboard
             </Link>
           </li>

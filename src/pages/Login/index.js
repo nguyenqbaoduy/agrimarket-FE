@@ -33,7 +33,7 @@ const Login = () => {
         if (role == 1)
             navigate("/");
         else if (role == 2)
-            navigate("/seller/" + token.UserID);
+            navigate("/seller");
         else
             navigate("/admin");
     }

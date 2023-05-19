@@ -59,23 +59,23 @@ function SideBar() {
       <div id={cx("sidebar")} className={hide ? 'hide' : ''} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <ul className={cx("side-menu")}>
           <li className={cx("side-menu-detail")}>
-            <Link to={'/Seller/01'} className={cx("link-dashboard")} id={cx("active")}>
+            <Link to={'/Seller'} className={cx("link-dashboard")} id={cx("active")}>
               <i className="fa-solid fa-chart-line"></i>DashBoard
             </Link>
           </li>
-          <li className={cx("divider")}> Main</li>
+          {/* <li className={cx("divider")}> Main</li> */}
           <li className={cx("side-menu-detail")}>
-            <Link to={'#'} className={cx("link-dashboard")}>
+            <Link to={'/Seller/Transport'} className={cx("link-dashboard")}>
               <i className={cx("fa-solid fa-chart-line")}></i>Vận Chuyển
             </Link>
           </li>
           <li className={cx("side-menu-detail")}>
-            <Link to={'#'} className={cx("link-dashboard")}>
+            <Link to={'/Seller/Order-management'} className={cx("link-dashboard")}>
               <i className={cx("fa-solid fa-chart-line")}></i>Quản Lý Đơn Hàng
             </Link>
           </li>
           <li className={cx("side-menu-detail")}>
-            <Link className={cx("link-dashboard")} onClick={handleHide}>
+            <Link to={'/Seller/ManageProduct'} className={cx("link-dashboard")} onClick={handleHide}>
               <i className={cx("fa-solid fa-volleyball")}></i>Quản Lý Sản Phẩm
               <i className={cx("fa-solid fa-chevron-right icon-right")}></i>
             </Link>
