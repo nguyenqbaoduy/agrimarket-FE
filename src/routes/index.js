@@ -2,11 +2,15 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import ProductDetail from '../pages/ProductDetail'
 import DashBoard from '../pages/Seller/DashBoard'
+import DashBoardAdmin from '../pages/Admin/DashBoardAdmin'
+import ManagerAccount from '../pages/Admin/ManagerAccount'
+
 import index from '../pages/Seller/ProductManager'
 import Cart from '../pages/Cart'
 //-----------Layout--------------------------------
 import Seller from '../Layout/Seller'
 import DefaultLayout from '../Layout/DefaultLayout';
+import Admin from '../Layout/Admin';
 
 const publicPath = [
     { path: '/', component: Home, layout: DefaultLayout },
@@ -16,6 +20,8 @@ const publicPath = [
     { path: '/Seller', component: DashBoard, layout: Seller },
     { path: '/Seller/ManageProduct', component: index, layout: Seller },
     { path: '/Seller/ManageProduct', component: index, layout: Seller },
+    { path: '/Admin', component: DashBoardAdmin, layout: Admin },
+    { path: '/ManagerAccount', component: ManagerAccount, layout: Admin },
 ]
 const privatePath = [
 ]
