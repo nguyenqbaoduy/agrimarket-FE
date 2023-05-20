@@ -559,12 +559,18 @@ header {
 .payment-form{
     margin-bottom: 40px;
 }
+.payment-form input{
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: lighter;
+}
 
 .payment-method{
     display: flex;
     align-items: center;
     gap: 30px;
     margin-bottom: 40px;
+    margin-top: 20px;
 }
 
 .payment-method .method{
@@ -607,12 +613,9 @@ header {
     border-radius: 5px;
     background: #f1f1f1;
     margin-top: 15px;
-}
-
-.payment-form input{
-    padding: 10px 15px;
-    font-size: 15px;
-    font-weight: lighter;
+    font: inherit;
+    width: 100%;
+    border: none;
 }
 
 .cardholder-name,
@@ -932,4 +935,52 @@ footer .main-footer .content.about p{
     .list-product{
         grid-template-columns: repeat(4, 1fr);
     }
+}
+select{
+    border: 1px transparent solid;
+}
+.address{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.address .method{
+    border: 1px solid silver;
+    border-radius: 5px;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.address .selected{
+    border-color: #266937;
+}
+.address-form{
+    margin-bottom: 40px;
+}
+.address-form input{
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: lighter;
+}
+.transport{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.transport .method{
+    border: 1px solid silver;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    gap: 20px;
+    cursor: pointer;
 }
