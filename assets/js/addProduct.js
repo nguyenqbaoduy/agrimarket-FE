@@ -87,7 +87,7 @@ sidebar.addEventListener('mouseenter', function () {
 		})
 	}
 })
-
+//Upload Image
 let uploadButton = document.getElementById("upload-button");
 let choosenImage = document.getElementById("choosen-image");
 let fileName = document.getElementById("file-name");

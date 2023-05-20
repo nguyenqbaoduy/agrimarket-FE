@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="./assets/css/manageAcc_Admin.css" />
+    <link rel="stylesheet" href="./assets/css/manageProduct_Admin.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <title>Manage Accounts</title>
+    <title>Manage Products</title>
 </head>
 
 <body>
@@ -22,8 +22,6 @@
             <a href="#"><img src="./assets/image/logo/logo.png" alt="" /></a>
             <div class="box-content">
                 <a href="./dashBoard_Admin.html">Trang chủ</a>
-                <span>></span>
-                <a href="./manageAcc_Admin.html">Accounts</a>
             </div>
             <div class="content-nav">
                 <nav>
@@ -54,13 +52,13 @@
                         <a href="./dashBoard_Admin.html" "><i class="fa-solid fa-gauge"></i>DashBoard</a>
                     </li>
                     <li>
-                        <a href="./manageProduct_Admin.html"><i class="fa-solid fa-box"></i>Products</a>
+                        <a href="./manageProduct_Admin.html" class="active" ><i class="fa-solid fa-box"></i>Products</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa-solid fa-file-invoice"></i>Orders</a>
                     </li>
                     <li>
-                        <a href="./manageAcc_Admin.html" class="active"><i class="fa-solid fa-user"></i>Accounts</a>
+                        <a href="./manageAcc_Admin.html"><i class="fa-solid fa-user"></i>Accounts</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa-solid fa-newspaper"></i>News And Articles</a>
@@ -70,10 +68,10 @@
         </div>
         <div class="content-right">
             <main>
-                <h1 class="title">Accounts</h1>
+                <h1 class="title">Products</h1>
                 <div class="grouphd">
                     <button class="btn btn-add">
-                        <a href="./addAccount.html">Add Account</a>
+                        <a href="./addProduct_Ad.html">Add Product</a>
                     </button>
                     <div class="search-box">
                         <input class="search-box_input" placeholder="Search..." type="" text>
@@ -83,36 +81,38 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>Phone Number</th>
-                                <th>Address</th>
-                                <th>Role</th>
-                                <th></th>
+                                <th>ON</td>
+                                <th>Product's name</td>
+                                <th>Categorize</td>
+                                <th>Price</td>
+                                <th>Warehouse</td>
+                                <th>Shop</td>
+                                <th></td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="email">conbocuoi40@gmail.com</td>
-                                <td class="password">123456123</td>
-                                <td class="phone">0905478741</td>
-                                <td class="address">Quảng Nam, Việt Nam</td>
-                                <td class="role">Seller</td>
-                                <td class="control">
-                                    <button class="btn-edit">
-                                        <a href="./editAccount.html">Edit</a>
-                                    </button>
-                                    <button class="btn-delete">
-                                        <a href="#">Delete</a>
-                                    </button>
+                                <td class="pro-number">
+                                    1
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="email">conbocuoi40@gmail.com</td>
-                                <td class="password">123456123</td>
-                                <td class="phone">0905478741</td>
-                                <td class="address">Quảng Nam, Việt Nam</td>
-                                <td class="role">User</td>
+                                <td class="product" id="">
+                                    <img src="./assets/image/buy/tts.png" alt="">
+                                    <div class="product-de">
+                                        Thuốc trừ sâu Batas 25EC
+                                    </div>
+                                </td>
+                                <td class="product-cate" id="">
+                                    Thuốc
+                                </td>
+                                <td class="product-pri" id="">
+                                    1.000đ
+                                </td>
+                                <td class="product-warehouse" id="">
+                                    100
+                                </td>
+                                <td class="product-shop" id="">
+                                    Agrimarket
+                                </td>
                                 <td class="control">
                                     <button class="btn-edit">
                                         <a href="./editAccount.html">Edit</a>
@@ -132,7 +132,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="./assets/js/manageAcc_Admin.js"></script>
+    <script src="./assets/js/manageProduct_Admin.js"></script>
 </body>
 
 </html>
