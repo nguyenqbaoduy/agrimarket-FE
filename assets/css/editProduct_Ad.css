@@ -77,13 +77,18 @@ body {
 .content-left {
     display: flex;
     background: #ffffff;
+    width: 20%;
+}
+
+.divied {
+    width: 1%;
+    background: #42c3622b;
 }
 
 .content-right {
-    width: 100%;
+    width: 79%;
     padding-right: 40px;
     height: auto;
-    display: flex;
     background: #ffffff;
 }
 
@@ -174,7 +179,6 @@ nav .divider {
 
 nav .profile {
     position: relative;
-    ;
 }
 
 nav .profile img {
@@ -231,7 +235,7 @@ nav .profile .profile-link a:hover {
 /*SIDEBAR*/
 #sidebar {
     position: flex;
-    width: 300px;
+    width: 100%;
     background: var(--light);
     height: 100%;
 }
@@ -301,134 +305,290 @@ nav .profile .profile-link a:hover {
 }
 
 /* MAIN */
-main {
-    width: 100%;
-    padding: 24px 20px 20px 20px;
-}
-
-main .title {
+.title {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 10px;
+    margin-left: 20px;
 }
 
-main .grouphd {
+.edit-row {
     display: flex;
-    margin-left: 64%;
 }
 
-main .btn-add {
-    width: 200px;
-    background: #00AC2C;
+.tiltle-product {
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.tiltle-product h4 {
+    display: flex;
+    color: #000;
+    font-weight: normal;
+}
+
+.tiltle-product span {
+    color: #ff0000;
+    font-size: smaller;
+    padding-right: 5px;
+}
+
+.edit-on {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-on input {
+    width: 75%;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    border: 0.4px solid #d2d2d2c2;
+    margin-left: 121%;
+    padding-left: 7px;
+}
+
+.edit-on input:hover {
+    border: 0.4px solid #717171c2;
+}
+
+::placeholder {
+    color: #7d7d7d;
+    font-size: 15px;
+}
+
+.info-right {
+    margin-left: 100px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.info-right .image-user {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background: #fff;
+    border: 2px dashed red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: auto;
+}
+
+.image-user.active {
+    border: none;
+}
+
+.image-user img {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-content {
+    /* font-size: 15px;
+    color: gray; */
+}
+
+figcaption {
+    margin: 10px 0 10px 0;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.info-right label {
+    display: block;
+    background: var(--primary-color);
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    width: 130px;
+    padding: 13px 0;
+    border-radius: 5px;
+    margin: auto;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 14px 0px, rgba(0, 0, 0, 0.1) 0px 5px 5px 0px;
+}
+
+.edit-main {
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.edit-main input {
+    width: 180%;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    border: 0.4px solid #d2d2d2c2;
+    margin-left: 62%;
+    padding-left: 13px;
+}
+
+.edit-main input:hover {
+    border: 0.4px solid #717171c2;
+}
+
+::placeholder {
+    color: #7d7d7d;
+    font-size: 15px;
+}
+
+.edit-cate {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-cate select {
+    width: 140%;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    border: 0.4px solid #d2d2d2c2;
+    margin-left: 77%;
+    padding-left: 7px;
+}
+
+.edit-cate select:hover {
+    border: 0.4px solid #717171c2;
+}
+
+::placeholder {
+    color: #7d7d7d;
+    font-size: 15px;
+}
+
+.edit-price {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-price input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    border: 0.4px solid #d2d2d2c2;
+    margin-left: 110%;
+    padding-left: 13px;
+}
+
+.edit-price input:hover {
+    border: 0.4px solid #717171c2;
+}
+
+::placeholder {
+    color: #7d7d7d;
+    font-size: 15px;
+}
+
+.edit-warehouse {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-warehouse input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    border: 0.4px solid #d2d2d2c2;
+    margin-left: 83%;
+    padding-left: 13px;
+}
+
+.edit-warehouse input:hover {
+    border: 0.4px solid #717171c2;
+}
+
+::placeholder {
+    color: #7d7d7d;
+    font-size: 15px;
+}
+
+.edit-shop {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-shop input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    border: 0.4px solid #d2d2d2c2;
+    margin-left: 109%;
+    padding-left: 13px;
+}
+
+.edit-shop input:hover {
+    border: 0.4px solid #717171c2;
+}
+
+::placeholder {
+    color: #7d7d7d;
+    font-size: 15px;
+}
+
+.containerbtn {
+    height: auto;
+    width: 100%;
+    background: #ffffff2b;
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.btn-group {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.btn-cancel {
+    width: 150px;
     border-radius: 5px;
     justify-content: center;
     height: 40px;
     transition: 0.3s linear;
     margin-right: 20px;
     border: 1px solid #2828285c;
-    margin-top: 29px;
 }
 
-main .btn-add:hover {
+.btn-cancel:hover {
     transform: translateY(2px)
 }
 
-main .btn-add a {
+.btn-cancel a {
     padding-top: 9px;
-    font-size: 18px;
-    color: #ffffff;
-}
-
-main .search-box {
-    padding-top: 9px;
-}
-
-main .search-box input {
-    width: 200px;
-    height: 40px;
-    border-radius: 5px;
-    padding-left: 10px;
-    margin-top: 20px;
-}
-
-::placeholder {
-    color: #000000c2;
     font-size: 15px;
+    color: #000000;
 }
 
-main .content-main{
-    margin-top: 20px;
-}
-main table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-tr {
-    border-bottom: 1px solid #eef0f3;
-    border-right: 1px solid #eef0f3;
-    border-left: 1px solid #eef0f3;
-}
-
-thead th {
-    font-size: 14px;
-    background: #d9d9d96b;
-    padding: 15px;
-    border-top: 1px solid #eef0f3;
-    color: #8D8D8D;
-    /* width: 20%; */
-    border: 1px solid #ffffff;
-}
-
-main .tbody {
-    height: 20%;
-}
-
-tbody tr td {
-    padding: 15px;
-    text-align: center;
-}
-
-tbody tr td h5 {
-    margin-bottom: 70px;
-}
-
-tbody tr td .btn-edit{
-    width: 35%;
+.btn-save {
+    width: 150px;
+    border-radius: 5px;
     background: #00AC2C;
-    border-radius: 5px;
     justify-content: center;
-    height: 32px;
+    height: 40px;
     transition: 0.3s linear;
     border: 1px solid #2828285c;
 }
 
-tbody tr td .btn-edit:hover {
+.btn-save:hover {
     transform: translateY(2px)
 }
 
-tbody tr td .btn-edit a {
+.btn-save a {
     padding-top: 9px;
-    font-size: 16px;
-    color: #ffffff;
-}
-
-tbody tr td .btn-delete{
-    width: 45%;
-    background: #ff0000;
-    border-radius: 5px;
-    justify-content: center;
-    height: 32px;
-    transition: 0.3s linear;
-    border: 1px solid #2828285c;
-}
-
-tbody tr td .btn-delete:hover {
-    transform: translateY(2px)
-}
-
-tbody tr td .btn-delete a {
-    padding-top: 9px;
-    font-size: 16px;
+    font-size: 15px;
     color: #ffffff;
 }

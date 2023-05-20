@@ -359,6 +359,14 @@ main .search-box input {
 main .content-main{
     margin-top: 20px;
 }
+
+main .content-main img{
+    width: 50%;
+    height: 45px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
 main table {
     border-collapse: collapse;
     width: 100%;
@@ -387,6 +395,7 @@ main .tbody {
 tbody tr td {
     padding: 15px;
     text-align: center;
+    justify-content: center;
 }
 
 tbody tr td h5 {

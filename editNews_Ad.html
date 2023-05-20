@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="./assets/css/addProduct_Ad.css" />
+    <link rel="stylesheet" href="./assets/css/editNews_Ad.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <title>Add Product</title>
+    <title>Edit News</title>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
                             <a href="./dashBoard_Admin.html" "><i class=" fa-solid fa-gauge"></i>DashBoard</a>
                         </li>
                         <li>
-                            <a href="./manageProduct_Admin.html" class="active"><i
+                            <a href="./manageProduct_Admin.html"><i
                                     class="fa-solid fa-box"></i>Products</a>
                         </li>
                         <li>
@@ -62,25 +62,25 @@
                             <a href="./manageAcc_Admin.html"><i class="fa-solid fa-user"></i>Accounts</a>
                         </li>
                         <li>
-                            <a href="./manageNews_Admin.html"><i class="fa-solid fa-newspaper"></i>News And Articles</a>
+                            <a href="./manageNews_Admin.html"  class="active"><i class="fa-solid fa-newspaper"></i>News And Articles</a>
                         </li>
                     </ul>
                 </section>
             </div>
             <div class="divied"></div>
             <div class="content-right">
-                <h1 class="title">Add Product</h1>
+                <h1 class="title">Edit News</h1>
                 <div class="edit-row">
                     <div class="tiltle-product">
-                        <h4><span>*</span>ON</h4>
+                        <h4><span>*</span>ID Post</h4>
                     </div>
-                    <div class="edit-on">
-                        <input class="on-box_input" placeholder="Odinal Number" type="" text>
+                    <div class="edit-IDP">
+                        <input class="IDP-box_input" placeholder="ID" type="" text>
                     </div>
                 </div>  
                 <div class="edit-row">
                     <div class="tiltle-product">
-                        <h4><span>*</span>Image's Product</h4>
+                        <h4><span>*</span>Image</h4>
                     </div>
                     <div class="info-right">
                         <figure class="image-user">
@@ -107,63 +107,47 @@
 
                 <div class="edit-row">
                     <div class="tiltle-product">
-                        <h4><span>*</span>Product's Name</h4>
+                        <h4><span>*</span>Title</h4>
                     </div>
-                    <div class="edit-main">
-                        <input class="name-box_input" placeholder="Nhập vào..." type="" text>
+                    <div class="edit-title">
+                        <input class="tile-box_input" placeholder="" type="" text>
                     </div>
                 </div>
                 
                 <div class="edit-row">
                     <div class="tiltle-product">
-                        <h4><span>*</span>Categorize</h4>
+                        <h4><span>*</span>Body</h4>
                     </div>
-                    <div class="edit-cate">
-                        <select class="cate-box-input" name="" id="">
-                            <option value="hatgiong">Hạt giống</option>
-                            <option value="lamvuon">Nghề làm vườn</option>
-                            <option value="channuoi">Chăn nuôi</option>
-                            <option value="chatdinhduongtv">Chất dinh dưỡng thực vật</option>
-                            <option value="thuoctrusau">Thuốc trừ sâu</option>
-                            <option value="congcucongdung">Công cụ & công dụng</option>
-                          </select>
+                    <div class="edit-body">
+                        <textarea type="textarea" resize="none" rows="2" minrows="9" maxrows="26" autosize="true" maxlength="Infinity" restrictiontype="input" max="Infinity" min="-Infinity" class="body_box-input"></textarea>
                     </div>
                 </div>
 
                 <div class="edit-row">
                     <div class="tiltle-product">
-                        <h4><span>*</span>Price</h4>
+                        <h4><span>*</span>Author</h4>
                     </div>
-                    <div class="edit-price">
-                        <input class="price-box_input" placeholder="VND" type="" text>
-                    </div>
-                </div>
-
-                <div class="edit-row">
-                    <div class="tiltle-product">
-                        <h4><span>*</span>Warehouse</h4>
-                    </div>
-                    <div class="edit-warehouse">
-                        <input class="warehouse-box_input" placeholder="" type="" text>
+                    <div class="edit-author">
+                        <input class="author-box_input" placeholder="" type="" text>
                     </div>
                 </div>
 
                 <div class="edit-row">
                     <div class="tiltle-product">
-                        <h4><span>*</span>Shop</h4>
+                        <h4><span>*</span>Post Date</h4>
                     </div>
-                    <div class="edit-shop">
-                        <input class="shop-box_input" placeholder="" type="" text>
+                    <div class="edit-postdate">
+                        <input class ="form-control" type="date">
                     </div>
                 </div>
         
                 <div class="containerbtn">
                     <div class="btn-group">
                         <button class="btn btn-cancel">
-                            <a href="manageProduct_Admin.html">Cancel</a>
+                            <a href="manageNews_Admin.html">Cancel</a>
                         </button>
-                        <button class="btn btn-create">
-                            <a href="#">Create</a>
+                        <button class="btn btn-save">
+                            <a href="#">Save</a>
                         </button>
                     </div>
                 </div>
@@ -171,7 +155,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script src="./assets/js/addProduct_Ad.js"></script>
+        <script src="./assets/js/editNews_Ad.js"></script>
 </body>
 
 </html>

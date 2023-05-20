@@ -1,4 +1,4 @@
-//	PROFILE DROPDOWN
+//PROFILE DROPDOWN
 const profile = document.querySelector('nav .profile');
 const  imgProfile = profile.querySelector('img');
 const dropdownProfile = profile.querySelector('.profile-link');
@@ -16,3 +16,5 @@ window.addEventListener('click', function(e){
 		}
 	}
 })
+
+//
