@@ -32,8 +32,8 @@ const ProductDetail = () => {
                 console.log(error);
                 setErrorOccurred(true); // To render Page not found
             }
-            setDataLoaded(true);
             window.scrollTo(0, 0);
+            setDataLoaded(true);
         };
         fetchData();
     }, []);
@@ -178,8 +178,8 @@ const ProductDetail = () => {
                                         <a href='#'>Thêm vào giỏ hàng</a>
                                     </button>
                                     {dataLoaded && (
-                                        <button className={cx('btn-sed')}>
-                                            <Link to="/Checkout" state={product}>Mua ngay</Link>
+                                        <button className={cx('btn-sed')} onClick={() => navigate('/Checkout', { state: [{...product,Quantity:quantity}] })}>
+                                           <Link>Mua ngay</Link> 
                                         </button>
                                     )}
                                 </div>

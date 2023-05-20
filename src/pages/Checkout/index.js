@@ -8,11 +8,13 @@ import styles from "./Checkout.module.scss";
 const cx = classNames.bind(styles);
 const Checkout = () => {
     const location = useLocation();
-    const data = location.state;
-    console.log(data);
+    const items = location.state;
+    console.log(items)
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className={cx('container')} id="">
-            <h1 className={cx('headingpm')}>Shopping cart</h1>
             <div className={cx('item-flex')}>
                 {/* Checkout Section */}
                 <section className={cx('checkout')}>
@@ -62,43 +64,26 @@ const Checkout = () => {
                 <section className={cx('cart')}>
                     <div className={cx('cart-item-box')}>
                         <h2 className={cx('section-headingpm')}>Order Summery</h2>
-                        <div className={cx('product-card')}>
-                            <div className={cx('card')}>
-                                <div className={cx('img-box')}>
-                                    <img src="./assets/image/buy/tts.png" alt="" className={cx('product-img')} />
-                                </div>
-                                <div className={cx('detail')}>
-                                    <h4 className={cx('product-name')}>Thuoc Tru Sau 25EC Batos</h4>
-                                    {/* <div className={cx('wrapper')}> */}
-                                    <div className={cx('product-qty')}>
-                                        <span id="quantity">x1</span
-                                        >
+                        {items && items.map((item, index) => (
+                            <div className={cx('product-card')}>
+                                <div className={cx('card')}>
+                                    <div className={cx('img-box')}>
+                                        <img src={api_url + "/images/product/"+item.ProductImageDefault} alt="" className={cx('product-img')} />
                                     </div>
-                                    <div className={cx('price')}>
-                                        $<span id="price">110</span>
+                                    <div className={cx('detail')}>
+                                        <h4 className={cx('product-name')}>{item.ProductName}</h4>
+                                        {/* <div className={cx('wrapper')}> */}
+                                        <div className={cx('product-qty')}>
+                                            <span id="quantity">Số lượng: {item.Quantity}</span>
+                                        </div>
+                                        <div className={cx('price')}>
+                                            $<span id="price">{item.ProductPrice}</span>
+                                        </div>
+                                        {/* </div> */}
                                     </div>
-                                    {/* </div> */}
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('product-card')}>
-                            <div className={cx('card')}>
-                                <div className={cx('img-box')}>
-                                    <img src="./assets/image/buy/hoa-hong-hat-giong-min.png" alt="" className={cx('product-img')} />
-                                </div>
-                                <div className={cx('detail')}>
-                                    <h4 className={cx('product-name')}>Thuoc Tru Sau 25EC Batos</h4>
-                                    {/* <div className={cx('wrapper')}> */}
-                                    <div className={cx('product-qty')}>
-                                        <span id="quantity">x1</span>
-                                    </div>
-                                    <div className={cx('price')}>
-                                        $<span id="price">110</span>
-                                    </div>
-                                    {/* </div> */}
                                 </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                     {/* <div className={cx('wrapper')}> */}
                     <div className={cx('discount-token')}>
