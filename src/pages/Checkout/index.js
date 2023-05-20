@@ -18,6 +18,7 @@ const Checkout = () => {
     const [wardsCode, setSelectedWardsId] = useState();
     const [transports, setTransports] = useState([]);
     const [transportsID, setSelectedTransportsId] = useState();
+    const [service_fee, setService_fee] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,7 +31,19 @@ const Checkout = () => {
         fetchData();
         window.scrollTo(0, 0);
     }, []);
+    let totalProductPrice = 0;
+    // Tính tổng sản phẩm
+    items && items.map((item) => {
+        // Chuyển đổi item.ProductPrice sang kiểu number để có thể cộng dồn
+        const productPrice = parseFloat(item.ProductPrice);
+        const quantity = parseFloat(item.Quantity);
 
+        // Kiểm tra nếu productPrice là một số hợp lệ
+        if (!isNaN(productPrice)) {
+            // Cộng dồn productPrice vào tổng
+            totalProductPrice += productPrice *quantity;
+        }
+    });
     const handleOptionProvincesChange = async (e) => {
         const selectedValue = e.target.value;
         setSelectedProvincesId(selectedValue);
@@ -122,13 +135,13 @@ const Checkout = () => {
                         </form>
                     </div>
                     <button className={cx('btn1', 'btn-primary')}>
-                        <b>Pay</b> $ <span id="payAmount">2.15</span>
+                        <b>Đặt hàng</b>
                     </button>
                 </section>
                 {/* Cart Section */}
                 <section className={cx('cart')}>
                     <div className={cx('cart-item-box')}>
-                        <h2 className={cx('section-headingpm')}>Order Summery</h2>
+                        <h2 className={cx('section-headingpm')}>Sản phẩm</h2>
                         {items && items.map((item, index) => (
                             <div className={cx('product-card')}>
                                 <div className={cx('card')}>
@@ -152,24 +165,21 @@ const Checkout = () => {
                     </div>
                     {/* <div className={cx('wrapper')}> */}
                     <div className={cx('discount-token')}>
-                        <label htmlFor="discount-token" className={cx('label-default')}>Gift card/Discount code</label>
+                        <label htmlFor="discount-token" className={cx('label-default')}>Voucher</label>
                         <div className={cx('wrapper-flex')}>
                             <input type="text" name="discount-token" id="discount-token" className={cx('input-default')} />
-                            <button className={cx('btn1', 'btn-outline')}>Apply</button>
+                            <button className={cx('btn1', 'btn-outline')}>Chọn</button>
                         </div>
                     </div>
                     <div className={cx('amount')}>
                         <div className={cx('subtotal')}>
-                            <span>Subtutol</span> <span>$ <span id="subtotal">2.85</span></span>
-                        </div>
-                        <div className={cx('tax')}>
-                            <span>Tax</span> <span>$ <span id="tax">2.85</span></span>
+                            <span>Tổng sản phẩm</span> <span>$ <span id="subtotal">{totalProductPrice}</span></span>
                         </div>
                         <div className={cx('shipping')}>
-                            <span>Shipping</span> <span>$ <span id="shipping">2.85</span></span>
+                            <span>Phí vận chuyển</span> <span>$ <span id="shipping">{service_fee}</span></span>
                         </div>
                         <div className={cx('total')}>
-                            <span>Total</span> <span>$ <span id="total">2.15</span></span>
+                            <span>Tổng cộng</span> <span>$ <span id="total">{totalProductPrice+service_fee}</span></span>
                         </div>
                     </div>
                 </section>
