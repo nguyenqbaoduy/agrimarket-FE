@@ -1,11 +1,62 @@
 import React from "react";
+import { useState } from "react";
 import styles from "./AllProduct.module.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
+import Modal from 'react-modal';
+import Button from "react-bootstrap/Button";
 
 const cx = classNames.bind(styles);
 
 export default function AllProduct() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const numberOfProducts = 0;
+  const handleAddProduct = () => {
+    // Lấy số lượng sản phẩm hiện tại
+    const currentNumberOfProducts = numberOfProducts;
+
+    // Thêm sản phẩm vào giỏ hàng
+    numberOfProducts = currentNumberOfProducts + 1;
+  };
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      name: "Thuốc trừ sâu Batas 25EC",
+      category: "Thuốc",
+      price: "1.000đ",
+      stock: 1,
+      sales: 0,
+    },
+  ]);
+
+  const updateProduct = (id) => {
+    // Find product by id
+    const productToUpdate = products.find((product) => product.id === id);
+
+    // Update product
+    productToUpdate.name = "New Product Name";
+    productToUpdate.category = "New Category";
+    productToUpdate.price = "New Price";
+    productToUpdate.stock = 10;
+    productToUpdate.sales = 5;
+
+    // Update state with new products array
+    setProducts([...products]);
+  };
+
+  // Function to delete product
+  const deleteProduct = (id) => {
+    // Filter out product with matching id
+    const updatedProducts = products.filter((product) => product.id !== id);
+
+    // Update state with new products array
+    setProducts(updatedProducts);
+  };
+
   return (
     <div className={cx("all-product")}>
       <div className={cx("tabs")}>
@@ -21,10 +72,13 @@ export default function AllProduct() {
         {/* <hr className={cx('card__separator')} /> */}
         <div className={cx("tab-pane active")}>
           <div className={cx("header-tab")}>
-            <h2>0 Sản phẩm</h2>
+            <h2>{numberOfProducts} Sản phẩm</h2>
             <div className={cx("grouphd")}>
-              <button className={cx("btn btn-add")}>
-                <Link to={"/Seller/01/AddProduct"}>Thêm 1 sản phẩm mới</Link>
+              <button
+                className={cx("btn", "btn-add")}
+                onclick={handleAddProduct}
+              >
+                <Link to={"/Seller/AddProduct"}>Thêm 1 sản phẩm mới</Link>
               </button>
               <div className={cx("search-box")}>
                 <input
@@ -51,36 +105,45 @@ export default function AllProduct() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className={cx("pro-check")}>
-                    <div className={cx("product-check")}>
-                      <input type="checkbox" name="btn" />
-                    </div>
-                  </td>
-                  <td className={cx("product")} id="">
-                    <img src="./assets/image/buy/tts.png" alt="" />
-                    <div className={cx("product-de")}>
-                      <h5>Thuốc trừ sâu Batas 25EC</h5>
-                    </div>
-                  </td>
-                  <td className={cx("product-cate")} id="">
-                    <h5>Thuốc</h5>
-                  </td>
-                  <td className={cx("product-pri")} id="">
-                    <h5>1.000đ</h5>
-                  </td>
-                  <td className={cx("product-warehouse")} id="">
-                    <h5>1</h5>
-                  </td>
-                  <td className={cx("product-sales")} id="">
-                    <h5>0</h5>
-                  </td>
-                  <td className={cx("product-operation")} id="">
-                    <Link to={'#'}>Cập nhật</Link>
-                    <Link to={'#'}>Xóa</Link>
-                    <Link to={'#'}>Ẩn</Link>
-                  </td>
-                </tr>
+                {products.map((product) => (
+                  <tr key={product.id}>
+                    <td className={cx("pro-check")}>
+                      <div className={cx("product-check")}>
+                        <input type="checkbox" name="btn" />
+                      </div>
+                    </td>
+                    <td className={cx("product")} id="">
+                      <img src="./assets/image/buy/tts.png" alt="" />
+                      <div className={cx("product-de")}>
+                        <h5>{product.name}</h5>
+                      </div>
+                    </td>
+                    <td className={cx("product-cate")} id="">
+                      <h5>{product.category}</h5>
+                    </td>
+                    <td className={cx("product-pri")} id="">
+                      <h5>{product.price}</h5>
+                    </td>
+                    <td className={cx("product-warehouse")} id="">
+                      <h5>{product.stock}</h5>
+                    </td>
+                    <td className={cx("product-sales")} id="">
+                      <h5>{product.sales}</h5>
+                    </td>
+                    <td className={cx("product-operation")} id="">
+                      <button onClick={() => updateProduct(product.id)}>
+                        Cập nhật
+                      </button>
+                      <button onClick={() => deleteProduct(product.id)}>
+                        Xóa
+                      </button>
+                      <button>Ẩn</button>
+                      <Button variant="primary" onClick={handleShow}>
+                        Launch demo modal
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -116,9 +179,7 @@ export default function AllProduct() {
               </ul>
               <button className={cx("btn2")} onclick="nextBtn()">
                 Next
-                <img
-                  src="./assets/image/icon/448-arrow.png"
-                />
+                <img src="./assets/image/icon/448-arrow.png" />
               </button>
             </div>
           </div>
@@ -177,9 +238,9 @@ export default function AllProduct() {
                     <h5>0</h5>
                   </td>
                   <td className={cx("product-operation")} id="">
-                    <Link to={'#'}>Cập nhật</Link>
-                    <Link to={'#'}>Xóa</Link>
-                    <Link to={'#'}>Ẩn</Link>
+                    <Link to={"#"}>Cập nhật</Link>
+                    <Link to={"#"}>Xóa</Link>
+                    <Link to={"#"}>Ẩn</Link>
                   </td>
                 </tr>
               </tbody>

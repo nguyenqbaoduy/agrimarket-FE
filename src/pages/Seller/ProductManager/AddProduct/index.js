@@ -1,10 +1,62 @@
 import React from "react";
+import { useState } from "react";
 import styles from "./AddProduct.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
 export default function AddProduct() {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [manufacturer, setManufacturer] = useState('');
+  const [price, setPrice] = useState('');
+  const [size, setSize] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [image, setImage] = useState(null);
+  const [data, setData] = useState({});
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    // reader.readAsDataURL(file);
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleManufacturerChange = (e) => {
+    setManufacturer(e.target.value);
+  };
+
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
+  };
+
+  const handleSizeChange = (e) => {
+    setSize(e.target.value);
+  };
+
+  const handleExpiryChange = (e) => {
+    setExpiry(e.target.value);
+  };
+
+  const handleSave = () => {
+    
+  };
+
+  const handleCancel = () => {
+    setData({});
+  };
+
   return (
     <div className={cx("add-product")}>
       <div className={cx("info-title")}>Thông tin cơ bản</div>
@@ -16,7 +68,7 @@ export default function AddProduct() {
         </div>
         <div className={cx("info-right")}>
           <figure className={cx("image-user")}>
-            <img alt="" id="choosen-image" />
+            {image && <img src={image} alt="uploaded image" id="choosen-image"/>}
             <div className={cx("img-content")}>
               <div className={cx("icon")}>
                 <i className={cx("fas", "fa-cloud-upload-alt")}></i>
@@ -25,7 +77,7 @@ export default function AddProduct() {
             </div>
           </figure>
           <figcaption id="file-name"></figcaption>
-          <input type="file" id="upload-button" accept="image/*" name="image" />
+          <input type="file" id="upload-button" accept="image/*" name="image" onChange={handleImageChange}/>
           <label htmlFor="upload-button">
             <i className={cx("fas", "fa-upload")}></i> &nbsp; Chọn ảnh
           </label>
@@ -43,6 +95,8 @@ export default function AddProduct() {
             placeholder="Nhập vào..."
             type=""
             text
+            value={name}
+            onChange={handleNameChange}
           />
         </div>
       </div>
@@ -65,6 +119,8 @@ export default function AddProduct() {
             max="Infinity"
             min="-Infinity"
             className={cx("detail_box-input")}
+            value={description}
+            onChange={handleDescriptionChange}
           ></textarea>
         </div>
       </div>
@@ -75,7 +131,7 @@ export default function AddProduct() {
           </h4>
         </div>
         <div className={cx("edit-dvsx")}>
-          <input className={cx("dvsx-box_input")} placeholder="" type="" text />
+          <input className={cx("dvsx-box_input")} placeholder="" type="" text value={manufacturer} onChange={handleManufacturerChange}/>
         </div>
       </div>
       <div className={cx("edit-row")}>
@@ -90,6 +146,8 @@ export default function AddProduct() {
             placeholder="VND"
             type=""
             text
+            value={price}
+            onChange={handlePriceChange}
           />
         </div>
       </div>
@@ -105,6 +163,8 @@ export default function AddProduct() {
             placeholder="Nhập vào..."
             type=""
             text
+            value={size}
+            onChange={handleSizeChange}
           />
         </div>
       </div>
@@ -115,19 +175,20 @@ export default function AddProduct() {
           </h4>
         </div>
         <div className={cx("edit-expiry")}>
-          <input className={cx("form-control")} type="date" />
+          <input className={cx("form-control")} type="date" value={expiry} onChange={handleExpiryChange}/>
         </div>
       </div>
       <div className={cx("containerbtn")}>
         <div className={cx("btn-group")}>
-          <button className={cx("btn", "btn-cancel")}>
+          <button className={cx("btn", "btn-cancel")} onClick={handleCancel}>
             <a href="#">Hủy</a>
           </button>
-          <button className={cx("btn", "btn-save")}>
+          <button className={cx("btn", "btn-save")} onClick={handleSave}>
             <a href="#">Lưu</a>
           </button>
         </div>
       </div>
     </div>
   );
+  
 }
