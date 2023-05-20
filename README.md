@@ -1,8 +1,10 @@
-Đầu tiên thực hiện cài module:
+# 1. Install module:
 npm i 
-Chạy dự án
+# 2. Run project
 npm start
-Account for test
+# Account for test
 username: admin password: admin (Role admin)
+
 username: sell password: sell (Role seller)
+
 username: abc password: abc (Role user)
