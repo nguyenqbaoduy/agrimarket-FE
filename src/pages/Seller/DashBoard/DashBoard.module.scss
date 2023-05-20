@@ -1,0 +1,126 @@
+.content-right {
+	width: 100%;
+	padding-right: 40px;
+	height: auto;
+	display: flex;
+	background: #ffffff;
+
+	.content-dashboard {
+		width: 100%;
+		padding: 24px 20px 20px 20px;
+
+		.title {
+			font-size: 28px;
+			font-weight: 600;
+			margin-bottom: 10px;
+		}
+
+		.breadcrumbs {
+			display: flex;
+			grid-gap: 6px;
+			list-style: none;
+
+
+			.name-page-item{
+				font-size: 14px;
+				color: #1775F1;
+				
+			}
+
+			.name-page-item#active,
+			&.divider {
+				color: #8D8D8D;
+				pointer-events: none;
+			}
+		}
+
+		.info-data {
+			margin-top: 36px;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			grid-gap: 20px;
+
+
+			.card {
+				padding: 20px;
+				border-radius: 10px;
+				background: var(--light);
+				box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+				border: 0.4px solid #d2d2d2c2;
+
+
+				.head {
+					display: flex;
+					justify-content: space-between;
+					align-items: flex-start;
+
+
+					.card-parameter {
+						font-size: 24px;
+						font-weight: 600;
+					}
+
+					.card-titlle {
+						font-size: 14px;
+					}
+
+					.icon {
+						font-size: 20px;
+						color: #33bf17;
+					}
+
+					.icon.down {
+						color: #ff0000;
+					}
+				}
+
+				.progress {
+					display: block;
+					margin-top: 24px;
+					height: 10px;
+					width: 100%;
+					border-radius: 10px;
+					background: #cccccc;
+					overflow-y: hidden;
+					position: relative;
+					margin-bottom: 4px;
+
+
+					&::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100%;
+						background: #266937C2;
+						width: var(--value);
+					}
+				}
+
+				.label {
+					font-size: 14px;
+					font-weight: 700;
+				}
+			}
+		}
+
+		.data {
+			display: flex;
+			grid-gap: 20px;
+			margin-top: 20px;
+			flex-wrap: wrap;
+			border: 0.4px solid #d2d2d2c2;
+
+
+			.content-data {
+				flex-grow: 1;
+				flex-basis: 400px;
+				padding: 20px;
+				background: var(--light);
+				border-radius: 10px;
+				box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+			}
+
+		}
+	}
+}
