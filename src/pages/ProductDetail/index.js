@@ -1,6 +1,6 @@
 import styles from './ProductDetail.module.scss'
 import React, { useEffect, useState, useContext } from 'react'
-import { api_url,getDetailProduct, addItemToCart } from '../../services/getAPI.js'
+import { api_url, getDetailProduct, addItemToCart } from '../../services/getAPI.js'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import PageNotFound from "../PageNotFound";
@@ -28,16 +28,16 @@ const ProductDetail = () => {
                 const getProduct = await getDetailProduct(params.ProductID);
                 setProduct(getProduct.data.product);
                 setImages(getProduct.data.images);
-                setDataLoaded(true);
             } catch (error) {
                 console.log(error);
                 setErrorOccurred(true); // To render Page not found
             }
+            setDataLoaded(true);
             window.scrollTo(0, 0);
         };
         fetchData();
     }, []);
-    
+
     const handleDecrease = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
@@ -68,7 +68,7 @@ const ProductDetail = () => {
                 Quantity: quantity,
             }
             const status = await addItemToCart(cookies.accessToken, data);
-            if (status == "200"){
+            if (status == "200") {
                 toast("Thêm thành công")
                 triggerHeaderReload();
             }
@@ -94,20 +94,20 @@ const ProductDetail = () => {
                 theme="dark"
             />
             <div className={cx('container')}>
-                <div className={cx('content_title')}>
+                {/* <div className={cx('content_title')}>
                     <a href='/'>Trang chủ</a>
                     <span>{'>'}</span>
                     <a href='#'>Thuốc trừ sâu</a>
                     <span></span>
                     <span id={cx('product-title')}></span>
-                </div>
+                </div> */}
                 <div className={cx('content_product', 'container')}>
                     <div className={cx('content_container-top')}>
                         <div className={cx('content-left')}>
                             <div className={cx('content-img-detail', 'product-images-detail')}>
                                 {dataLoaded && (
                                     images.map((image, index) => (
-                                        <img className={cx('img') + (index + 1)} src={api_url+'/images/product/' + image.ImageUrl}
+                                        <img className={cx('img') + (index + 1)} src={api_url + '/images/product/' + image.ImageUrl}
                                             // onclick={'changeImage('one')'} 
                                             id={cx(image.ImageID)}
                                             key={index}
@@ -117,7 +117,7 @@ const ProductDetail = () => {
                             </div>
                             {dataLoaded && (
                                 <img src={
-                                    api_url+'/images/product/' + images[0].ImageUrl
+                                    api_url + '/images/product/' + images[0].ImageUrl
                                 }
                                     alt='' id={cx('main-img')} className={cx('product-image')} />
                             )}
@@ -149,11 +149,11 @@ const ProductDetail = () => {
                                 </div>
                             </div> */}
                                 <div className={cx('content-title', 'content-name-expiry')}>
-                                    <h4>Expiry Date:</h4>
+                                    {/* <h4>Expiry Date:</h4>
                                     <div className={cx('content-button-expiry', 'product-expiry')}>
                                         <button type='button' className={cx('btn-1')}>07/09/2025</button>
                                         <button type='button' className={cx('btn-2')}>07/09/2025</button>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className={cx('content-title', 'content-name-number')}>
                                     <h4>Số lượng:</h4>
@@ -177,9 +177,11 @@ const ProductDetail = () => {
                                         <i className={cx('fa-solid', 'fa-cart-plus')}></i>
                                         <a href='#'>Thêm vào giỏ hàng</a>
                                     </button>
-                                    <button className={cx('btn-sed')}>
-                                        <a href='#'>Mua ngay</a>
-                                    </button>
+                                    {dataLoaded && (
+                                        <button className={cx('btn-sed')}>
+                                            <Link to="/Checkout" state={product}>Mua ngay</Link>
+                                        </button>
+                                    )}
                                 </div>
                                 <div className={cx('content-name-addwish')}>
                                     <button className={cx('btn-addwish')}>

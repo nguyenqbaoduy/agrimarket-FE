@@ -1,8 +1,9 @@
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Login/ForgotPassword'
-import ProductDetail from '../pages/ProductDetail'
 import Category from '../pages/Category'
+import Checkout from '../pages/Checkout'
+import ProductDetail from '../pages/ProductDetail'
 import DashBoard from '../pages/Seller/DashBoard'
 import DashBoardAdmin from '../pages/Admin/DashBoardAdmin'
 import ManagerAccount from '../pages/Admin/ManagerAccount'
@@ -25,6 +26,8 @@ const publicPath = [
     { path: '/Category/:CategoryID', component: Category, layout: DefaultLayout },
     { path: '/Product/:ProductID', component: ProductDetail, layout: DefaultLayout },
     { path: '/Cart', component: Cart, layout: DefaultLayout },
+    { path: '/Category/:CategoryID', component: Category, layout: DefaultLayout },
+    { path: '/Checkout', component: Checkout, layout: DefaultLayout },
     { path: '/News', component: News, layout: DefaultLayout },
     { path: '/News/:NewsID', component: SingleNews, layout: DefaultLayout },
 
