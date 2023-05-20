@@ -44,7 +44,6 @@ const Checkout = () => {
                                     <label htmlFor="expire-date" className={cx('label-default')}>Expiration date</label>
                                     <div className={cx('input-flex')}>
                                         <input type="number" name="day" id="expire-date" placeholder="31" min="1" max="31" className={cx('input-default')} />
-                                        /
                                         <input type="number" name="month" id="expire-date" placeholder="12" min="1" max="12" className={cx('input-default')} />
                                     </div>
                                 </div>
