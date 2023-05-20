@@ -109,7 +109,7 @@ function Header() {
                             <ul className={cx('search-history-list')}>
                                 {searchResults && searchResults.slice(0, 5).map((result, index) => (
                                     <li className={cx('search-history-item')} key={index}>
-                                        <Link className={cx('search-item')} to={"/product/detail/" + result.ProductID}>{result.ProductName}</Link>
+                                        <Link className={cx('search-item')} to={"/product/" + result.ProductID}>{result.ProductName}</Link>
                                     </li>
                                 ))}
                             </ul>

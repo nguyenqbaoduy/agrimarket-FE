@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ForgotPassword.module.scss'
 import classNames from "classnames/bind";
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 const ForgotPassword = () => {
     return (
@@ -18,10 +19,9 @@ const ForgotPassword = () => {
                 </label>
                 <a href="" style={{ textDecoration: 'none' }}><button className={cx('submit')} type="button">Gửi</button></a>
                 <div className={cx('home-page')}>
-                    <a href="" style={{ textDecoration: 'none' }}>
-                        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+                    <Link to ="/login" style={{ textDecoration: 'none' }}>
                         <span>Đăng Nhập</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
 
