@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getCart, changeQuantity, deteleCartItem } from "../../services/getAPI.js";
+import { api_url, getCart, changeQuantity, deteleCartItem } from "../../services/getAPI.js";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
@@ -96,7 +96,7 @@ const Cart = () => {
                                 <input type="checkbox" name="btn" />
                             </div>
                             <div className={cx('cart-product', 'cart-mid-img')}>
-                                <a href="productDetail.html"><img src={"/images/product/" + cart.ProductImageDefault} alt="" className={cx('product-image')} /></a>
+                                <a href="productDetail.html"><img src={api_url+"/images/product/" + cart.ProductImageDefault} alt="" className={cx('product-image')} /></a>
                                 <div className={cx('cart-title')}>
                                     <a href="/user/productDetail.html"><h4 className={cx('product-title')}>{cart.ProductName}</h4></a>
                                     {/* <div className={cx('cart-size', 'product-size')}>

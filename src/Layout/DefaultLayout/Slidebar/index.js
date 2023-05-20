@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import classNames from "classnames/bind";
 
@@ -11,8 +12,8 @@ function Slidebar() {
         <div className={cx('main-menu-header')}>
             <div id={cx('menu')}>
                 <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/">Tin tức và bài viết</a></li>
+                    <li><Link to ="/">Trang chủ</Link></li>
+                    <li><Link to = "/News">Tin tức và bài viết</Link></li>
                 </ul>
             </div>
         </div>

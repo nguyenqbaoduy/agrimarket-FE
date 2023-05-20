@@ -1,6 +1,6 @@
 import styles from './ProductDetail.module.scss'
 import React, { useEffect, useState, useContext } from 'react'
-import { getDetailProduct, addItemToCart } from '../../services/getAPI.js'
+import { api_url,getDetailProduct, addItemToCart } from '../../services/getAPI.js'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import PageNotFound from "../PageNotFound";
@@ -107,7 +107,7 @@ const ProductDetail = () => {
                             <div className={cx('content-img-detail', 'product-images-detail')}>
                                 {dataLoaded && (
                                     images.map((image, index) => (
-                                        <img className={cx('img') + (index + 1)} src={'/images/product/' + image.ImageUrl}
+                                        <img className={cx('img') + (index + 1)} src={api_url+'/images/product/' + image.ImageUrl}
                                             // onclick={'changeImage('one')'} 
                                             id={cx(image.ImageID)}
                                             key={index}
@@ -117,7 +117,7 @@ const ProductDetail = () => {
                             </div>
                             {dataLoaded && (
                                 <img src={
-                                    '/images/product/' + images[0].ImageUrl
+                                    api_url+'/images/product/' + images[0].ImageUrl
                                 }
                                     alt='' id={cx('main-img')} className={cx('product-image')} />
                             )}

@@ -1,37 +1,40 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./AllProduct.module.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
-import Modal from 'react-modal';
-import Button from "react-bootstrap/Button";
+// import Modal from 'react-modal';
+// import Button from "react-bootstrap/Button";
+import { getProductOfSeller, api_url} from "../../../../services/getAPI.js";
+import { useCookies } from 'react-cookie';
 
 const cx = classNames.bind(styles);
 
 export default function AllProduct() {
+  const [cookies] = useCookies([]);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const numberOfProducts = 0;
   const handleAddProduct = () => {
     // Lấy số lượng sản phẩm hiện tại
     const currentNumberOfProducts = numberOfProducts;
-
     // Thêm sản phẩm vào giỏ hàng
     numberOfProducts = currentNumberOfProducts + 1;
   };
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Thuốc trừ sâu Batas 25EC",
-      category: "Thuốc",
-      price: "1.000đ",
-      stock: 1,
-      sales: 0,
-    },
-  ]);
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getProduct = await getProductOfSeller(cookies.UserID);
+        setProducts(getProduct);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+    window.scrollTo(0, 0);
+  }, []);
 
   const updateProduct = (id) => {
     // Find product by id
@@ -59,14 +62,14 @@ export default function AllProduct() {
 
   return (
     <div className={cx("all-product")}>
-      <div className={cx("tabs")}>
+      {/* <div className={cx("tabs")}>
         <div className={cx("tab-item active")}>Tất cả</div>
         <div className={cx("tab-item")}>Đang hoạt động</div>
         <div className={cx("tab-item")}>Hết hàng 0</div>
         <div className={cx("tab-item")}>Chờ duyệt 0</div>
         <div className={cx("tab-item")}>Đã ẩn 0</div>
         <div className={cx("line")}></div>
-      </div>
+      </div> */}
 
       <div className={cx("tab-content")}>
         {/* <hr className={cx('card__separator')} /> */}
@@ -105,7 +108,7 @@ export default function AllProduct() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {products && products.map((product) => (
                   <tr key={product.id}>
                     <td className={cx("pro-check")}>
                       <div className={cx("product-check")}>
@@ -113,19 +116,19 @@ export default function AllProduct() {
                       </div>
                     </td>
                     <td className={cx("product")} id="">
-                      <img src="./assets/image/buy/tts.png" alt="" />
+                      <img src={api_url+'/images/product/'+product.ProductImageDefault} alt="" />
                       <div className={cx("product-de")}>
-                        <h5>{product.name}</h5>
+                        <h5>{product.ProductName}</h5>
                       </div>
                     </td>
                     <td className={cx("product-cate")} id="">
-                      <h5>{product.category}</h5>
+                      <h5>{product.CategoryName}</h5>
                     </td>
                     <td className={cx("product-pri")} id="">
-                      <h5>{product.price}</h5>
+                      <h5>{product.ProductPrice}</h5>
                     </td>
                     <td className={cx("product-warehouse")} id="">
-                      <h5>{product.stock}</h5>
+                      <h5>{product.ProductQuantity}</h5>
                     </td>
                     <td className={cx("product-sales")} id="">
                       <h5>{product.sales}</h5>
@@ -138,9 +141,9 @@ export default function AllProduct() {
                         Xóa
                       </button>
                       <button>Ẩn</button>
-                      <Button variant="primary" onClick={handleShow}>
+                      {/* <Button variant="primary" onClick={handleShow}>
                         Launch demo modal
-                      </Button>
+                      </Button> */}
                     </td>
                   </tr>
                 ))}
@@ -186,7 +189,6 @@ export default function AllProduct() {
         </div>
         <div className={cx("tab-pane")}>
           <div className={cx("header-tab")}>
-            <h2>0 Sản phẩm</h2>
             <div className={cx("grouphd1")}>
               <div className={cx("search-box")}>
                 <input

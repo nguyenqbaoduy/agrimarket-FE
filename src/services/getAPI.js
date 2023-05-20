@@ -1,4 +1,4 @@
-const api_url = "http://localhost:3000";
+export const api_url = "http://localhost:3000";
 function setCookie(name, value) {
   document.cookie = name + "=" + value + "; path=/";
 }
@@ -166,4 +166,15 @@ export async function register(user) {
     data: data,
     status: response.status
   };
+};
+export async function getProductOfSeller(userID) {
+  const headers = new Headers();
+  headers.append('seller', userID);
+  const requestOptions = {
+    method: 'GET',
+    headers: headers,
+  };
+  const response = await fetch(api_url + '/seller/product', requestOptions);
+  var data = await response.json();
+  return data.result;
 };

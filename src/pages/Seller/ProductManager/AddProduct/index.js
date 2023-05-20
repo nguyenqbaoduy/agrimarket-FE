@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "./AddProduct.module.scss";
 import classNames from "classnames/bind";
-
+import {api_url} from "../../../../services/getAPI.js";
 const cx = classNames.bind(styles);
 
 export default function AddProduct() {
@@ -14,17 +14,23 @@ export default function AddProduct() {
   const [expiry, setExpiry] = useState('');
   const [image, setImage] = useState(null);
   const [data, setData] = useState({});
-
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    // reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append('image', file);
+  
+    await fetch(api_url+'/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setImage(api_url+"/images/product/"+data.imageUrl);
+      })
+      .catch((error) => {
+        console.error('Error uploading image:', error);
+      });
   };
-
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -94,7 +100,6 @@ export default function AddProduct() {
             className={cx("name-box_input")}
             placeholder="Nhập vào..."
             type=""
-            text
             value={name}
             onChange={handleNameChange}
           />
@@ -114,7 +119,7 @@ export default function AddProduct() {
             minrows="9"
             maxrows="26"
             autosize="true"
-            maxlength="Infinity"
+            maxLength="Infinity"
             restrictiontype="input"
             max="Infinity"
             min="-Infinity"
@@ -131,7 +136,7 @@ export default function AddProduct() {
           </h4>
         </div>
         <div className={cx("edit-dvsx")}>
-          <input className={cx("dvsx-box_input")} placeholder="" type="" text value={manufacturer} onChange={handleManufacturerChange}/>
+          <input className={cx("dvsx-box_input")} placeholder="" type="" value={manufacturer} onChange={handleManufacturerChange}/>
         </div>
       </div>
       <div className={cx("edit-row")}>
@@ -145,7 +150,6 @@ export default function AddProduct() {
             className={cx("price-box_input")}
             placeholder="VND"
             type=""
-            text
             value={price}
             onChange={handlePriceChange}
           />
@@ -162,7 +166,6 @@ export default function AddProduct() {
             className={cx("name-box_input")}
             placeholder="Nhập vào..."
             type=""
-            text
             value={size}
             onChange={handleSizeChange}
           />
@@ -180,11 +183,11 @@ export default function AddProduct() {
       </div>
       <div className={cx("containerbtn")}>
         <div className={cx("btn-group")}>
+        <button className={cx("btn", "btn-save")} onClick={handleSave}>
+            <a href="#">Lưu</a>
+          </button>
           <button className={cx("btn", "btn-cancel")} onClick={handleCancel}>
             <a href="#">Hủy</a>
-          </button>
-          <button className={cx("btn", "btn-save")} onClick={handleSave}>
-            <a href="#">Lưu</a>
           </button>
         </div>
       </div>

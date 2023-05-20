@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { authentication, getCartDrawerContainer, searchProduct,authorization } from "../../../services/getAPI";
+import { api_url,authentication, getCartDrawerContainer, searchProduct,authorization } from "../../../services/getAPI";
 import { useNavigate } from "react-router-dom";
 import { HeaderContext } from '../../DefaultLayout';
 import classNames from "classnames/bind";
@@ -170,7 +170,7 @@ function Header() {
                                 <ul className={cx('header__cart-list-item')}>
                                     {cart.map((product) => (
                                         <li key={product.ProductID} className={cx('header__cart-item')}>
-                                            <img src={"/images/product/" + product.ProductImageDefault} className={cx('header__cart-item-img')} alt={product.ProductName} />
+                                            <img src={api_url+"/images/product/" + product.ProductImageDefault} className={cx('header__cart-item-img')} alt={product.ProductName} />
                                             <div className={cx('header__cart-item-info')}>
                                                 <div className={cx('header__cart-item-heading')}>
                                                     <h3 className={cx('header__cart-item-name')}>{product.ProductName}</h3>

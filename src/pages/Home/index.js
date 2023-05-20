@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllProduct, getAllCategory } from "../../services/getAPI.js";
+import { api_url, getAllProduct, getAllCategory } from "../../services/getAPI.js";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
@@ -21,7 +21,7 @@ const Home = () => {
         setProducts(getProduct.data);
         const category = await getAllCategory();
         setCategorys(category);
-        
+
       } catch (error) {
         console.log(error);
       }
@@ -77,14 +77,14 @@ const Home = () => {
 
       {/* Product Catalog */}
       <section id={cx('slider-product')}>
-        {categorys.map((cartegory, index) => (
+        {categorys.map((category, index) => (
           <div className={cx('product-catalog')} key={index}>
-            <a href="./cartegory/seeds.html" className={cx('collect-item')}>
+            <a href="./category/seeds.html" className={cx('collect-item')}>
               <div className={cx('product-catalog-img')}>
-                <img src={"/images/cartegory/" + cartegory.CategoryIcon} alt="1" />
+                <img src={api_url+"/images/category/" + category.CategoryIcon} alt="1" />
               </div>
               <div className={cx('product-catalog-text')}>
-                <p>{cartegory.CategoryName}</p>
+                <p>{category.CategoryName}</p>
               </div>
             </a>
           </div>
@@ -97,10 +97,10 @@ const Home = () => {
           {currentProducts.map((product, index) => (
             <div className={cx('product-item')} key={index}>
               <div className={cx('image')}>
-                <img className={cx('product-item-img')} src={"/images/product/" + product.ProductImageDefault} alt="" />
+                <img className={cx('product-item-img')} src={api_url+"/images/product/" + product.ProductImageDefault} alt="" />
               </div>
               <button
-                className={cx('fas fa-heart', { favorite: product.isFavorite })}
+                className={cx('fas', 'fa-heart', { favorite: product.isFavorite })}
                 style={{
                   color: product.isFavorite
                     ? 'var(--primary-color)'
@@ -114,16 +114,17 @@ const Home = () => {
                 </Link>
                 <p className={cx('product-copany-name')}>{product.UserID}</p>
                 <div className={cx('stars')}>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}
-                  ></i>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}></i>
-                  <i className={cx('fas fa-star')}></i> (5/5)
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+                  <i className={cx('fas', 'fa-star')}></i>
+                  (5/5)
                 </div>
                 <strong className={cx('price')}>
                   <span className={cx('mrp')}>{product.ProductPrice}</span>
@@ -135,38 +136,38 @@ const Home = () => {
             </div>
           ))}
         </div>
-                  {/* Pagination */}
-                  <ul className={cx("pagination")}>
+        {/* Pagination */}
+        <ul className={cx("pagination")}>
+          <li
+            className={cx("previous-page", { disable: currentPage == 1 })}
+            onClick={() => {
+              if (currentPage > 1) {
+                paginate(currentPage - 1);
+              }
+            }}
+          >
+            Prev
+          </li>
+          {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => i + 1).map((number) => (
             <li
-              className={cx("previous-page", { disable: currentPage == 1 })}
-              onClick={() => {
-                if (currentPage > 1) {
-                  paginate(currentPage - 1);
-                }
-              }}
+              key={number}
+              className={cx("pagination-item", { active: number === currentPage })}
+              onClick={() => paginate(number)}
             >
-              Prev
+              {number}
             </li>
-            {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => i + 1).map((number) => (
-              <li
-                key={number}
-                className={cx("pagination-item", { active: number === currentPage })}
-                onClick={() => paginate(number)}
-              >
-                {number}
-              </li>
-            ))}
-            <li
-              className={cx("next-page", { disable: currentPage === Math.ceil(products.length / productsPerPage) })}
-              onClick={() => {
-                if (currentPage < Math.ceil(products.length / productsPerPage)) {
-                  paginate(currentPage + 1);
-                }
-              }}
-            >
-              Next
-            </li>
-          </ul>
+          ))}
+          <li
+            className={cx("next-page", { disable: currentPage === Math.ceil(products.length / productsPerPage) })}
+            onClick={() => {
+              if (currentPage < Math.ceil(products.length / productsPerPage)) {
+                paginate(currentPage + 1);
+              }
+            }}
+          >
+            Next
+          </li>
+        </ul>
       </div>
     </div>
   );

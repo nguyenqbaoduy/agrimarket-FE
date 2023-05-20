@@ -219,8 +219,6 @@ input[type="file"]{
 .containerbtn{
     height: auto;
 	width: 100%;
-	background: #42c3622b;
-    display: flex;
     margin-top: 15px;
 }
 .btn-group{
@@ -228,16 +226,15 @@ input[type="file"]{
     margin-bottom: 30px;
     margin-left: 10px;
     display: flex;
-    margin-left: 800px;
+    margin-left: 40px;
 }
 .btn-cancel{
     width: 150px;
-    background: #00AC2C;
+    background: #9c0a0a;
     border-radius: 5px;
     justify-content: center;
     height: 40px;
     transition: 0.3s linear;
-    margin-right: 20px;
     border: 1px solid #2828285c;
 }
 .btn-cancel:hover{
@@ -250,9 +247,11 @@ input[type="file"]{
 }
 .btn-save{
     width: 150px;
+    background: #00AC2C;
     border-radius: 5px;
     justify-content: center;
     height: 40px;
+    margin-right: 20px;
     transition: 0.3s linear;
     border: 1px solid #2828285c;
 }

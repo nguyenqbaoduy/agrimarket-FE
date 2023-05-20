@@ -9,6 +9,10 @@ import index from '../pages/Seller/ProductManager'
 import AllProduct from '../pages/Seller/ProductManager/AllProduct'
 import AddProduct from '../pages/Seller/ProductManager/AddProduct'
 import Cart from '../pages/Cart'
+import News from '../pages/News'
+import SingleNews from '../pages/News/singleNews'
+
+
 //-----------Layout--------------------------------
 import Seller from '../Layout/Seller'
 import DefaultLayout from '../Layout/DefaultLayout';
@@ -19,6 +23,9 @@ const publicPath = [
     { path: '/Login', component: Login, layout: null },
     { path: '/Product/:ProductID', component: ProductDetail, layout: DefaultLayout },
     { path: '/Cart', component: Cart, layout: DefaultLayout },
+    { path: '/News', component: News, layout: DefaultLayout },
+    { path: '/News/:NewsID', component: SingleNews, layout: DefaultLayout },
+
     { path: '/Seller', component: DashBoard, layout: Seller },
     { path: '/Seller/AddProduct', component: AddProduct, layout: Seller },
     { path: '/Seller/AllProduct', component: AllProduct, layout: Seller },
