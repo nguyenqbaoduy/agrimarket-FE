@@ -1,11 +1,10 @@
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import ForgotPassword from '../pages/Login/ForgotPassword'
 import ProductDetail from '../pages/ProductDetail'
 import DashBoard from '../pages/Seller/DashBoard'
 import DashBoardAdmin from '../pages/Admin/DashBoardAdmin'
 import ManagerAccount from '../pages/Admin/ManagerAccount'
-
-import index from '../pages/Seller/ProductManager'
 import AllProduct from '../pages/Seller/ProductManager/AllProduct'
 import AddProduct from '../pages/Seller/ProductManager/AddProduct'
 import Cart from '../pages/Cart'
@@ -21,6 +20,8 @@ import Admin from '../Layout/Admin';
 const publicPath = [
     { path: '/', component: Home, layout: DefaultLayout },
     { path: '/Login', component: Login, layout: null },
+    { path: '/Forgot', component: ForgotPassword, layout: null },
+
     { path: '/Product/:ProductID', component: ProductDetail, layout: DefaultLayout },
     { path: '/Cart', component: Cart, layout: DefaultLayout },
     { path: '/News', component: News, layout: DefaultLayout },

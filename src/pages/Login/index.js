@@ -6,7 +6,7 @@ import classNames from "classnames/bind";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 const Login = () => {
     const [cookies, setCookie] = useCookies(['token']);
@@ -88,9 +88,9 @@ const Login = () => {
                     <button className={cx('submit')} type="button" id={cx("btn-login")} onClick={sendLogin}>
                         Đăng nhập
                     </button>
-                    <a href="./forgot.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/forgot" style={{ textDecoration: 'none' }}>
                         <p className={cx('forgot-pass')}>Quên mật khẩu ?</p>
-                    </a>
+                    </Link>
                     {/* <div className={cx('social-media')}>
                     <ul>
                         <li>
