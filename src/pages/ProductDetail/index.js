@@ -19,7 +19,7 @@ const ProductDetail = () => {
     const [errorOccurred, setErrorOccurred] = useState(false);
     const params = useParams();
     const [quantity, setQuantity] = useState(1);
-    const [cookies, setCookie, removeCookie] = useCookies([]);
+    const [cookies] = useCookies([]);
     const { triggerHeaderReload } = useContext(HeaderContext);
 
     useEffect(() => {

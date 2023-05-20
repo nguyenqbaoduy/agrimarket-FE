@@ -15,19 +15,20 @@ export default function AllProduct() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const numberOfProducts = 0;
-  const handleAddProduct = () => {
-    // Lấy số lượng sản phẩm hiện tại
-    const currentNumberOfProducts = numberOfProducts;
-    // Thêm sản phẩm vào giỏ hàng
-    numberOfProducts = currentNumberOfProducts + 1;
-  };
+  const [numberOfProducts,setNumberOfProducts] = useState();
+  // const handleAddProduct = () => {
+  //   // Lấy số lượng sản phẩm hiện tại
+  //   const currentNumberOfProducts = numberOfProducts;
+  //   // Thêm sản phẩm vào giỏ hàng
+  //   numberOfProducts = currentNumberOfProducts + 1;
+  // };
   const [products, setProducts] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       try {
         const getProduct = await getProductOfSeller(cookies.UserID);
         setProducts(getProduct);
+        setNumberOfProducts(getProduct.length)
       } catch (error) {
         console.log(error);
       }
@@ -79,7 +80,7 @@ export default function AllProduct() {
             <div className={cx("grouphd")}>
               <button
                 className={cx("btn", "btn-add")}
-                onclick={handleAddProduct}
+                // onclick={handleAddProduct}
               >
                 <Link to={"/Seller/AddProduct"}>Thêm 1 sản phẩm mới</Link>
               </button>

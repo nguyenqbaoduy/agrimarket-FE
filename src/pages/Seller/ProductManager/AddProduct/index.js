@@ -2,34 +2,47 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "./AddProduct.module.scss";
 import classNames from "classnames/bind";
-import {api_url} from "../../../../services/getAPI.js";
+import { api_url, addProduct, getAllCategory } from "../../../../services/getAPI.js";
+import { formattedDateTime } from "../../../../services/getDate";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 export default function AddProduct() {
+  const navigate = useNavigate();
+  const [cookies] = useCookies(['accessToken']);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [manufacturer, setManufacturer] = useState('');
   const [price, setPrice] = useState('');
-  const [size, setSize] = useState('');
-  const [expiry, setExpiry] = useState('');
+  const [quantity, setQuantity] = useState('');
   const [image, setImage] = useState(null);
-  const [data, setData] = useState({});
+  const [fileImage, setFileImage] = useState();
+  const [categorys, setCategorys] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getCategory = await getAllCategory();
+        setCategorys(getCategory);
+
+      } catch (error) {
+        console.log(error);
+      }
+      window.scrollTo(0, 0);
+    };
+    fetchData();
+  }, []);
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
-  
-    await fetch(api_url+'/upload', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setImage(api_url+"/images/product/"+data.imageUrl);
-      })
-      .catch((error) => {
-        console.error('Error uploading image:', error);
-      });
+    setFileImage(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setImage(reader.result);
+    };
   };
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -39,32 +52,89 @@ export default function AddProduct() {
     setDescription(e.target.value);
   };
 
-  const handleManufacturerChange = (e) => {
-    setManufacturer(e.target.value);
-  };
-
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
   };
 
-  const handleSizeChange = (e) => {
-    setSize(e.target.value);
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
   };
-
-  const handleExpiryChange = (e) => {
-    setExpiry(e.target.value);
+  const handleOptionChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedCategoryId(selectedValue);
   };
+  const handleSave = async () => {
+    const dataProduct = {
+      ProductName: name,
+      ProductPrice: price,
+      ProductDescription: description,
+      ProductActive: 1,
+      ProductQuantity: quantity,
+      ProductCreatedAt: formattedDateTime,
+      UserID: cookies.UserID,
+      CategoryID: selectedCategoryId,
+      ProductImageDefault: "tmp"
+    }
+    if (!(Object.values(dataProduct).some(value => value === ''))) {
+      const formData = new FormData();
+      formData.append('image', fileImage);
+      const header = new Headers();
+      header.append('authorization', cookies.accessToken);
+      await fetch(api_url + '/uploadProduct', {
+        method: 'POST',
+        body: formData,
+        headers: header,
+      }).then((response) =>
+        response.json()
+      )
+        .then(async (data) => {
+          dataProduct.ProductImageDefault = data.imageUrl
+          console.log(data.imageUrl)
+          const req = await addProduct(cookies.accessToken, dataProduct);
+          if (req === 200) {
+            clear();
+            toast("Thêm thành công")
 
-  const handleSave = () => {
-    
+            setTimeout(() => {
+              navigate("/Seller/AllProduct")
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          toast("Thêm ảnh thất bại")
+        });
+    }
+    else {
+      toast("Thêm thất bại")
+    }
   };
-
+  function clear() {
+    setName('');
+    setDescription('');
+    setPrice('');
+    setQuantity('');
+    setImage(null);
+    setFileImage(null);
+    setSelectedCategoryId('')
+  }
   const handleCancel = () => {
-    setData({});
+    clear();
   };
 
   return (
     <div className={cx("add-product")}>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
       <div className={cx("info-title")}>Thông tin cơ bản</div>
       <div className={cx("edit-row")}>
         <div className={cx("tiltle-product")}>
@@ -74,7 +144,7 @@ export default function AddProduct() {
         </div>
         <div className={cx("info-right")}>
           <figure className={cx("image-user")}>
-            {image && <img src={image} alt="uploaded image" id="choosen-image"/>}
+            {image && <img src={image} alt="uploaded image" id="choosen-image" />}
             <div className={cx("img-content")}>
               <div className={cx("icon")}>
                 <i className={cx("fas", "fa-cloud-upload-alt")}></i>
@@ -83,7 +153,7 @@ export default function AddProduct() {
             </div>
           </figure>
           <figcaption id="file-name"></figcaption>
-          <input type="file" id="upload-button" accept="image/*" name="image" onChange={handleImageChange}/>
+          <input type="file" id="upload-button" accept="image/*" name="image" onChange={handleImageChange} />
           <label htmlFor="upload-button">
             <i className={cx("fas", "fa-upload")}></i> &nbsp; Chọn ảnh
           </label>
@@ -132,16 +202,6 @@ export default function AddProduct() {
       <div className={cx("edit-row")}>
         <div className={cx("tiltle-product")}>
           <h4>
-            <span>*</span>Đơn vị sản xuất
-          </h4>
-        </div>
-        <div className={cx("edit-dvsx")}>
-          <input className={cx("dvsx-box_input")} placeholder="" type="" value={manufacturer} onChange={handleManufacturerChange}/>
-        </div>
-      </div>
-      <div className={cx("edit-row")}>
-        <div className={cx("tiltle-product")}>
-          <h4>
             <span>*</span>Giá
           </h4>
         </div>
@@ -158,32 +218,39 @@ export default function AddProduct() {
       <div className={cx("edit-row")}>
         <div className={cx("tiltle-product")}>
           <h4>
-            <span>*</span>Size
+            <span>*</span>Số lượng
           </h4>
         </div>
-        <div className={cx("edit-size")}>
+        <div className={cx("edit-price")}>
           <input
-            className={cx("name-box_input")}
-            placeholder="Nhập vào..."
+            className={cx("price-box_input")}
+            placeholder=""
             type=""
-            value={size}
-            onChange={handleSizeChange}
+            value={quantity}
+            onChange={handleQuantityChange}
           />
         </div>
       </div>
       <div className={cx("edit-row")}>
         <div className={cx("tiltle-product")}>
           <h4>
-            <span>*</span>Hạn sử dụng đến
+            <span>*</span>Loại sản phẩm
           </h4>
         </div>
-        <div className={cx("edit-expiry")}>
-          <input className={cx("form-control")} type="date" value={expiry} onChange={handleExpiryChange}/>
+        <div className={cx("edit-price")}>
+          <select value={selectedCategoryId} onChange={handleOptionChange} className={cx("price-box_input")}>
+            <option value="">-- Chọn một tùy chọn --</option>
+            {categorys && categorys.map(category => (
+              <option key={category.CategoryID} value={category.CategoryID}>
+                {category.CategoryName}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div className={cx("containerbtn")}>
         <div className={cx("btn-group")}>
-        <button className={cx("btn", "btn-save")} onClick={handleSave}>
+          <button className={cx("btn", "btn-save")} onClick={handleSave}>
             <a href="#">Lưu</a>
           </button>
           <button className={cx("btn", "btn-cancel")} onClick={handleCancel}>
@@ -193,5 +260,5 @@ export default function AddProduct() {
       </div>
     </div>
   );
-  
+
 }

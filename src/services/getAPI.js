@@ -178,3 +178,14 @@ export async function getProductOfSeller(userID) {
   var data = await response.json();
   return data.result;
 };
+export async function addProduct(accessToken, data) {
+  const response = await fetch(api_url + '/product/add', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
