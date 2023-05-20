@@ -30,12 +30,6 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
   const toggleFavorite = (productId) => {
     setProducts((prevProducts) => {
       return prevProducts.map((product) => {
@@ -53,6 +47,14 @@ const Home = () => {
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   }
+  // Pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  
   return (
     <div>
       <div className={cx('banner-container')}>
@@ -79,14 +81,14 @@ const Home = () => {
       <section id={cx('slider-product')}>
         {categorys.map((category, index) => (
           <div className={cx('product-catalog')} key={index}>
-            <a href="./category/seeds.html" className={cx('collect-item')}>
+            <Link to={`/Category/${category.CategoryID}`} className={cx('collect-item')}>
               <div className={cx('product-catalog-img')}>
                 <img src={api_url+"/images/category/" + category.CategoryIcon} alt="1" />
               </div>
               <div className={cx('product-catalog-text')}>
                 <p>{category.CategoryName}</p>
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </section>
@@ -112,7 +114,7 @@ const Home = () => {
                 <Link to={`/Product/${product.ProductID}`}>
                   <h3 className={cx('product-title')}>{product.ProductName}</h3>
                 </Link>
-                <p className={cx('product-copany-name')}>{product.UserID}</p>
+                {/* <p className={cx('product-copany-name')}>{product.UserID}</p> */}
                 <div className={cx('stars')}>
                   <i className={cx('fas', 'fa-star')}></i>
                   <i className={cx('fas', 'fa-star')}></i>
@@ -130,9 +132,9 @@ const Home = () => {
                   <span className={cx('mrp')}>{product.ProductPrice}</span>
                 </strong>
               </div>
-              <div className={cx('product-volume')}>
+              {/* <div className={cx('product-volume')}>
                 <p>480 ml</p>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

@@ -68,6 +68,14 @@ export async function getAllProduct() {
     status: response.status
   };
 };
+export async function getCatalog(categoryId) {
+  const response = await fetch(api_url + `/product/category/${categoryId}`);
+  var data = await response.json();
+  return {
+    data: data.result,
+    status: response.status
+  };
+};
 export async function searchProduct(search) {
   const response = await fetch(api_url + '/product/search/?ProductName='+search)
   var data = await response.json();
