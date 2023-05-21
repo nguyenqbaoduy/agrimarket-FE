@@ -111,7 +111,7 @@ const Home = () => {
                 onClick={() => toggleFavorite(product.ProductID)}
               ></button>
               <div className={cx('info')}>
-                <Link to={`/Product/${product.ProductID}`}>
+                <Link className={cx('product-link')} to={`/Product/${product.ProductID}`}>
                   <h3 className={cx('product-title')}>{product.ProductName}</h3>
                 </Link>
                 {/* <p className={cx('product-copany-name')}>{product.UserID}</p> */}

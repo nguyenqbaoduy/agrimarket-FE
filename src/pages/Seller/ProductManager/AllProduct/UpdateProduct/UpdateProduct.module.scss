@@ -2,16 +2,20 @@
     width: 100%;
 }
 
-.modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    color: var(--bs-modal-color);
-    pointer-events: auto;
-    background-color: var(--bs-modal-bg);
-    background-clip: padding-box;
-    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
-    border-radius: var(--bs-modal-border-radius);
-    outline: 0;
+.btn-update{
+    --bs-btn-color: black !important; 
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-padding-x: 10px !important;
+    --bs-btn-padding-y: 2px !important;
+    --bs-btn-font-size: 12px !important;
+    --bs-btn-hover-bg: none !important;
+    --bs-btn-hover-border-color: none !important;
+    --bs-btn-border-width: none !important;
+    --bs-btn-hover-color: none !important;
+}
+
+.btn-update:hover{
+    color: none !important;
+    background-color: #0d6efd !important;
+    
 }

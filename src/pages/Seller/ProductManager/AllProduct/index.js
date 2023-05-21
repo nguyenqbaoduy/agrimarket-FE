@@ -84,7 +84,7 @@ export default function AllProduct() {
                 className={cx("btn", "btn-add")}
                 // onclick={handleAddProduct}
               >
-                <Link to={"/Seller/AddProduct"}>Thêm 1 sản phẩm mới</Link>
+                <Link to={"/Seller/AddProduct"} className={cx('btn-add-product')}>Thêm 1 sản phẩm mới</Link>
               </button>
               <div className={cx("search-box")}>
                 <input
@@ -137,14 +137,11 @@ export default function AllProduct() {
                       <h5>{product.sales}</h5>
                     </td>
                     <td className={cx("product-operation")} id="">
-                      <button onClick={() => updateProduct(product.id)}>
-                        Cập nhật
-                      </button>
-                      <button onClick={() => deleteProduct(product.id)}>
+                      <UpdateProduct />
+                      <button className={cx('btn-delete')} onClick={() => deleteProduct(product.id)}>
                         Xóa
                       </button>
                       <button>Ẩn</button>
-                      <UpdateProduct />
                     </td>
                   </tr>
                 ))}
@@ -154,7 +151,7 @@ export default function AllProduct() {
           <div className={cx("containernp")}>
             <div className={cx("pagination")}>
               <button className={cx("btn1")} onclick="backBtn()">
-                <img src="./assets/image/icon/448-arrow.png" />
+              <i class="fas fa-arrow-left"></i>
                 Prev
               </button>
               <ul>
@@ -183,7 +180,7 @@ export default function AllProduct() {
               </ul>
               <button className={cx("btn2")} onclick="nextBtn()">
                 Next
-                <img src="./assets/image/icon/448-arrow.png" />
+                <i class="fas fa-arrow-right"></i>
               </button>
             </div>
           </div>
