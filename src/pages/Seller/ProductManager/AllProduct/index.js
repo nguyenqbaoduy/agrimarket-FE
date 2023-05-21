@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 // import Button from "react-bootstrap/Button";
 import { getProductOfSeller, api_url} from "../../../../services/getAPI.js";
 import { useCookies } from 'react-cookie';
+import UpdateProduct from "./UpdateProduct";
+
 
 const cx = classNames.bind(styles);
 
@@ -142,9 +144,7 @@ export default function AllProduct() {
                         Xóa
                       </button>
                       <button>Ẩn</button>
-                      {/* <Button variant="primary" onClick={handleShow}>
-                        Launch demo modal
-                      </Button> */}
+                      <UpdateProduct />
                     </td>
                   </tr>
                 ))}
@@ -288,5 +288,6 @@ export default function AllProduct() {
         </div>
       </div>
     </div>
+    
   );
 }
