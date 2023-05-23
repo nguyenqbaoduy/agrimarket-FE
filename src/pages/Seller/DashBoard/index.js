@@ -40,7 +40,7 @@ function DashBoard() {
                 <h2 className={cx('card-parameter')}>1500</h2>
                 <p className={cx('card-titlle')}>Traffic</p>
               </div>
-              <i className={cx("bx bx-trending-up icon")} ></i>
+              <i className={cx("bx", "bx-trending-up", "icon")} ></i>
             </div>
             <span className={cx("progress")}  data-value="40%"></span>
             <span className={cx("label")} >40%</span>
@@ -51,7 +51,7 @@ function DashBoard() {
                 <h2 className={cx('card-parameter')}>234</h2>
                 <p className={cx('card-titlle')}>Sales</p>
               </div>
-              <i className={cx("bx bx-trending-down icon down")} ></i>
+              <i className={cx("bx", "bx-trending-down", "icon", "down")} ></i>
             </div>
             <span className={cx("progress")}  data-value="60%"></span>
             <span className={cx("label")} >60%</span>
@@ -62,7 +62,7 @@ function DashBoard() {
                 <h2 className={cx('card-parameter')}>465</h2>
                 <p className={cx('card-titlle')}>Pageviews</p>
               </div>
-              <i className={cx("bx bx-trending-up icon")} ></i>
+              <i className={cx("bx", "bx-trending-up", "icon")} ></i>
             </div>
             <span className={cx("progress")}  data-value="40%"></span>
             <span className={cx("label")} >30%</span>
@@ -73,7 +73,7 @@ function DashBoard() {
                 <h2 className={cx('card-parameter')}>235</h2>
                 <p className={cx('card-titlle')}>Visitors</p>
               </div>
-              <i className={cx("bx bx-trending-up icon")} ></i>
+              <i className={cx("bx", "bx-trending-up", "icon")} ></i>
             </div>
             <span className={cx("progress")}  data-value="80%"></span>
             <span className={cx("label")} >80%</span>

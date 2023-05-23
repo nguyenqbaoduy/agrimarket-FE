@@ -250,11 +250,11 @@ export default function AddProduct() {
       </div>
       <div className={cx("containerbtn")}>
         <div className={cx("btn-group")}>
-          <button className={cx("btn", "btn-save")} onClick={handleSave}>
-            <a href="#">Lưu</a>
-          </button>
           <button className={cx("btn", "btn-cancel")} onClick={handleCancel}>
             <a href="#">Hủy</a>
+          </button>
+          <button className={cx("btn", "btn-save")} onClick={handleSave}>
+            <a href="#">Lưu</a>
           </button>
         </div>
       </div>
