@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { api_url, getAllProduct, getAllCategory } from "../../services/getAPI.js";
+import { api_url, getAllProduct, getAllCategory, getFavorite } from "../../services/getAPI.js";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
@@ -13,12 +13,22 @@ const Home = () => {
   const [categorys, setCategorys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10); // Số lượng product hiện thị trên mỗi trang
-  const [cookies] = useCookies(['accessToken']);
+  const [cookies] = useCookies([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const getProduct = await getAllProduct();
-        setProducts(getProduct.data);
+        var getFavorites = null;
+        var productIDs = [];
+        if (cookies.accessToken != null) {
+          getFavorites = await getFavorite(cookies.accessToken);
+          productIDs = getFavorites.map((favorite) => favorite.ProductID);
+        }
+        const updatedProducts = getProduct.data.map(product => ({
+          ...product,
+          isFavorite: productIDs.includes(product.ProductID),
+        }));
+        setProducts(updatedProducts);
         const category = await getAllCategory();
         setCategorys(category);
 
@@ -30,19 +40,28 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const toggleFavorite = (productId) => {
+  const toggleFavorite = async (productId) => {
     setProducts((prevProducts) => {
       return prevProducts.map((product) => {
         if (product.ProductID === productId) {
-          return {
+          const updatedProduct = {
             ...product,
             isFavorite: !product.isFavorite
           };
+
+          // if (updatedProduct.isFavorite) {
+          //   addFavorite(productId);
+          // } else {
+          //   removeFavorite(productId);
+          // }
+
+          return updatedProduct;
         }
         return product;
       });
     });
   };
+
   // Khi F5 tự động scroll lên đầu
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
@@ -54,7 +73,7 @@ const Home = () => {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  
+
   return (
     <div>
       <div className={cx('banner-container')}>
@@ -83,7 +102,7 @@ const Home = () => {
           <div className={cx('product-catalog')} key={index}>
             <Link to={`/Category/${category.CategoryID}`} className={cx('collect-item')}>
               <div className={cx('product-catalog-img')}>
-                <img src={api_url+"/images/category/" + category.CategoryIcon} alt="1" />
+                <img src={api_url + "/images/category/" + category.CategoryIcon} alt="1" />
               </div>
               <div className={cx('product-catalog-text')}>
                 <p>{category.CategoryName}</p>
@@ -99,7 +118,7 @@ const Home = () => {
           {currentProducts.map((product, index) => (
             <div className={cx('product-item')} key={index}>
               <div className={cx('image')}>
-                <img className={cx('product-item-img')} src={api_url+"/images/product/" + product.ProductImageDefault} alt="" />
+                <img className={cx('product-item-img')} src={api_url + "/images/product/" + product.ProductImageDefault} alt="" />
               </div>
               <button
                 className={cx('fas', 'fa-heart', { favorite: product.isFavorite })}

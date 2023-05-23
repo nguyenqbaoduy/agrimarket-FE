@@ -27,11 +27,11 @@ function Header() {
             try {
                 // Kiểm tra đã login chưa
                 const getUser = await authentication(cookies.accessToken, cookies.refreshToken);
-                if (getUser.status == '200') {
+                if (getUser.status === 200) {
                     setUserName(getUser.fullname)
                     setIsLoggedIn(true)
                     // Kiểm tra có sản phẩm trong giỏ hàng không
-                    const getCartItem = await getCartDrawerContainer(cookies.accessToken);
+                    const getCartItem = await getCartDrawerContainer(getUser.accessToken);
                     setCart(getCartItem);
                     if (getCartItem != null)
                         setHasCart(true);
@@ -75,7 +75,6 @@ function Header() {
         else{
             setSearchTerm(value);
             // Gửi yêu cầu GET tới API với từ khóa tìm kiếm
-            console.log(searchTerm)
             const data = await searchProduct(searchTerm)
             // // Xử lý dữ liệu trả về từ API
             setSearchResults(data);
@@ -155,7 +154,7 @@ function Header() {
                     })}>
                         <i className={cx('header__cart-icon', 'fas', 'fa-cart-plus')}></i><span className={cx('cart-title')}>Giỏ hàng</span>
                         <div className={cx('header__cart-count')}> {cart == null ? 0 : cart.length}</div>
-                        {cart === null ? (
+                        {isLoggedIn == false || cart === null ? (
                             /* Chưa có sản phẩm */
                             <div className={cx('header__cart-list', 'no-cart')}>
                                 <p className={cx('header__no-cart-text')}>Chưa có sản phẩm</p>

@@ -89,7 +89,6 @@ export default function AddProduct() {
       )
         .then(async (data) => {
           dataProduct.ProductImageDefault = data.imageUrl
-          console.log(data.imageUrl)
           const req = await addProduct(cookies.accessToken, dataProduct);
           if (req === 200) {
             clear();
