@@ -8,6 +8,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { updateInfoProduct, getDetailProduct, getAllCategory } from "../../../../../services/getAPI";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
+import { async } from "q";
 
 
 const cx = classNames.bind(styles);
@@ -30,9 +31,9 @@ export default function UpdateProduct({ ProductID, UserID }) {
       CategoryID: selectedCategoryId,
     });
   };
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     formData.ProductDescription = formData.ProductDescription.replace(/\n/g, "");
-    var status = updateInfoProduct(cookies.accessToken, formData)
+    var status = await updateInfoProduct(cookies.accessToken, formData)
     if (status === 200)
       toast("Cập nhật thành công")
     else
@@ -102,7 +103,7 @@ export default function UpdateProduct({ ProductID, UserID }) {
               <Form.Label>Phân loại hàng</Form.Label>
               <Dropdown>
                 <div className="menu-active">
-                  <select value={selectedCategoryId} onChange={handleOptionChange} className={cx("price-box_input")}>
+                  <select value={formData.CategoryID} onChange={handleOptionChange} className={cx("price-box_input")}>
                     <option value="">-- Chọn một tùy chọn --</option>
                     {categorys && categorys.map(category => (
                       <option key={category.CategoryID} value={category.CategoryID}>
