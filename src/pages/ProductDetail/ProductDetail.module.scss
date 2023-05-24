@@ -276,7 +276,6 @@ header {
 .content_container-top {
   background-color: var(--white-color);
   width: 100%;
-  border: 1px solid red;
   display: flex;
   margin-top: 40px;
 }
@@ -288,7 +287,6 @@ header {
   padding-right: 20px;
   background: #ffffff;
   height: auto;
-  border: 1px solid blue;
 }
 
 .content-left img {
@@ -356,7 +354,6 @@ header {
   width: 48%;
   padding-right: 40px;
   height: auto;
-  border: 1px solid yellow;
 
   .content-name {
     text-transform: uppercase;
