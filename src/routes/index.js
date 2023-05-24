@@ -9,9 +9,11 @@ import DashBoardAdmin from '../pages/Admin/DashBoardAdmin'
 import ManagerAccount from '../pages/Admin/ManagerAccount'
 import AllProduct from '../pages/Seller/ProductManager/AllProduct'
 import AddProduct from '../pages/Seller/ProductManager/AddProduct'
+import AddAccount from '../pages/Admin/AddAccount'
 import Cart from '../pages/Cart'
 import News from '../pages/News'
 import SingleNews from '../pages/News/singleNews'
+import Order from '../pages/User/Order'
 
 
 //-----------Layout--------------------------------
@@ -26,6 +28,7 @@ const publicPath = [
     { path: '/Category/:CategoryID', component: Category, layout: DefaultLayout },
     { path: '/Product/:ProductID', component: ProductDetail, layout: DefaultLayout },
     { path: '/Cart', component: Cart, layout: DefaultLayout },
+    { path: '/Order', component: Order, layout: DefaultLayout },
     { path: '/Category/:CategoryID', component: Category, layout: DefaultLayout },
     { path: '/Checkout', component: Checkout, layout: DefaultLayout },
     { path: '/News', component: News, layout: DefaultLayout },
@@ -35,6 +38,7 @@ const publicPath = [
     { path: '/Seller/AddProduct', component: AddProduct, layout: Seller },
     { path: '/Seller/AllProduct', component: AllProduct, layout: Seller },
     { path: '/Admin', component: DashBoardAdmin, layout: Admin },
+    { path: '/Admin/AddAcount', component: AddAccount, layout: Admin },
     { path: '/ManagerAccount', component: ManagerAccount, layout: Admin },
 ]
 const privatePath = [

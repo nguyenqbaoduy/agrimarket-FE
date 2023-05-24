@@ -138,9 +138,9 @@ function Header() {
                                 <Link className={cx('sub-menu-link')} to={`/Info`}>
                                     <p>Tài khoản của tôi</p>
                                 </Link>
-                                <a className={cx('sub-menu-link')}>
+                                <Link to={"/Order"} className={cx('sub-menu-link')}>
                                     <p>Đơn mua</p>
-                                </a>
+                                </Link>
                                 <a className={cx('sub-menu-link')}
                                     onClick={toogleLogOut}
                                 >

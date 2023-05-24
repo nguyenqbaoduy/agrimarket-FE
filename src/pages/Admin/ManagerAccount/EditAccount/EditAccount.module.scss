@@ -1,0 +1,26 @@
+.modal-product{
+    width: 100%;
+}
+
+.btn-edit{
+    --bs-btn-color: black !important; 
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-padding-x: 10px !important;
+    --bs-btn-padding-y: 2px !important;
+    --bs-btn-font-size: 12px !important;
+    --bs-btn-hover-bg: none !important;
+    --bs-btn-hover-border-color: none !important;
+    --bs-btn-border-width: none !important;
+    --bs-btn-hover-color: none !important;
+    height: 32px !important;
+    font-size: 16px !important;
+    color: #fff !important;
+    transition: 0.3s linear !important;
+}
+
+.btn-edit:hover{
+    transform: translateY(2px);
+    color: none !important;
+    background-color: #0d6efd !important;
+    
+}

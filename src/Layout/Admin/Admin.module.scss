@@ -11,6 +11,8 @@
 	--light-blue: #D0E4FF;
 	--dark-blue: #0C5FCD;
 	--red: #FC3B56;
+	--header-height: 60px;
+	--body-height: 1px;
 }
 
 html {
@@ -25,6 +27,7 @@ html {
 
 .wrapper {
 	max-width: 100%;
+	margin-top: calc(var(--header-height) + var(--body-height))
 }
 
 *,
@@ -126,7 +129,7 @@ body {
 /*Nav*/
 .content-nav {
 	position: relative;
-	width: calc(100% - 100px);
+	width: calc(100% - 200px);
 	left: 100px;
 }
 
@@ -221,10 +224,8 @@ nav .profile .profile-link a:hover {
 /* End header */
 
 .containerds {
-	height: auto;
-	width: 100%;
-	background: #f5f5f5;
-	display: flex;
+	display: grid;
+    grid-template-columns: repeat(1, 1fr 4fr);
 }
 
 /*SIDEBAR*/
