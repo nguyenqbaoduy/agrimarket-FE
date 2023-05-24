@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 // import Modal from 'react-modal';
 // import Button from "react-bootstrap/Button";
-import { getProductOfSeller, api_url} from "../../../../services/getAPI.js";
+import { getProductOfSeller, api_url, deleteProduct, changeActive } from "../../../../services/getAPI.js";
 import { useCookies } from 'react-cookie';
 import UpdateProduct from "./UpdateProduct";
 
@@ -13,24 +13,22 @@ import UpdateProduct from "./UpdateProduct";
 const cx = classNames.bind(styles);
 
 export default function AllProduct() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(5); // Số lượng product hiện thị trên mỗi trang
   const [cookies] = useCookies([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [numberOfProducts,setNumberOfProducts] = useState();
-  // const handleAddProduct = () => {
-  //   // Lấy số lượng sản phẩm hiện tại
-  //   const currentNumberOfProducts = numberOfProducts;
-  //   // Thêm sản phẩm vào giỏ hàng
-  //   numberOfProducts = currentNumberOfProducts + 1;
-  // };
+  const [numberOfProducts, setNumberOfProducts] = useState();
   const [products, setProducts] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       try {
         const getProduct = await getProductOfSeller(cookies.UserID);
-        setProducts(getProduct);
-        setNumberOfProducts(getProduct.length)
+        if (getProduct) {
+          setProducts(getProduct);
+          setNumberOfProducts(getProduct.length)
+        }
       } catch (error) {
         console.log(error);
       }
@@ -55,12 +53,40 @@ export default function AllProduct() {
   };
 
   // Function to delete product
-  const deleteProduct = (id) => {
-    // Filter out product with matching id
-    const updatedProducts = products.filter((product) => product.id !== id);
+  const btnDeleteProduct = async (ProductID, FileName) => {
+    // Remove product with matching ProductID,FileName
+    const updatedProducts = products.filter(item => item.ProductID !== ProductID);
 
     // Update state with new products array
     setProducts(updatedProducts);
+    var data = {
+      ProductID: ProductID,
+      FileName: FileName
+    }
+    await deleteProduct(data);
+  };
+  // Pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const toggleProductActive = (productId) => {
+    const updatedProducts = [...products];
+    const productIndex = products.findIndex((product) => product.ProductID === productId);
+    if (productIndex !== -1) {
+      updatedProducts[productIndex].ProductActive = updatedProducts[productIndex].ProductActive === 1 ? 0 : 1;
+      var data = {
+        ProductActive: updatedProducts[productIndex].ProductActive,
+        ProductID: productId,
+        UserID: cookies.UserID,
+      }
+      changeActive(data)
+    }
+
+    // Update the state with the modified products array
+    setProducts(updatedProducts)
   };
 
   return (
@@ -82,7 +108,7 @@ export default function AllProduct() {
             <div className={cx("grouphd")}>
               <button
                 className={cx("btn", "btn-add")}
-                // onclick={handleAddProduct}
+              // onClick={handleAddProduct}
               >
                 <Link to={"/Seller/AddProduct"} className={cx('btn-add-product')}>Thêm 1 sản phẩm mới</Link>
               </button>
@@ -111,15 +137,15 @@ export default function AllProduct() {
                 </tr>
               </thead>
               <tbody>
-                {products && products.map((product) => (
-                  <tr key={product.id}>
+                {products && currentProducts.map((product) => (
+                  <tr key={product.ProductID}>
                     <td className={cx("pro-check")}>
                       <div className={cx("product-check")}>
                         <input type="checkbox" name="btn" />
                       </div>
                     </td>
-                    <td className={cx("product")} id="">
-                      <img src={api_url+'/images/product/'+product.ProductImageDefault} alt="" />
+                    <td className={cx("product")} id={product.ProductID}>
+                      <img src={api_url + '/images/product/' + product.ProductImageDefault} alt="" />
                       <div className={cx("product-de")}>
                         <h5>{product.ProductName}</h5>
                       </div>
@@ -137,11 +163,15 @@ export default function AllProduct() {
                       <h5>{product.sales}</h5>
                     </td>
                     <td className={cx("product-operation")} id="">
-                      <UpdateProduct />
-                      <button className={cx('btn-delete')} onClick={() => deleteProduct(product.id)}>
+                      <UpdateProduct ProductID={product.ProductID} UserID={product.UserID} />
+                      <button className={cx('btn-delete')} onClick={() => btnDeleteProduct(product.ProductID, product.ProductImageDefault)}>
                         Xóa
                       </button>
-                      <button>Ẩn</button>
+                      {product.ProductActive === 1 ? (
+                        <button onClick={() => toggleProductActive(product.ProductID)}>Ẩn</button>
+                      ) : (
+                        <button onClick={() => toggleProductActive(product.ProductID)}>Hiện</button>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -149,142 +179,64 @@ export default function AllProduct() {
             </table>
           </div>
           <div className={cx("containernp")}>
+
+            {/* Pagination */}
             <div className={cx("pagination")}>
-              <button className={cx("btn1")} onclick="backBtn()">
-              <i class="fas fa-arrow-left"></i>
+              <button className={cx("btn1", { disable: currentPage == 1 })}
+                onClick={() => {
+                  if (currentPage > 1) {
+                    paginate(currentPage - 1);
+                  }
+                }}>
+                <i className="fas fa-arrow-left"></i>
                 Prev
               </button>
+              <ul>
+                {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => i + 1).map((number) => (
+                  <li
+                    key={number}
+                    className={cx("pagination-item", { active: number === currentPage })}
+                    onClick={() => paginate(number)}
+                  >
+                    {number}
+                  </li>
+                ))}
+              </ul>
+              <button className={cx("btn2", { disable: currentPage === Math.ceil(products.length / productsPerPage) })}
+                onClick={() => {
+                  if (currentPage < Math.ceil(products.length / productsPerPage)) {
+                    paginate(currentPage + 1);
+                  }
+                }}>
+                Next
+                <i className="fas fa-arrow-right"></i>
+              </button>
+            </div>
+            {/* <div className={cx("pagination")}>
               <ul>
                 <li
                   className={cx("link active")}
                   value="1"
-                  onclick="activeLink()"
+                  // onClick="activeLink()"
                 >
                   1
                 </li>
-                <li className={cx("link")} value="2" onclick="activeLink()">
+                <li className={cx("link")} value="2">
                   2
                 </li>
-                <li className={cx("link")} value="3" onclick="activeLink()">
+                <li className={cx("link")} value="3">
                   3
                 </li>
-                <li className={cx("link")} value="4" onclick="activeLink()">
-                  4
-                </li>
-                <li className={cx("link")} value="5" onclick="activeLink()">
-                  5
-                </li>
-                <li className={cx("link")} value="6" onclick="activeLink()">
-                  6
-                </li>
               </ul>
-              <button className={cx("btn2")} onclick="nextBtn()">
+              <button className={cx("btn2")}>
                 Next
-                <i class="fas fa-arrow-right"></i>
+                <i className="fas fa-arrow-right"></i>
               </button>
-            </div>
-          </div>
-        </div>
-        <div className={cx("tab-pane")}>
-          <div className={cx("header-tab")}>
-            <div className={cx("grouphd1")}>
-              <div className={cx("search-box")}>
-                <input
-                  className={cx("search-box_input")}
-                  placeholder="Search..."
-                  type="text"
-                />
-              </div>
-            </div>
-          </div>
-          <div className={cx("content-tab")}>
-            <table width="100%">
-              <thead>
-                <tr>
-                  <td>
-                    <input type="checkbox" name="btn" id="chAll" />
-                  </td>
-                  <td>Tên sản phẩm</td>
-                  <td>Phân loại hàng</td>
-                  <td>Giá</td>
-                  <td>Kho hàng</td>
-                  <td>Doanh số</td>
-                  <td>Thao tác</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className={cx("pro-check")}>
-                    <div className={cx("product-check")}>
-                      <input type="checkbox" name="btn" />
-                    </div>
-                  </td>
-                  <td className={cx("product")} id="">
-                    <img src="./assets/image/buy/tts.png" alt="" />
-                    <div className={cx("product-de")}>
-                      <h5>Thuốc trừ sâu Batas 25EC</h5>
-                    </div>
-                  </td>
-                  <td className={cx("product-cate")} id="">
-                    <h5>Thuốc</h5>
-                  </td>
-                  <td className={cx("product-pri")} id="">
-                    <h5>1.000đ</h5>
-                  </td>
-                  <td className={cx("product-warehouse")} id="">
-                    <h5>1</h5>
-                  </td>
-                  <td className={cx("product-sales")} id="">
-                    <h5>0</h5>
-                  </td>
-                  <td className={cx("product-operation")} id="">
-                    <Link to={"#"}>Cập nhật</Link>
-                    <Link to={"#"}>Xóa</Link>
-                    <Link to={"#"}>Ẩn</Link>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className={cx("containernp")}>
-            <div className={cx("pagination")}>
-              <button className={cx("btn1")} onclick="backBtn()">
-                <img src="./assets/image/icon/448-arrow.png" />
-                Prev
-              </button>
-              <ul>
-                <li
-                  className={cx("link active")}
-                  value="1"
-                  onclick="activeLink()"
-                >
-                  1
-                </li>
-                <li className={cx("link")} value="2" onclick="activeLink()">
-                  2
-                </li>
-                <li className={cx("link")} value="3" onclick="activeLink()">
-                  3
-                </li>
-                <li className={cx("link")} value="4" onclick="activeLink()">
-                  4
-                </li>
-                <li className={cx("link")} value="5" onclick="activeLink()">
-                  5
-                </li>
-                <li className={cx("link")} value="6" onclick="activeLink()">
-                  6
-                </li>
-              </ul>
-              <button className={cx("btn2")} onclick="nextBtn()">
-                Next
-                <img src="./assets/image/icon/448-arrow.png" />
-              </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
     </div>
-    
+
   );
 }

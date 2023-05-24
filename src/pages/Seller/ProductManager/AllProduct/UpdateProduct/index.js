@@ -1,19 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./UpdateProduct.module.scss";
 import classNames from "classnames/bind";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
+import { updateInfoProduct, getDetailProduct, getAllCategory } from "../../../../../services/getAPI";
+import { useCookies } from "react-cookie";
+
 
 const cx = classNames.bind(styles);
 
-export default function UpdateProduct() {
+export default function UpdateProduct({ ProductID, UserID }) {
   const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState({})
+  const [categorys, setCategorys] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+  const [cookies, setCookie] = useCookies([]);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+  }
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      CategoryID: selectedCategoryId,
+    });
+  };
+  const handleUpdate = () => {
+    formData.ProductDescription = formData.ProductDescription.replace(/\n/g, "");
+    updateInfoProduct(cookies.accessToken,formData)
+  }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getProduct = await getDetailProduct(ProductID);
+        setFormData(getProduct.data.product);
+        const getCategory = await getAllCategory();
+        setCategorys(getCategory);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+  const handleOptionChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedCategoryId(selectedValue);
+  };
   return (
     <div className={cx("modal-product")}>
       <Button
@@ -33,56 +70,60 @@ export default function UpdateProduct() {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Tên sản phẩm</Form.Label>
               <Form.Control
-                type="name"
+                type="text"
+                name="ProductName"
                 placeholder="Nhập tên sản phẩm"
                 autoFocus
+                value={formData.ProductName}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Phân loại hàng</Form.Label>
               <Dropdown>
-                <Dropdown.Toggle
-                  className="active-btn"
-                  variant="secondary"
-                  id="dropdown-button-dark-example1"
-                >
-                  Phân loại
-                </Dropdown.Toggle>
                 <div className="menu-active">
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Thuốc trừ sâu</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Thuốc diệt cỏ
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
-                      Thuốc tăng trưởng
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
+                  <select value={selectedCategoryId} onChange={handleOptionChange} className={cx("price-box_input")}>
+                    <option value="">-- Chọn một tùy chọn --</option>
+                    {categorys && categorys.map(category => (
+                      <option key={category.CategoryID} value={category.CategoryID}>
+                        {category.CategoryName}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </Dropdown>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Giá</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
+                name="price"
                 placeholder="Ex: 100.000đ"
-                autoFocus
+                value={formData.ProductPrice}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Kho hàng</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
+                name="quantity"
                 placeholder="Nhập số lượng sản phẩm"
-                autoFocus
+                value={formData.ProductQuantity}
+                onChange={handleInputChange}
               />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Doanh số</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Mô tả sản phẩm</Form.Label>
+              <Form.Control
+                type="text"
+                as="textarea"
+                rows={3}
+                name="ProductDescription"
+                autoFocus
+                value={formData.ProductDescription}
+                onChange={handleInputChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -90,7 +131,7 @@ export default function UpdateProduct() {
           <Button variant="secondary" onClick={handleClose}>
             Thoát
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleUpdate}>
             Cập nhật
           </Button>
         </Modal.Footer>
