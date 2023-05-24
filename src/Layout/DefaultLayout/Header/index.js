@@ -28,6 +28,8 @@ function Header() {
                 // Kiểm tra đã login chưa
                 const getUser = await authentication(cookies.accessToken, cookies.refreshToken);
                 if (getUser.status === 200) {
+                    console.log("Header: " + getUser.accessToken)
+                    setCookie('accessToken', getUser.accessToken, { path: "/" });
                     setUserName(getUser.fullname)
                     setIsLoggedIn(true)
                     // Kiểm tra có sản phẩm trong giỏ hàng không

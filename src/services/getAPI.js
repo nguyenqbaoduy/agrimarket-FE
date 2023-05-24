@@ -3,7 +3,7 @@ function setCookie(name, value) {
   document.cookie = name + "=" + value + "; path=/";
 }
 function removeCookie(name) {
-  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 export async function login(username, password) {
   const headers = new Headers();
@@ -16,7 +16,10 @@ export async function login(username, password) {
   };
   const response = await fetch(api_url + '/login', requestOptions);
   var data = await response.json();
-  return data;
+  return {
+    data: data,
+    status: response.status,
+  };
 };
 export async function authorization(accessToken) {
   const headers = new Headers();
@@ -27,27 +30,31 @@ export async function authorization(accessToken) {
   };
   const response = await fetch(api_url + '/authorization', requestOptions);
   var data = await response.json();
-  return data.Role;
+  return {
+    data: data,
+    status: response.status,
+  };
 };
 
 export async function authentication(accessToken, refreshToken) {
   const authHeader = new Headers();
   authHeader.append('authorization', accessToken);
-  
+
   const authRequest = {
     method: 'GET',
     headers: authHeader,
   };
-  
+
   const authResponse = await fetch(api_url + '/authentication', authRequest);
-  
+
   if (authResponse.status === 200) {
     const data = await authResponse.json();
+    // setCookie('accessToken', accessToken);
     return {
       fullname: data.data.FullName,
       status: authResponse.status,
       role: data.data.Role,
-      accessToken : accessToken
+      accessToken: accessToken
     };
   } else if (authResponse.status === 401) {
     const refreshedAccessToken = await refreshAccessToken(refreshToken);
@@ -63,21 +70,21 @@ export async function authentication(accessToken, refreshToken) {
     }
   } else {
     return { status: authResponse.status };
-  } 
+  }
 }
 
 
 async function refreshAccessToken(refreshToken) {
   const refreshHeader = new Headers();
   refreshHeader.append('authorization', refreshToken);
-  
+
   const refreshRequest = {
     method: 'GET',
     headers: refreshHeader,
   };
-  
+
   const refreshTokenResponse = await (fetch(api_url + '/refresh_access_token', refreshRequest));
-  if(refreshTokenResponse.status === 401) {
+  if (refreshTokenResponse.status === 401) {
     return null
   }
   else

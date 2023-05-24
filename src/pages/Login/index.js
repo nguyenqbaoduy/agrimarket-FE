@@ -25,17 +25,26 @@ const Login = () => {
         const passwordInput = document.getElementById('login-password');
         const username = usernameInput.value;
         const password = passwordInput.value;
-        const token = await login(username, password);
-        setCookie('accessToken', token.accessToken, { path: "/" });
-        setCookie('refreshToken', token.refreshToken, { path: "/" });
-        setCookie('UserID', token.UserID, { path: "/" });
-        const role = await authorization(token.accessToken);
-        if (role == 1)
-            navigate("/");
-        else if (role == 2)
-            navigate("/seller");
+        const data = await login(username, password);
+        if (data.status === 200) {
+            setCookie('accessToken', data.data.accessToken, { path: "/" });
+            setCookie('refreshToken', data.data.refreshToken, { path: "/" });
+            setCookie('UserID', data.data.UserID, { path: "/" });
+            const getData = await authorization(data.data.accessToken);
+            if (getData.status === 200) {
+                if (getData.data.Role == 1)
+                    navigate("/");
+                else if (getData.data.Role == 2)
+                    navigate("/seller");
+                else
+                    navigate("/admin");
+            }
+            else {
+                toast(getData.data.message)
+            }
+        }
         else
-            navigate("/admin");
+            toast(data.data.message)
     }
     const sendSignup = async () => {
         const user = {
