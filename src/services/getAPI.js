@@ -2,6 +2,9 @@ export const api_url = "http://localhost:3000";
 function setCookie(name, value) {
   document.cookie = name + "=" + value + "; path=/";
 }
+function removeCookie(name) {
+  document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 export async function login(username, password) {
   const headers = new Headers();
   headers.append('UserName', username);
@@ -13,7 +16,10 @@ export async function login(username, password) {
   };
   const response = await fetch(api_url + '/login', requestOptions);
   var data = await response.json();
-  return data;
+  return {
+    data: data,
+    status: response.status,
+  };
 };
 export async function authorization(accessToken) {
   const headers = new Headers();
@@ -24,41 +30,67 @@ export async function authorization(accessToken) {
   };
   const response = await fetch(api_url + '/authorization', requestOptions);
   var data = await response.json();
-  return data.Role;
-};
-export async function authentication(accessToken, refreshToken) {
-  const headerA = new Headers();
-  headerA.append('authorization', accessToken);
-  const requestAuth = {
-    method: 'GET',
-    headers: headerA,
+  return {
+    data: data,
+    status: response.status,
   };
-  const response = await fetch(api_url + '/authentication', requestAuth);
-  if (response.status === 200) {
-    var data = await response.json();
+};
+
+export async function authentication(accessToken, refreshToken) {
+  const authHeader = new Headers();
+  authHeader.append('authorization', accessToken);
+
+  const authRequest = {
+    method: 'GET',
+    headers: authHeader,
+  };
+
+  const authResponse = await fetch(api_url + '/authentication', authRequest);
+
+  if (authResponse.status === 200) {
+    const data = await authResponse.json();
+    // setCookie('accessToken', accessToken);
     return {
       fullname: data.data.FullName,
-      status: response.status,
-      role: data.data.Role
+      status: authResponse.status,
+      role: data.data.Role,
+      accessToken: accessToken
+    };
+  } else if (authResponse.status === 401) {
+    const refreshedAccessToken = await refreshAccessToken(refreshToken);
+    if (refreshedAccessToken) {
+      const retryAuthResponse = await authentication(refreshedAccessToken.accessToken, refreshToken);
+      return retryAuthResponse;
+    } else {
+      // Xoá token
+      removeCookie('accessToken', { path: "/" })
+      removeCookie('refreshToken', { path: "/" })
+      removeCookie('UserID', { path: "/" })
+      return { status: authResponse.status };
     }
   } else {
-    const headerR = new Headers();
-    headerR.append('authorization', refreshToken);
-    const requestRefreshToken = {
-      method: 'GET',
-      headers: headerR,
-    };
-    const renewToken = await fetch(api_url + '/refresh_access_token', requestRefreshToken);
-    if (renewToken.status === 200) {
-      var newToken = await renewToken.json();
-      setCookie('accessToken', newToken)
-      authentication(newToken);
-    }
-    else {
-      return { status: renewToken.status }
-    }
-  };
+    return { status: authResponse.status };
+  }
 }
+
+
+async function refreshAccessToken(refreshToken) {
+  const refreshHeader = new Headers();
+  refreshHeader.append('authorization', refreshToken);
+
+  const refreshRequest = {
+    method: 'GET',
+    headers: refreshHeader,
+  };
+
+  const refreshTokenResponse = await (fetch(api_url + '/refresh_access_token', refreshRequest));
+  if (refreshTokenResponse.status === 401) {
+    return null
+  }
+  else
+    return refreshTokenResponse.json();
+}
+
 
 export async function getAllProduct() {
   const response = await fetch(api_url + '/product/all?');
@@ -67,6 +99,17 @@ export async function getAllProduct() {
     data: data.result,
     status: response.status
   };
+};
+export async function getFavorite(accessToken) {
+  const headers = new Headers();
+  headers.append('Authorization', accessToken);
+  const requestOptions = {
+    method: 'GET',
+    headers: headers,
+  };
+  const response = await fetch(api_url + '/favorite', requestOptions);
+  var data = await response.json();
+  return data.result;
 };
 export async function getCatalog(categoryId) {
   const response = await fetch(api_url + `/product/category/${categoryId}`);
@@ -77,7 +120,7 @@ export async function getCatalog(categoryId) {
   };
 };
 export async function searchProduct(search) {
-  const response = await fetch(api_url + '/product/search/?ProductName='+search)
+  const response = await fetch(api_url + '/product/search/?ProductName=' + search)
   var data = await response.json();
   return data.result;
 
@@ -138,7 +181,6 @@ export async function addItemToCart(accessToken, data) {
   return response.status;
 };
 export async function changeQuantity(accessToken, data) {
-  console.log(data)
   const response = await fetch(api_url + '/cart/changeQuantity', {
     method: "PUT",
     headers: {
@@ -150,7 +192,6 @@ export async function changeQuantity(accessToken, data) {
   return response.status;
 };
 export async function deteleCartItem(accessToken, data) {
-  console.log(data)
   const response = await fetch(api_url + '/cart/remove', {
     method: "DELETE",
     headers: {
@@ -189,6 +230,28 @@ export async function getProductOfSeller(userID) {
 export async function addProduct(accessToken, data) {
   const response = await fetch(api_url + '/product/add', {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function addFavorite(accessToken, data) {
+  const response = await fetch(api_url + '/product/add', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function deteleFavorite(accessToken, data) {
+  const response = await fetch(api_url + '/cart/remove', {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       'Authorization': accessToken

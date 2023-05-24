@@ -31,7 +31,6 @@ const Cart = () => {
             ChangeAmount: updatedCart[index].Quantity,
         }
         const status = await changeQuantity(cookies.accessToken, data);
-        console.log(status)
     };
     const handleDecreaseQuantity = async (index) => {
         const updatedCart = [...cart];
@@ -42,7 +41,6 @@ const Cart = () => {
             ChangeAmount: updatedCart[index].Quantity,
         }
         const status = await changeQuantity(cookies.accessToken, data);
-        console.log(status)
 
     };
     const handleQuantityChange = async (event, index) => {
@@ -55,7 +53,6 @@ const Cart = () => {
             ChangeAmount: updatedCart[index].Quantity,
         }
         const status = await changeQuantity(cookies.accessToken, data);
-        console.log(status)
     };
     const handleDeleteItem = async (index) => {
         const updatedCart = [...cart];
@@ -63,7 +60,6 @@ const Cart = () => {
             CartItemID: updatedCart[index].CartItemID,
         }
         const status = await deteleCartItem(cookies.accessToken, data);
-        console.log(status)
         updatedCart.splice(index, 1);
         setCart(updatedCart);
         triggerHeaderReload();

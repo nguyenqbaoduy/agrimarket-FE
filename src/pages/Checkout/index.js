@@ -59,7 +59,6 @@ const Checkout = () => {
     const handleOptionWardsChange = async (e) => {
         const selectedValue = e.target.value;
         setSelectedWardsId(selectedValue);
-        console.log(districtsId);
         const getTransport = await getTransports(districtsId);
         setTransports(getTransport.data);
     };

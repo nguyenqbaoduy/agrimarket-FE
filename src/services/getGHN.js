@@ -13,7 +13,6 @@ export async function getProvince() {
     return response.json();
 }
 export async function getDistrict(provinceID) {
-    console.log("getDistrict");
     const response = await fetch(district+provinceID, {
         method: "GET",
         headers: {
@@ -41,7 +40,6 @@ export async function getTransports(to_districtsId) {
         'from_district': 1530, //Liên Chiểu, Đà Nẵng
         'to_district' : parseInt(to_districtsId)
     }
-    console.log(data)
     const response = await fetch(transport, {
         method: "POST",
         headers: {
