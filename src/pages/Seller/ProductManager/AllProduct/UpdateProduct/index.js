@@ -8,8 +8,9 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { updateInfoProduct, getDetailProduct, getAllCategory } from "../../../../../services/getAPI";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from 'react-toastify';
-import { async } from "q";
-
+import { Editor, EditorState, convertFromHTML, ContentState } from 'draft-js';
+import 'draft-js/dist/Draft.css';
+import { stateToHTML } from 'draft-js-export-html';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,16 @@ export default function UpdateProduct({ ProductID, UserID }) {
   const [categorys, setCategorys] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [cookies, setCookie] = useCookies([]);
+
+  const [editorState, setEditorState] = React.useState(
+    () => EditorState.createEmpty(),
+  );
+
+  const editor = React.useRef(null);
+  function focusEditor() {
+    editor.current.focus();
+  }
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -32,14 +43,15 @@ export default function UpdateProduct({ ProductID, UserID }) {
     });
   };
   const handleUpdate = async () => {
-    formData.ProductDescription = formData.ProductDescription.replace(/\n/g, "");
+    var text = editorState.getCurrentContent()
+    text = stateToHTML(text);
+    formData.ProductDescription = text;
     var status = await updateInfoProduct(cookies.accessToken, formData)
     if (status === 200)
       toast("Cập nhật thành công")
     else
       toast("Cập nhật thất bại")
     setShow(false)
-
   }
 
   useEffect(() => {
@@ -49,6 +61,13 @@ export default function UpdateProduct({ ProductID, UserID }) {
         setFormData(getProduct.data.product);
         const getCategory = await getAllCategory();
         setCategorys(getCategory);
+        var text = getProduct.data.product.ProductDescription
+        const blocksFromHTML = convertFromHTML(text);
+        const state = ContentState.createFromBlockArray(
+          blocksFromHTML.contentBlocks,
+          blocksFromHTML.entityMap,
+        );
+        setEditorState(EditorState.createWithContent(state))
       } catch (error) {
         console.log(error);
       }
@@ -136,15 +155,16 @@ export default function UpdateProduct({ ProductID, UserID }) {
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Label>Mô tả sản phẩm</Form.Label>
-              <Form.Control
-                type="text"
-                as="textarea"
-                rows={3}
-                name="ProductDescription"
-                autoFocus
-                value={formData.ProductDescription}
-                onChange={handleInputChange}
-              />
+              <div
+                style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
+                onClick={focusEditor}
+              >
+                <Editor
+                  ref={editor}
+                  editorState={editorState}
+                  onChange={setEditorState}
+                />
+              </div>
             </Form.Group>
           </Form>
         </Modal.Body>

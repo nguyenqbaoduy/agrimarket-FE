@@ -199,8 +199,8 @@ const ProductDetail = () => {
                                 <div className={cx('content-namerv')}>
                                     <p>Chi tiết sản phẩm</p>
                                 </div>
-                                <div className={cx('content-descript')}>
-                                    {product.ProductDescription}
+                                <div className={cx('content-descript')} dangerouslySetInnerHTML={{ __html: product.ProductDescription }}>
+                                    
                                 </div>
                             </div>
                         </div>
