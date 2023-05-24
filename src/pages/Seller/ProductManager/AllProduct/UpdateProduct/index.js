@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import { updateInfoProduct, getDetailProduct, getAllCategory } from "../../../../../services/getAPI";
 import { useCookies } from "react-cookie";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const cx = classNames.bind(styles);
@@ -31,7 +32,13 @@ export default function UpdateProduct({ ProductID, UserID }) {
   };
   const handleUpdate = () => {
     formData.ProductDescription = formData.ProductDescription.replace(/\n/g, "");
-    updateInfoProduct(cookies.accessToken,formData)
+    var status = updateInfoProduct(cookies.accessToken, formData)
+    if (status === 200)
+      toast("Cập nhật thành công")
+    else
+      toast("Cập nhật thất bại")
+    setShow(false)
+
   }
 
   useEffect(() => {
@@ -52,7 +59,20 @@ export default function UpdateProduct({ ProductID, UserID }) {
     setSelectedCategoryId(selectedValue);
   };
   return (
+
     <div className={cx("modal-product")}>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
       <Button
         variant="primary"
         onClick={handleShow}
