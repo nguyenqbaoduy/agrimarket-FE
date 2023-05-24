@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { api_url, getCart, changeQuantity, deteleCartItem } from "../../services/getAPI.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
 import classNames from "classnames/bind";
@@ -10,9 +10,11 @@ import styles from "./Cart.module.scss";
 const cx = classNames.bind(styles);
 
 const Cart = () => {
+    const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const [cart, setCart] = useState([])
     const { triggerHeaderReload } = useContext(HeaderContext);
+    const [selectedItems, setSelectedItems] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,34 +27,39 @@ const Cart = () => {
     const handleIncreaseQuantity = async (index) => {
         const updatedCart = [...cart];
         updatedCart[index].Quantity += 1;
-        setCart(updatedCart);
         const data = {
             CartItemID: updatedCart[index].CartItemID,
             ChangeAmount: updatedCart[index].Quantity,
         }
-        const status = await changeQuantity(cookies.accessToken, data);
+        await changeQuantity(cookies.accessToken, data).then(function (sumPrice) {
+            updatedCart[index].SumPrice = sumPrice;
+            return setCart(updatedCart);
+        })
     };
     const handleDecreaseQuantity = async (index) => {
         const updatedCart = [...cart];
         updatedCart[index].Quantity -= 1;
-        setCart(updatedCart);
         const data = {
             CartItemID: updatedCart[index].CartItemID,
             ChangeAmount: updatedCart[index].Quantity,
         }
-        const status = await changeQuantity(cookies.accessToken, data);
-
+        await changeQuantity(cookies.accessToken, data).then(function (sumPrice) {
+            updatedCart[index].SumPrice = sumPrice;
+            return setCart(updatedCart);
+        })
     };
     const handleQuantityChange = async (event, index) => {
         const value = event.target.value;
         const updatedCart = [...cart];
         updatedCart[index].Quantity = parseInt(value);
-        setCart(updatedCart);
         const data = {
             CartItemID: updatedCart[index].CartItemID,
             ChangeAmount: updatedCart[index].Quantity,
         }
-        const status = await changeQuantity(cookies.accessToken, data);
+        await changeQuantity(cookies.accessToken, data).then(function (sumPrice) {
+            updatedCart[index].SumPrice = sumPrice;
+            return setCart(updatedCart);
+        })
     };
     const handleDeleteItem = async (index) => {
         const updatedCart = [...cart];
@@ -64,12 +71,27 @@ const Cart = () => {
         setCart(updatedCart);
         triggerHeaderReload();
 
-      };
+    };
+    const buy = () => {
+        console.log(selectedItems)
+        navigate('/Checkout', { state: selectedItems });
+    };
+    // Hàm xử lý khi checkbox thay đổi
+    const handleCheckboxChange = (event, index) => {
+        if (event.target.checked) {
+            // Checkbox được tích
+            setSelectedItems([...selectedItems, cart[index]]);
+        } else {
+            // Checkbox được bỏ tích
+            const updatedItems = selectedItems.filter((item, idx) => idx !== index);
+            setSelectedItems(updatedItems);
+        }
+    };
     return (
         <div className={cx("cart-page")}>
             <div className={cx('container', 'cart-container-top')}>
                 <div className={cx('cart-check')}>
-                    <input type="checkbox" name="btn" id={cx('checkAll')} />
+                    <input type="checkbox" name="btn" id={cx('checkAll')}/>
                 </div>
                 <div className={cx('cart-product')}>
                     Sản phẩm
@@ -89,10 +111,14 @@ const Cart = () => {
                     <div className={cx('content-cart-container')}>
                         <div className={cx('cart-container-mid')}>
                             <div className={cx('cart-check')}>
-                                <input type="checkbox" name="btn" />
+                                <input
+                                    type="checkbox"
+                                    name="btn"
+                                    onChange={(event) => handleCheckboxChange(event, index)}
+                                />
                             </div>
                             <div className={cx('cart-product', 'cart-mid-img')}>
-                                <a href="productDetail.html"><img src={api_url+"/images/product/" + cart.ProductImageDefault} alt="" className={cx('product-image')} /></a>
+                                <a href="productDetail.html"><img src={api_url + "/images/product/" + cart.ProductImageDefault} alt="" className={cx('product-image')} /></a>
                                 <div className={cx('cart-title')}>
                                     <a href="/user/productDetail.html"><h4 className={cx('product-title')}>{cart.ProductName}</h4></a>
                                     {/* <div className={cx('cart-size', 'product-size')}>
@@ -131,7 +157,8 @@ const Cart = () => {
             ))};
             <div className={cx('container', 'cart-buy')}>
                 <div className={cx('cart-buy-container')}>
-                    <a href="bill.html"><button className={cx('', 'btn', 'third')}>Mua hàng</button></a>
+                    <button className={cx('', 'btn', 'third')} onClick={buy}>
+                        Mua hàng</button>
                 </div>
             </div>
             <div className={cx('container', 'middle-content')}>

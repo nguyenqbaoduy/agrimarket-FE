@@ -189,7 +189,8 @@ export async function changeQuantity(accessToken, data) {
     },
     body: JSON.stringify(data),
   });
-  return response.status;
+  var result = await response.json()
+  return result.result.SumPrice;
 };
 export async function deteleCartItem(accessToken, data) {
   const response = await fetch(api_url + '/cart/remove', {

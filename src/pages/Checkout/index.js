@@ -10,6 +10,8 @@ const cx = classNames.bind(styles);
 const Checkout = () => {
     const location = useLocation();
     const items = location.state;
+    console.log(items)
+
     const [provinces, setProvinces] = useState([]);
     const [provincesId, setSelectedProvincesId] = useState();
     const [districts, setDistricts] = useState([]);
