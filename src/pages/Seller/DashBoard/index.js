@@ -17,7 +17,7 @@ function DashBoard() {
       item.style.setProperty('--value', item.dataset.value);
     });
   }, []);
-  
+
   return (
     <div className={cx("content-right")}>
       <div className={cx("content-dashboard")}>

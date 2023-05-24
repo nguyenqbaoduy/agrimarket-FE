@@ -329,13 +329,15 @@ main .btn-add {
 }
 
 main .btn-add:hover {
-    transform: translateY(2px)
+    transform: translateY(2px);
+    background: #00AC2C !important;
 }
 
 main .btn-add a {
     padding-top: 9px;
     font-size: 18px;
     color: #ffffff;
+    text-decoration: none;
 }
 
 main .search-box {
@@ -413,13 +415,13 @@ tbody tr td .btn-edit a {
 }
 
 tbody tr td .btn-delete{
-    width: 45%;
+    width: 100%;
     background: #ff0000;
     border-radius: 5px;
     justify-content: center;
     height: 32px;
     transition: 0.3s linear;
-    border: 1px solid #2828285c;
+    // border: 1px solid #2828285c;
 }
 
 tbody tr td .btn-delete:hover {
@@ -430,4 +432,9 @@ tbody tr td .btn-delete a {
     padding-top: 9px;
     font-size: 16px;
     color: #ffffff;
+    text-decoration: none;
+}
+
+.control{
+    
 }

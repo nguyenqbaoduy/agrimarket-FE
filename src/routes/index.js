@@ -9,6 +9,7 @@ import DashBoardAdmin from '../pages/Admin/DashBoardAdmin'
 import ManagerAccount from '../pages/Admin/ManagerAccount'
 import AllProduct from '../pages/Seller/ProductManager/AllProduct'
 import AddProduct from '../pages/Seller/ProductManager/AddProduct'
+import AddAccount from '../pages/Admin/AddAccount'
 import Cart from '../pages/Cart'
 import News from '../pages/News'
 import SingleNews from '../pages/News/singleNews'
@@ -35,6 +36,7 @@ const publicPath = [
     { path: '/Seller/AddProduct', component: AddProduct, layout: Seller },
     { path: '/Seller/AllProduct', component: AllProduct, layout: Seller },
     { path: '/Admin', component: DashBoardAdmin, layout: Admin },
+    { path: '/Admin/AddAcount', component: AddAccount, layout: Admin },
     { path: '/ManagerAccount', component: ManagerAccount, layout: Admin },
 ]
 const privatePath = [
