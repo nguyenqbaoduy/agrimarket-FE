@@ -3,6 +3,7 @@ const province = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data
 const district = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id="
 const ward = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id="
 const transport = "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services"
+const fee = "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee"
 export async function getProvince() {
     const response = await fetch(province, {
         method: "GET",
@@ -41,6 +42,31 @@ export async function getTransports(to_districtsId) {
         'to_district' : parseInt(to_districtsId)
     }
     const response = await fetch(transport, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            'token': token
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
+export async function getFee(order) {
+    const data = {
+        "service_type_id": parseInt(order.service_type_id),    // Gói dịch vụ lựa chọn
+        "insurance_value" : parseInt(order.insurance_value), //Giá trị đơn hàng
+        'shop_id': 124245,
+        'from_ward_code' : "40505",//40505 Hoà Minh
+        'from_district_id': 1530, //Liên Chiểu, Đà Nẵng
+        'to_district_id' : parseInt(order.to_district),
+        'to_ward_code' : order.to_ward_code,
+        "weight": 50,   //trọng lượng hàng hóa (gram)
+        "length": 10,   //Chiều dài (cm)
+        "width": 10,    //Chiều rộng (cm)
+        "height": 5     //Chiều cao (cm)
+
+    }
+    const response = await fetch(fee, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
