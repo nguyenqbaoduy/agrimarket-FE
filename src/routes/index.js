@@ -14,7 +14,7 @@ import Cart from '../pages/Cart'
 import News from '../pages/News'
 import SingleNews from '../pages/News/singleNews'
 import Order from '../pages/User/Order'
-
+import Profile from '../pages/User/Profile'
 
 //-----------Layout--------------------------------
 import Seller from '../Layout/Seller'
@@ -29,6 +29,7 @@ const publicPath = [
     { path: '/Product/:ProductID', component: ProductDetail, layout: DefaultLayout },
     { path: '/Cart', component: Cart, layout: DefaultLayout },
     { path: '/Order', component: Order, layout: DefaultLayout },
+    { path: '/Profile', component: Profile, layout: DefaultLayout },
     { path: '/Category/:CategoryID', component: Category, layout: DefaultLayout },
     { path: '/Checkout', component: Checkout, layout: DefaultLayout },
     { path: '/News', component: News, layout: DefaultLayout },
