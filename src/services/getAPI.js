@@ -329,3 +329,14 @@ export async function addOrderDetail(accessToken, data) {
   response.json()
   return response;
 };
+export async function getUserOrders(accessToken) {
+  const headers = new Headers();
+  headers.append('Authorization', accessToken);
+  const requestOptions = {
+    method: 'GET',
+    headers: headers,
+  };
+  const response = await fetch(api_url + '/order', requestOptions);
+  var data = await response.json();
+  return data.result;
+};
