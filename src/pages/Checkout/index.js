@@ -1,17 +1,18 @@
-import { } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
-import { api_url, checkout } from "../../services/getAPI.js";
-import { getProvince, getDistrict, getWard, getTransports } from "../../services/getGHN.js";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { api_url, createOrder, addOrderDetail } from "../../services/getAPI.js";
+import { getProvince, getDistrict, getWard, getTransports, getFee } from "../../services/getGHN.js";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import classNames from "classnames/bind";
 import styles from "./Checkout.module.scss";
+
 const cx = classNames.bind(styles);
 const Checkout = () => {
+    const navigate = useNavigate();
+
     const location = useLocation();
     const items = location.state;
-    console.log(items)
-
     const [provinces, setProvinces] = useState([]);
     const [provincesId, setSelectedProvincesId] = useState();
     const [districts, setDistricts] = useState([]);
@@ -21,6 +22,10 @@ const Checkout = () => {
     const [transports, setTransports] = useState([]);
     const [transportsID, setSelectedTransportsId] = useState();
     const [service_fee, setService_fee] = useState(0);
+    const [address, setAddress] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [cookies, setCookie] = useCookies(['token']);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -33,6 +38,7 @@ const Checkout = () => {
         fetchData();
         window.scrollTo(0, 0);
     }, []);
+ 
     let totalProductPrice = 0;
     // Tính tổng sản phẩm
     items && items.map((item) => {
@@ -43,7 +49,7 @@ const Checkout = () => {
         // Kiểm tra nếu productPrice là một số hợp lệ
         if (!isNaN(productPrice)) {
             // Cộng dồn productPrice vào tổng
-            totalProductPrice += productPrice *quantity;
+            totalProductPrice += productPrice * quantity;
         }
     });
     const handleOptionProvincesChange = async (e) => {
@@ -64,11 +70,47 @@ const Checkout = () => {
         const getTransport = await getTransports(districtsId);
         setTransports(getTransport.data);
     };
-    const handleOptionTransportsChange = (e) => {
+    const handleOptionTransportsChange = async (e) => {
         const selectedValue = e.target.value;
         setSelectedTransportsId(selectedValue);
+        var order = {
+            service_type_id: selectedValue,
+            insurance_value: totalProductPrice,
+            to_district: districtsId,
+            to_ward_code: wardsCode
+        }
+        const reqOrder = await getFee(order);
+        setService_fee(reqOrder.data.total)
     };
-
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value);
+      };
+    
+      const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
+      };
+    async function order() {
+        const OrderID  = "O" + new Date().getTime();
+        var data ={
+            OrderID : OrderID,
+            UserID : cookies.UserID,
+            Total : totalProductPrice,
+            Address : address,
+            PhoneNumber : phoneNumber
+        }
+        await createOrder(cookies.accessToken, data);
+        for (const item of items) {
+            var orderDetail = {
+                ProductID: item.ProductID,
+                OrderID: OrderID,
+                OrderDetailQuantity: item.Quantity,
+                OrderDetailSumPrice: item.SumPrice,
+                OrderDetailPriceOfProduct : item.ProductPrice
+            }
+            await addOrderDetail(cookies.accessToken, orderDetail)
+        }
+        navigate("/order")
+    }
     return (
         <div className={cx('container')} id="">
             <div className={cx('item-flex')}>
@@ -111,8 +153,30 @@ const Checkout = () => {
                         </div>
                         <form action="#">
                             <div className={cx('cardholder-name')}>
-                                <label htmlFor="cardholder-name" className={cx('label-default')}>Địa chỉ cụ thể</label>
-                                <input type="text" name="cardholder-name" id="cardholder-name" className={cx('input-default')} />
+                                <label htmlFor="cardholder-name" className={cx('label-default')}>
+                                    Địa chỉ cụ thể
+                                </label>
+                                <input
+                                    type="text"
+                                    name="cardholder-name"
+                                    id="cardholder-name"
+                                    className={cx('input-default')}
+                                    value={address}
+                                    onChange={handleAddressChange}
+                                />
+                            </div>
+                            <div className={cx('card-number')}>
+                                <label htmlFor="card-number" className={cx('label-default')}>
+                                    Số điện thoại
+                                </label>
+                                <input
+                                    type="text"
+                                    name="card-number"
+                                    id="card-number"
+                                    className={cx('input-default')}
+                                    value={phoneNumber}
+                                    onChange={handlePhoneNumberChange}
+                                />
                             </div>
                             <div className={cx('card-number')}>
                                 <label htmlFor="card-number" className={cx('label-default')}>Số điện thoại</label>
@@ -135,7 +199,7 @@ const Checkout = () => {
                             </div>
                         </form>
                     </div>
-                    <button className={cx('btn1', 'btn-primary')}>
+                    <button className={cx('btn1', 'btn-primary')} onClick={order}>
                         <b>Đặt hàng</b>
                     </button>
                 </section>
@@ -144,7 +208,7 @@ const Checkout = () => {
                     <div className={cx('cart-item-box')}>
                         <h2 className={cx('section-headingpm')}>Sản phẩm</h2>
                         {items && items.map((item, index) => (
-                            <div className={cx('product-card')}>
+                            <div className={cx('product-card')} key={index}>
                                 <div className={cx('card')}>
                                     <div className={cx('img-box')}>
                                         <img src={api_url + "/images/product/" + item.ProductImageDefault} alt="" className={cx('product-img')} />
@@ -180,7 +244,7 @@ const Checkout = () => {
                             <span>Phí vận chuyển</span> <span>$ <span id="shipping">{service_fee}</span></span>
                         </div>
                         <div className={cx('total')}>
-                            <span>Tổng cộng</span> <span>$ <span id="total">{totalProductPrice+service_fee}</span></span>
+                            <span>Tổng cộng</span> <span>$ <span id="total">{totalProductPrice + service_fee}</span></span>
                         </div>
                     </div>
                 </section>

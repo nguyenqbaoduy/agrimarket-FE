@@ -305,3 +305,27 @@ export async function updateInfoProduct(accessToken,data) {
   });
   return response.status;
 };
+export async function createOrder(accessToken, data) {
+  const response = await fetch(api_url + '/order/add', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function addOrderDetail(accessToken, data) {
+  const response = await fetch(api_url + '/order/addDetail', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(JSON.stringify(data));
+  response.json()
+  return response;
+};
