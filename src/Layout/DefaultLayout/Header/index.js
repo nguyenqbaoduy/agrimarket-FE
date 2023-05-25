@@ -136,7 +136,7 @@ function Header() {
                             isMenuOpen ? cx('sub-menu-wrap') : cx('sub-menu-wrap', 'open-menu')
                         } id={cx("subMenu")}>
                             <div className={cx('sub-menu')}>
-                                <Link className={cx('sub-menu-link')} to={`/Info`}>
+                                <Link className={cx('sub-menu-link')} to={`/Profile`}>
                                     <p>Tài khoản của tôi</p>
                                 </Link>
                                 <a className={cx('sub-menu-link')}>

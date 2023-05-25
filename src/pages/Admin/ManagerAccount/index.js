@@ -23,12 +23,25 @@ export default function ManagerAccount() {
         setProducts([...products]);
       };
 
-      const deleteProduct = (id) => {
-        // Filter out product with matching id
-        const updatedProducts = products.filter((product) => product.id !== id);
+      //Lock user,seller
+      const [user, setUser] = useState({
+        email: '',
+        password: '',
+        phonenumber: '',
+        address: '',
+        role: '',
+      });
     
-        // Update state with new products array
-        setProducts(updatedProducts);
+      const handleChange = (e) => {
+        setUser({
+          ...user,
+          [e.target.name]: e.target.value
+        });
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(user);
       };
 
     return (
@@ -68,8 +81,8 @@ export default function ManagerAccount() {
                                             Edit
                                         </button> */}
                                         <EditAccount />
-                                        <button className={cx('btn-delete')} onClick={() => deleteProduct(product.id)}>
-                                            Delete
+                                        <button className={cx('btn-delete')}>
+                                            Khóa
                                         </button>
                                     </td>
                                 </tr>
@@ -83,7 +96,7 @@ export default function ManagerAccount() {
                                 <td className={cx('control')}>
                                     <EditAccount />
                                     <button className={cx('btn-delete')}>
-                                        <a href="#">Xóa</a>
+                                        <a href="#">Khóa</a>
                                     </button>
                                 </td>
                             </tr>
