@@ -5,6 +5,8 @@ import Category from '../pages/Category'
 import Checkout from '../pages/Checkout'
 import ProductDetail from '../pages/ProductDetail'
 import DashBoard from '../pages/Seller/DashBoard'
+import OrderManager from '../pages/Seller/OrderManager'
+
 import DashBoardAdmin from '../pages/Admin/DashBoardAdmin'
 import ManagerAccount from '../pages/Admin/ManagerAccount'
 import AllProduct from '../pages/Seller/ProductManager/AllProduct'
@@ -36,6 +38,7 @@ const publicPath = [
     { path: '/News/:NewsID', component: SingleNews, layout: DefaultLayout },
 
     { path: '/Seller', component: DashBoard, layout: Seller },
+    { path: '/Seller/Order-management', component: OrderManager, layout: Seller },
     { path: '/Seller/AddProduct', component: AddProduct, layout: Seller },
     { path: '/Seller/AllProduct', component: AllProduct, layout: Seller },
     { path: '/Admin', component: DashBoardAdmin, layout: Admin },

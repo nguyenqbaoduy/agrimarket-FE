@@ -31,9 +31,6 @@ const Order = () => {
                     Số lượng
                 </div>
                 <div className={cx('order-money')}>
-                    Đơn giá
-                </div>
-                <div className={cx('order-money')}>
                     Tổng tiền
                 </div>
                 <div className={cx('order-status')}>
@@ -55,16 +52,13 @@ const Order = () => {
                             <span>{order.OrderDetailQuantity}</span>
                         </div>
                         <div className={cx('order-money-product')}>
-                            <span>{order.OrderDetailPriceOfProduct}</span>
-                        </div>
-                        <div className={cx('order-money-product')}>
                             <span>{order.OrderDetailSumPrice}</span>
                         </div>
                         <div className={cx('order-status-product')}>
                             <span>{order.Status}</span>
                         </div>
                         <div className={cx('btn')}>
-                            <button className={cx('btn-confirm')}>Xác nhận đơn hàng</button>
+                            <button className={cx('btn-confirm')}>Xác nhận đã nhận hàng</button>
                         </div>
                     </div>
                 </div>

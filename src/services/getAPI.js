@@ -340,3 +340,14 @@ export async function getUserOrders(accessToken) {
   var data = await response.json();
   return data.result;
 };
+export async function getSellOrders(accessToken) {
+  const headers = new Headers();
+  headers.append('Authorization', accessToken);
+  const requestOptions = {
+    method: 'GET',
+    headers: headers,
+  };
+  const response = await fetch(api_url + '/sell/order', requestOptions);
+  var data = await response.json();
+  return data.result;
+};
