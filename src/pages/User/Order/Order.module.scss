@@ -1,0 +1,108 @@
+:root {
+    --primary-color: #266937;
+    --gray-color: #EEEEEE;
+    --black-color: #000000;
+    --white-color: #fff;
+    --favorites-color: #CCCCCC;
+    --toolbar-heigth: 30px;
+    --main-header-height: 120px;
+    --main-menu-height: 60px;
+    --info-height: 60px;
+}
+
+.order-page {
+
+    /* Content cart */
+    .order-container-top {
+        display: flex;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .order-product {
+        margin-left: 5%;
+        width: 26%;
+    }
+
+    .order-price {
+        width: 13.3%;
+    }
+
+    .order-number {
+        width: 15%;
+    }
+
+    .order-money {
+        width: 15%;
+    }
+
+    /* order middle */
+    .order-container-mid {
+        display: flex;
+        margin-top: 15px;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .order-info{
+        width: 30%;
+    }   
+    
+    .order-info img {
+        cursor: pointer;
+        width: 120px;
+        height: 100px;
+    }
+
+    .order-info span{
+        margin-left: 5%;
+    }
+
+    .order-price-product{
+        width: 15%;
+        margin-left: 2%;
+        margin-top: 3.5%;
+    }
+
+    .order-number-product{
+        width: 14%;
+        margin-top: 3.5%;
+    }
+
+    .order-money-product{
+        width: 14%;
+        margin-top: 3.5%;
+    }
+
+    .order-status-product{
+        width: 14%;
+        margin-top: 3.5%;
+        margin-left: 1.5%;
+    }
+
+    .btn{
+        margin-top: 2%;
+    }
+
+    .btn-confirm{
+        font-size: 14px;
+        color: #fff;
+        background: #266937;
+        border-radius: 5px;
+        border: none;
+    }
+
+    /*Responsive*/
+    @media (max-width:768px) {
+        .banner-container .banner {
+            display: none;
+        }
+    }
+
+    @media (max-width:930px) {
+        .list-product {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

@@ -189,7 +189,8 @@ export async function changeQuantity(accessToken, data) {
     },
     body: JSON.stringify(data),
   });
-  return response.status;
+  var result = await response.json()
+  return result.result.SumPrice;
 };
 export async function deteleCartItem(accessToken, data) {
   const response = await fetch(api_url + '/cart/remove', {
@@ -252,6 +253,50 @@ export async function addFavorite(accessToken, data) {
 export async function deteleFavorite(accessToken, data) {
   const response = await fetch(api_url + '/cart/remove', {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': accessToken
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function deleteProduct(data) {
+  var productId = { ProductID: data.ProductID };
+  var filename = { FileName: data.FileName };
+
+  console.log(productId)
+  const removeProductResponse = await fetch(api_url + '/product/remove', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(productId),
+  });
+  const RemoveImageresponse = await fetch(api_url + '/deleteFile', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(filename),
+  });
+  removeProductResponse.json();
+  return removeProductResponse.result;
+};
+export async function changeActive(data) {
+  const response = await fetch(api_url + '/product/change_active', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.status;
+};
+export async function updateInfoProduct(accessToken,data) {
+  console.log(JSON.stringify(data))
+  const response = await fetch(api_url + '/product/update_info', {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       'Authorization': accessToken

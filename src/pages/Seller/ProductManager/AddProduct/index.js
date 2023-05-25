@@ -93,14 +93,18 @@ export default function AddProduct() {
           if (req === 200) {
             clear();
             toast("Thêm thành công")
-
             setTimeout(() => {
               navigate("/Seller/AllProduct")
             }, 3000);
           }
+          else{
+            setImage(null);
+            toast("Thêm thất bại")
+          }
         })
         .catch((error) => {
-          toast("Thêm ảnh thất bại")
+          setImage(null);
+          toast("Thêm thất bại")
         });
     }
     else {
@@ -119,7 +123,6 @@ export default function AddProduct() {
   const handleCancel = () => {
     clear();
   };
-
   return (
     <div className={cx("add-product")}>
       <ToastContainer

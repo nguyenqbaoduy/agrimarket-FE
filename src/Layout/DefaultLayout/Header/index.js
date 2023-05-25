@@ -28,7 +28,6 @@ function Header() {
                 // Kiểm tra đã login chưa
                 const getUser = await authentication(cookies.accessToken, cookies.refreshToken);
                 if (getUser.status === 200) {
-                    console.log("Header: " + getUser.accessToken)
                     setCookie('accessToken', getUser.accessToken, { path: "/" });
                     setUserName(getUser.fullname)
                     setIsLoggedIn(true)
@@ -139,9 +138,9 @@ function Header() {
                                 <Link className={cx('sub-menu-link')} to={`/Profile`}>
                                     <p>Tài khoản của tôi</p>
                                 </Link>
-                                <a className={cx('sub-menu-link')}>
+                                <Link to={"/Order"} className={cx('sub-menu-link')}>
                                     <p>Đơn mua</p>
-                                </a>
+                                </Link>
                                 <a className={cx('sub-menu-link')}
                                     onClick={toogleLogOut}
                                 >
