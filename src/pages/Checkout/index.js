@@ -178,10 +178,6 @@ const Checkout = () => {
                                     onChange={handlePhoneNumberChange}
                                 />
                             </div>
-                            <div className={cx('card-number')}>
-                                <label htmlFor="card-number" className={cx('label-default')}>Số điện thoại</label>
-                                <input type="text" name="card-number" id="card-number" className={cx('input-default')} />
-                            </div>
                             <div className={cx('input-flex')}>
                                 <div className={cx('transport')}>
                                     <label htmlFor="ccv" className={cx('label-default')}>Phương thức vận chuyển</label>
