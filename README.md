@@ -1,6 +1,8 @@
-# 1. Install module:
+# 1. Required
+Nodejs
+# 2. Install module:
 npm i 
-# 2. Run project
+# 3. Run project
 npm start
 # Account for test
 username: admin password: admin (Role admin)
